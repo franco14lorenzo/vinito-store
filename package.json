@@ -10,6 +10,7 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "lucide-react": "^0.381.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
@@ -18,13 +19,10 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5",
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
@@ -32,7 +30,10 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "postcss": "^8",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.8"
+    "prettier-plugin-tailwindcss": "^0.2.8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

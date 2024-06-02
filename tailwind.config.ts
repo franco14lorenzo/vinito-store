@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        raleway: ['var(--font-raleway)'],
+        kalnia: ['var(--font-kalnia)']
+      },
       colors: {
         pearl: {
           '50': '#faf3eb',
