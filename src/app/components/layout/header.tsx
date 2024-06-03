@@ -5,11 +5,11 @@ import Link from 'next/link'
 const Header = () => {
   return (
     <header className="fixed z-10 flex w-full max-w-screen-xl items-center justify-between overflow-hidden rounded-xl rounded-t-none bg-pearl-50 p-2 shadow">
-      <div
-        className="flex w-12 justify-end md:hidden md:w-[152px]"
-        aria-label="menu"
-      >
-        <button className="grid size-12 place-content-center rounded-lg hover:bg-pearl-100">
+      <div className="flex w-12 justify-end md:hidden md:w-[152px]">
+        <button
+          className="grid size-12 place-content-center rounded-lg hover:bg-pearl-100"
+          aria-label="menu"
+        >
           <Menu className="size-8 stroke-black" />
         </button>
       </div>

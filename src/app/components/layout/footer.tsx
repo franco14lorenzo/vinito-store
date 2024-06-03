@@ -6,10 +6,19 @@ const Footer = () => {
       <p className="text-center text-xs text-white">
         &copy; {year} Vinito. All rights reserved.
       </p>
-      <select className="rounded-lg border border-white bg-black p-1 text-xs text-white">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-      </select>
+      <div className="flex items-center gap-2">
+        <label htmlFor="language" className="text-xs text-white">
+          Language:
+        </label>
+        <select
+          className="rounded-lg border border-white bg-black p-1 text-xs text-white"
+          name="language"
+          id="language"
+        >
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
     </footer>
   )
 }
