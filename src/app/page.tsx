@@ -1,10 +1,10 @@
 import { Features, Hero } from '@/app/components/home'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="w-full">
+    <>
       <Hero />
       <Features />
-    </main>
+    </>
   )
 }

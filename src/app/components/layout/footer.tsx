@@ -2,16 +2,16 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="flex w-full max-w-screen-xl  flex-col items-center justify-center gap-2 overflow-hidden rounded-xl rounded-b-none bg-black p-4">
-      <p className="text-center text-xs text-white">
+    <footer className="flex w-full max-w-screen-xl  flex-col items-center justify-center gap-2 overflow-hidden rounded-xl rounded-b-none bg-black/10 p-4">
+      <p className="text-center text-xs text-black">
         &copy; {year} Vinito. All rights reserved.
       </p>
       <div className="flex items-center gap-2">
-        <label htmlFor="language" className="text-xs text-white">
+        <label htmlFor="language" className="text-xs text-black">
           Language:
         </label>
         <select
-          className="rounded-lg border border-white bg-black p-1 text-xs text-white"
+          className="cursor-pointer rounded-lg border border-black bg-transparent p-1 text-xs text-black"
           name="language"
           id="language"
         >

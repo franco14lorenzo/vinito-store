@@ -26,9 +26,9 @@ export default function RootLayout({
         className={`${raleway.variable} ${kalnia.variable} flex min-h-screen w-full flex-col items-center justify-start bg-pearl-50 font-raleway text-black`}
       >
         <Header />
-        <div className="mt-12 flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start p-2">
+        <main className="mt-16 flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start p-2">
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

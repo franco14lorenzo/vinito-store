@@ -17,10 +17,10 @@ const Hero = () => {
         </p>
         <Link
           className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
-          href="/shop"
+          href="/tastings"
         >
           Discover our tastings
-          <ArrowRight className="ml-2 inline size-4" />
+          <ArrowRight className="ml-2 inline size-5" />
         </Link>
       </div>
     </section>
