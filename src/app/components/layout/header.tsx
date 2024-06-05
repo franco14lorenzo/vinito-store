@@ -30,6 +30,7 @@ const Header = () => {
             <Menu className="size-8 stroke-zinc-950" />
           </SheetTrigger>
           <SheetContent side="left" className="bg-pearl-50 px-0">
+            <span tabIndex={0} className="sr-only" />
             <SheetHeader>
               <SheetTitle className="rounded-b-lg border-zinc-950/50 px-4 pb-4 shadow">
                 <Link
