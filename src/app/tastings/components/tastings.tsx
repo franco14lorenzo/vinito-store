@@ -25,12 +25,12 @@ export const Tasting = ({
 }) => {
   return (
     <article className="flex flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-b from-pearl-100 to-pearl-50 p-4">
-      <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-black">
+      <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">
         {title}
       </h2>
       <div className="h-64 w-64 rounded-xl bg-gradient-to-t from-pearl-100 to-pearl-50" />
-      <p className="text-black">{wines} wines</p>
-      <p className="text-black">{description}</p>
+      <p className="text-zinc-950">{wines} wines</p>
+      <p className="text-zinc-950">{description}</p>
       <Link
         className="mt-4 rounded-full bg-black px-4 py-2 text-white hover:bg-opacity-80"
         href={`/tastings/${title.toLowerCase()}`}

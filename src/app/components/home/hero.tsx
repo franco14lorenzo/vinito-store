@@ -6,13 +6,13 @@ const Hero = () => {
   return (
     <section className="flex flex-col items-center justify-center px-4 text-center">
       <div className="flex h-[400px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
-        <p className="mb-4 text-sm font-medium uppercase text-black">
+        <p className="mb-4 text-sm font-medium uppercase text-zinc-950">
           Live the best experience
         </p>
-        <h1 className="font-kalnia text-6xl font-bold text-black">
+        <h1 className="font-kalnia text-6xl font-bold text-zinc-950">
           Taste Vinito
         </h1>
-        <p className="mb-4 text-2xl font-medium text-black">
+        <p className="mb-4 text-2xl font-medium text-zinc-950">
           From Mendoza to the world
         </p>
         <Link

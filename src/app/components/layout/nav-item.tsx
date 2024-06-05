@@ -1,15 +1,19 @@
 'use client'
+import { ReactNode } from 'react'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const NavItem = ({
   href,
   className,
-  label
+  label,
+  children
 }: {
   href: string
   className?: string
   label: string
+  children?: ReactNode
 }) => {
   const pathname = usePathname()
   return (
@@ -17,9 +21,10 @@ const NavItem = ({
       href={href}
       className={`hover:opacity-70 ${
         pathname.startsWith(href) ? 'underline' : ''
-      } ${className}`}
+      } ${className} `}
     >
       {label}
+      {children}
     </Link>
   )
 }
