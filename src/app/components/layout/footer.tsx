@@ -2,7 +2,7 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="flex w-full max-w-screen-xl  flex-col items-center justify-center gap-2 overflow-hidden rounded-xl rounded-b-none bg-black/10 p-4">
+    <footer className="flex w-full max-w-screen-xl  flex-col items-center justify-center gap-2 overflow-hidden rounded-b-none border-t border-black/50 p-4">
       <p className="text-center text-xs text-black">
         &copy; {year} Vinito. All rights reserved.
       </p>
