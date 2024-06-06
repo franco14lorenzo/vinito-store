@@ -8,22 +8,30 @@ const NavItem = ({
   href,
   className,
   label,
-  children
+  children,
+  side = false
 }: {
   href: string
   className?: string
   label: string
   children?: ReactNode
+  side?: boolean
 }) => {
   const pathname = usePathname()
   return (
     <Link
       href={href}
       className={`hover:opacity-70 ${
-        pathname.startsWith(href) ? 'underline' : ''
+        pathname.startsWith(href) && !side ? 'border-b-2 border-zinc-950' : ''
       } ${className} `}
     >
-      {label}
+      <span
+        className={`${
+          pathname.startsWith(href) && side ? 'border-b-2 border-zinc-950' : ''
+        }`}
+      >
+        {label}
+      </span>
       {children}
     </Link>
   )
