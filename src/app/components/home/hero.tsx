@@ -12,7 +12,7 @@ const Hero = () => {
         <h1 className="font-kalnia text-6xl font-bold text-zinc-950">
           Taste Vinito
         </h1>
-        <p className="mb-4 text-2xl font-medium text-zinc-950">
+        <p className="mb-4 mt-3 text-2xl font-medium text-zinc-950">
           From Mendoza to the world
         </p>
         <Link
