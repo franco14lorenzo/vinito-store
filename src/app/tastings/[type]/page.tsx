@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import Breadcrumbs from '@/components/blocks/breadcrumbs'
+
 export async function generateStaticParams() {
   const tastings = ['standard', 'premium', 'deluxe']
   return tastings.map((type) => ({ type }))
@@ -41,8 +43,15 @@ export default function TastingDetailsPage({
     return notFound()
   }
 
+  const breadcrumbs = [
+    { name: 'Home', href: '/' },
+    { name: 'Tastings', href: '/tastings' },
+    { name: tasting.title, isCurrentPage: true }
+  ]
+
   return (
     <>
+      <Breadcrumbs elements={breadcrumbs} />
       <h1 className="mb-4 font-kalnia text-3xl font-bold">{tasting.title}</h1>
       <p className="mb-4 text-lg">{tasting.description}</p>
       <p className="text-lg">Number of wines: {tasting.wines}</p>
