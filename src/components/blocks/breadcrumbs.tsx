@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 
 import Link from 'next/link'
 
@@ -27,8 +27,8 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ elements }) => {
       <Breadcrumb>
         <BreadcrumbList>
           {elements.map((element, index) => (
-            <>
-              <BreadcrumbItem key={index}>
+            <Fragment key={element.name}>
+              <BreadcrumbItem>
                 {element.href ? (
                   <BreadcrumbLink asChild>
                     <Link href={element.href}>{element.name}</Link>
@@ -38,7 +38,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ elements }) => {
                 )}
               </BreadcrumbItem>
               {index < elements.length - 1 && <BreadcrumbSeparator />}
-            </>
+            </Fragment>
           ))}
         </BreadcrumbList>
       </Breadcrumb>
