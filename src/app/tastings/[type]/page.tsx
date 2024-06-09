@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 
+import Actions from './components/actions'
+
 export async function generateStaticParams() {
   const tastings = ['standard', 'premium', 'deluxe']
   return tastings.map((type) => ({ type }))
@@ -186,23 +188,7 @@ export default function TastingDetailsPage({
         <h2 className="font-bold">Tasting Description</h2>
         <p className="my-4">{tasting.description}</p>
       </section>
-      <section className="grid w-full max-w-72 grid-cols-1 gap-4 px-4 py-2">
-        <div className="flex w-full justify-between">
-          <p className="text-xl font-bold leading-10">${tasting.price}</p>
-          <div className="flex items-center gap-2 font-semibold">
-            <button className="size-5 rounded-full bg-black leading-5 text-white">
-              -
-            </button>
-            <span>1</span>
-            <button className="size-5 rounded-full bg-black leading-5 text-white">
-              +
-            </button>
-          </div>
-        </div>
-        <button className="w-full rounded-full bg-black py-3 text-white hover:opacity-80">
-          Add to Cart
-        </button>
-      </section>
+      <Actions item={{ price: tasting.price, name: tasting.title }} />
     </>
   )
 }
