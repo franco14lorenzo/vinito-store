@@ -14,9 +14,9 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
   const { addItem } = useCart()
 
   return (
-    <section className="grid w-full grid-cols-1 gap-4 self-start px-4 py-2 md:w-72">
+    <section className="grid w-full grid-cols-1 gap-4 self-start py-2 md:w-72">
       <div className="flex w-full justify-between">
-        <p className="text-xl font-bold leading-10">${item.price}</p>
+        <p className="text-xl font-bold leading-10">${item.price.toFixed(2)}</p>
         <div className="flex w-20  items-center font-semibold">
           <button
             className={`grid size-5 place-content-center rounded-full bg-black leading-5 text-white ${
@@ -52,7 +52,7 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
           setDialogOpen(Dialogs.Cart)
         }}
       >
-        Add to Cart
+        Add to Bag
       </button>
     </section>
   )

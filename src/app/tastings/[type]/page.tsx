@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import Actions from '@/app/tastings/[type]/components/actions'
+import WinesTabs from '@/app/tastings/[type]/components/wines-tabs'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
-
-import Actions from './components/actions'
 
 export async function generateStaticParams() {
   const tastings = ['standard', 'premium', 'deluxe']
@@ -82,7 +82,7 @@ export default function TastingDetailsPage({
         },
         dessert: {
           name: 'Justin Vineyards',
-          type: 'Cabernet Sauvignon',
+          type: 'Cabernet Franc',
           year: 2017,
           region: 'Paso Robles',
           alcohol: 14.5,
@@ -121,7 +121,7 @@ export default function TastingDetailsPage({
           price: 60
         },
         dessert: {
-          name: 'Justin Vineyards',
+          name: 'Dessert Wine',
           type: 'Cabernet Sauvignon',
           year: 2017,
           region: 'Paso Robles',
@@ -130,7 +130,7 @@ export default function TastingDetailsPage({
         },
         special: {
           name: 'Justin Vineyards',
-          type: 'Cabernet Sauvignon',
+          type: 'Cabernet Franc',
           year: 2017,
           region: 'Paso Robles',
           alcohol: 14.5,
@@ -153,42 +153,45 @@ export default function TastingDetailsPage({
     { name: tasting.title, isCurrentPage: true }
   ]
 
+  const wines = Object.values(tasting.wines)
+
   return (
     <>
       <Breadcrumbs elements={breadcrumbs} />
-      <h1 className="px-4 py-10 font-kalnia text-3xl font-bold">
-        {tasting.title} Tasting
-      </h1>
-      <section className="w-full px-4 py-2">
-        <h2 className="font-bold">Wines</h2>
-        <ul className="my-4 grid grid-cols-repeat-130 place-items-center gap-4 rounded-lg bg-gradient-to-b from-pearl-200 to-pearl-100 p-4 py-3 text-xs">
-          {Object.values(tasting.wines).map((wine) => (
-            <li key={wine.name}>
-              <article className="flex h-52 max-w-32 flex-col justify-between rounded-lg bg-pearl-50 p-4">
-                <div className="h-8 w-full ">
-                  <h3 className="h-8 font-bold">{wine.name}</h3>
-                </div>
-                <div className="h-3 w-full text-[10px]">
-                  <p>{wine.type}</p>
-                </div>
-                <div className="mt-3 grid h-full grid-cols-2 gap-2">
-                  <div className="flex flex-col gap-1 self-end px-1 py-4 text-[10px]">
-                    <p>{wine.year}</p>
-                    <p>{wine.region}</p>
-                    <p>{wine.alcohol}%</p>
-                  </div>
-                  <div className="h-28 w-full rounded-t-full bg-gradient-to-b from-pearl-100 to-pearl-50 p-2" />
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
+
+      <section className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+        <section className="flex flex-col px-4">
+          <div className="aspect-square w-full rounded-lg bg-pearl-100" />
+        </section>
+
+        <article className="flex flex-col justify-between gap-4 px-4">
+          <section className="py-4 md:py-0">
+            <h1 className="h-14 font-kalnia text-3xl font-bold">
+              {tasting.title} Tasting
+            </h1>
+            <h2 className="font-bold">Tasting Description</h2>
+            <p className="my-4">{tasting.description}</p>
+            <h2 className="font-bold">Wines</h2>
+            <p className="my-4">{wines.length} units of 750ml</p>
+            <h2 className="font-bold">Mariage</h2>
+            <p className="my-4">Cheese and charcuterie board</p>
+          </section>
+          <div className="hidden md:block">
+            <Actions item={{ price: tasting.price, name: tasting.title }} />
+          </div>
+        </article>
       </section>
-      <section className="px-4 py-2">
-        <h2 className="font-bold">Tasting Description</h2>
-        <p className="my-4">{tasting.description}</p>
+
+      <section className="grid w-full gap-4 px-4 py-2">
+        <h2 className="font-bold">Wines Details</h2>
+        <WinesTabs wines={wines} />
       </section>
-      <Actions item={{ price: tasting.price, name: tasting.title }} />
+
+      <div className="h-[60px] w-full md:hidden" />
+
+      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-pearl-50 px-4 shadow md:hidden">
+        <Actions item={{ price: tasting.price, name: tasting.title }} />
+      </div>
     </>
   )
 }
