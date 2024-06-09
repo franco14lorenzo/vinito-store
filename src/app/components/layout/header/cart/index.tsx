@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsClient } from '@uidotdev/usehooks'
 import { Minus, Plus, ShoppingBag, Trash } from 'lucide-react'
 
 import Link from 'next/link'
@@ -17,6 +18,7 @@ import {
 } from '@/components/ui/sheet'
 
 const Cart = () => {
+  const isClient = useIsClient()
   const { items, removeItem, updateItem } = useCart()
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
@@ -36,7 +38,7 @@ const Cart = () => {
         >
           <ShoppingBag className="size-8 fill-black stroke-pearl-50" />
           <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full border border-pearl-50 bg-red-500 text-xs font-medium leading-5 text-white">
-            {totalItems}
+            {isClient ? totalItems : '...'}
           </span>
         </SheetTrigger>
         <SheetContent
