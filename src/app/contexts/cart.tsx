@@ -31,8 +31,11 @@ interface CartProviderProps {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>(() => {
-    const storedItems = localStorage.getItem('cartItems')
-    return storedItems ? JSON.parse(storedItems) : []
+    if (typeof window !== 'undefined') {
+      const storedItems = localStorage.getItem('cartItems')
+      return storedItems ? JSON.parse(storedItems) : []
+    }
+    return []
   })
 
   useEffect(() => {

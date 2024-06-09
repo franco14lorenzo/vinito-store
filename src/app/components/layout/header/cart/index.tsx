@@ -22,7 +22,6 @@ const Cart = () => {
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
 
   const [dialogOpen, setDialogOpen] = useDialog()
-  console.log('dialogOpen', dialogOpen)
 
   const handleOpenChange = (isOpen: boolean) => {
     setDialogOpen(isOpen ? Dialogs.Cart : null)
