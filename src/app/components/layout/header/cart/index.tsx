@@ -3,6 +3,7 @@
 import { useIsClient } from '@uidotdev/usehooks'
 import { Minus, Plus, ShoppingBag, Trash } from 'lucide-react'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { useCart } from '@/app/contexts/cart'
@@ -97,7 +98,7 @@ const Cart = () => {
                     disabled={items.length === 0}
                     className="w-full cursor-pointer rounded-full bg-black py-3 text-center text-white hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => {
-                      if (items.length === 0) {
+                      if (items.length !== 0) {
                         push('/checkout')
                         setDialogOpen(null)
                       }
@@ -121,6 +122,7 @@ const Item = ({
   item: { id: string; name: string; quantity: number; price: number }
 }) => {
   const { removeItem, updateItem } = useCart()
+  const [, setDialogOpen] = useDialog()
 
   return (
     <article
@@ -131,7 +133,13 @@ const Item = ({
         <div className=" flex size-14 items-center rounded-lg bg-white" />
 
         <div className="flex flex-col justify-between py-0.5">
-          <p className="font-bold">{item.name}</p>
+          <Link
+            href={`/tastings/${item.id.toLowerCase().replace(/ /g, '-')}`}
+            className="text-base font-semibold hover:underline"
+            onClick={() => setDialogOpen(null)}
+          >
+            {item.name} Tasting
+          </Link>
           <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button
               aria-label="Decrease quantity"
