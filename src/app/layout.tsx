@@ -14,7 +14,10 @@ const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' })
 const kalnia = Kalnia({ subsets: ['latin'], variable: '--font-kalnia' })
 
 export const metadata: Metadata = {
-  title: 'Vinito Store',
+  title: {
+    template: '%s | Vinito',
+    default: 'Vinito Store'
+  },
   description: 'Live the best wine tasting experience with Vinito'
 }
 

@@ -4,7 +4,7 @@ import { HeadingSection, Tastings } from '@/app/tastings/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Tastings', // TODO: Change this to template
+  title: 'Tastings',
   description: 'Discover our wine tasting packages'
 }
 
