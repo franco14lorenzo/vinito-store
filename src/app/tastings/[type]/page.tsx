@@ -189,7 +189,7 @@ export default function TastingDetailsPage({
 
       <div className="h-[60px] w-full md:hidden" />
 
-      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-pearl-50 px-4 shadow md:hidden">
+      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-pearl-50 px-4 pb-4 shadow md:hidden">
         <Actions item={{ price: tasting.price, name: tasting.title }} />
       </div>
     </>

@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Logo = () => {
   return (
     <Link
-      className="flex items-center space-x-2 p-0 hover:opacity-70 md:pl-2"
+      className="flex items-center space-x-2 p-0 hover:opacity-70 md:pl-4"
       href="/"
       aria-label="home"
     >
