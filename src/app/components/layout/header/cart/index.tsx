@@ -134,6 +134,7 @@ const Item = ({
           <p className="font-bold">{item.name}</p>
           <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button
+              aria-label="Decrease quantity"
               className={`grid size-5 place-content-center rounded-l-full border-r border-zinc-950/50 leading-5
             ${item.quantity === 1 ? 'cursor-not-allowed opacity-50' : ''}`}
               onClick={() => {
@@ -147,6 +148,7 @@ const Item = ({
 
             <span className="flex-1 px-1.5 text-center">{item.quantity}</span>
             <button
+              aria-label="Increase quantity"
               className="grid size-5 place-content-center rounded-r-full border-l border-zinc-950/50 leading-5"
               onClick={() => updateItem(item.id, item.quantity + 1)}
             >
@@ -159,6 +161,7 @@ const Item = ({
       <section className="flex flex-col items-end justify-between py-0.5">
         <button
           className="grid place-content-center rounded-full leading-5 text-zinc-950/50 hover:text-zinc-950/80"
+          aria-label="Remove item"
           onClick={() => {
             const confirm = window.confirm(
               `Are you sure you want to remove ${item.name} from your cart?`

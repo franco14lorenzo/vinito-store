@@ -21,6 +21,7 @@ export function WinesTabs({
       <TabsList className="grid h-auto gap-2 bg-pearl-100 px-4 py-4 text-xs">
         {wines.map((wine) => (
           <TabsTrigger
+            aria-label={wine.type}
             key={`${wine.name}-${wine.type}`}
             value={`${wine.name}-${wine.type}`}
             className="h-auto text-wrap p-2 text-xs shadow hover:bg-pearl-200 active:bg-pearl-200"
@@ -33,6 +34,7 @@ export function WinesTabs({
       <div className="grid flex-1 gap-4 px-4 py-2">
         {wines.map((wine) => (
           <TabsContent
+            aria-label={`${wine.name} details`}
             key={`${wine.name}-${wine.type}`}
             value={`${wine.name}-${wine.type}`}
           >

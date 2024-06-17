@@ -19,7 +19,8 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
         <p className="text-xl font-bold leading-10">${item.price.toFixed(2)}</p>
         <div className="flex w-20  items-center font-semibold">
           <button
-            className={`grid size-5 place-content-center rounded-full bg-black leading-5 text-white ${
+            aria-label="Decrease quantity"
+            className={`grid size-6 place-content-center rounded-full bg-black leading-5 text-white ${
               quantity === 1 ? 'cursor-not-allowed opacity-50' : ''
             }
               `}
@@ -33,7 +34,8 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
           </button>
           <span className="flex-1 text-center">{quantity}</span>
           <button
-            className="grid size-5 place-content-center rounded-full bg-black leading-5 text-white"
+            aria-label="Increase quantity"
+            className="grid size-6 place-content-center rounded-full bg-black leading-5 text-white"
             onClick={() => setQuantity(quantity + 1)}
           >
             <Plus size={10} strokeWidth={4} />
