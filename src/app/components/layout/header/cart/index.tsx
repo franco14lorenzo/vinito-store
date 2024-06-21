@@ -1,11 +1,12 @@
 'use client'
 
 import { useIsClient } from '@uidotdev/usehooks'
-import { Minus, Plus, ShoppingBag, Trash } from 'lucide-react'
+import { MapPin, Minus, Plus, ShoppingBag, Trash } from 'lucide-react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { useAccommodation } from '@/app/contexts/accommodation'
 import { useCart } from '@/app/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 import {
@@ -20,8 +21,11 @@ import {
 
 const Cart = () => {
   const { push } = useRouter()
+
   const isClient = useIsClient()
+
   const { items } = useCart()
+  const [accommodation] = useAccommodation()
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
 
@@ -63,6 +67,20 @@ const Cart = () => {
                 items.length === 0 ? 'justify-center' : 'justify-start'
               }`}
             >
+              {accommodation && (
+                <section className="flex flex-row gap-2 px-4 py-2">
+                  <div className="flex items-center justify-center">
+                    <MapPin className="size-6" />
+                  </div>
+                  <div className="flex flex-col overflow-hidden ">
+                    <p className="text-[8px] leading-[10px]">Deliver to</p>
+                    <p className="truncate text-xs font-semibold">
+                      {accommodation?.name} - {accommodation?.address}
+                    </p>
+                  </div>
+                </section>
+              )}
+
               <div className="grid overflow-y-auto px-4 text-left">
                 {items.length === 0 && (
                   <div className="flex flex-col justify-center">
@@ -81,11 +99,15 @@ const Cart = () => {
           </SheetDescription>
           <SheetFooter>
             <div className="grid w-full pt-4">
+              <section className="mb-2 flex justify-between px-4 text-sm font-semibold">
+                <p>Subtotal</p>
+                <span className="font-semibold text-zinc-800">
+                  ${totalPrice}
+                </span>
+              </section>
               <section className="flex justify-between px-4 text-sm font-semibold">
                 <p>Shipping</p>
-                <span className="font-semibold text-green-500">
-                  Free for you
-                </span>
+                <span className="font-semibold text-green-500">Free</span>
               </section>
               <div className="mt-4 flex flex-1 flex-col gap-6 border-t border-zinc-950/20 p-4 pb-0">
                 <section className="flex justify-between text-xl font-bold">
@@ -125,14 +147,11 @@ const Item = ({
   const [, setDialogOpen] = useDialog()
 
   return (
-    <article
-      key={item.id}
-      className="flex h-[89px] justify-between border-b border-zinc-950/20 py-4"
-    >
+    <article key={item.id} className="flex h-[89px] justify-between py-4">
       <section className="flex gap-4">
-        <div className=" flex size-14 items-center rounded-lg bg-white" />
+        <div className=" flex size-14 items-center rounded-lg bg-pearl-100" />
 
-        <div className="flex flex-col justify-between py-0.5">
+        <div className="flex flex-col justify-between">
           <Link
             href={`/tastings/${item.id.toLowerCase().replace(/ /g, '-')}`}
             className="text-base font-semibold hover:underline"
@@ -166,7 +185,7 @@ const Item = ({
         </div>
       </section>
 
-      <section className="flex flex-col items-end justify-between py-0.5">
+      <section className="flex flex-col items-end justify-between">
         <button
           className="grid place-content-center rounded-full leading-5 text-zinc-950/50 hover:text-zinc-950/80"
           aria-label="Remove item"
