@@ -216,22 +216,17 @@ const Item = ({
           >
             <Trash className="size-4" />
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="gap-8">
             <DialogHeader>
               <DialogTitle>
                 Remove {item.name} tasting from your cart
               </DialogTitle>
               <DialogDescription>
-                Are you sure you want to remove {item.name} from your cart?
+                Are you sure you want to remove {item.name} tasting from your
+                cart?
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter className="flex flex-row-reverse justify-center gap-4">
-              <DialogClose
-                asChild
-                className="rounded-full bg-black px-4 py-2 text-white"
-              >
-                <button type="button">Close</button>
-              </DialogClose>
+            <DialogFooter className="flex justify-center gap-2">
               <button
                 type="button"
                 className="rounded-full border border-black px-4 py-2 "
@@ -242,6 +237,12 @@ const Item = ({
               >
                 Remove
               </button>
+              <DialogClose
+                asChild
+                className="rounded-full bg-black px-4 py-2 text-white"
+              >
+                <button type="button">Close</button>
+              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Dialog>
