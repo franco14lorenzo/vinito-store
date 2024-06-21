@@ -83,7 +83,7 @@ const Cart = () => {
               className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
               {accommodation && (
-                <section className="flex flex-row gap-2 self-start px-4 py-2">
+                <section className="flex max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 py-2">
                   <div className="flex items-center justify-center">
                     <MapPin className="size-6" />
                   </div>
