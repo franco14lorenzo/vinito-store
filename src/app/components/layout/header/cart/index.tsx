@@ -1,7 +1,14 @@
 'use client'
 
 import { useIsClient } from '@uidotdev/usehooks'
-import { MapPin, Minus, Plus, ShoppingBag, Trash } from 'lucide-react'
+import {
+  ArrowRight,
+  MapPin,
+  Minus,
+  Plus,
+  ShoppingBag,
+  Trash
+} from 'lucide-react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -63,12 +70,10 @@ const Cart = () => {
           </SheetHeader>
           <SheetDescription asChild>
             <div
-              className={`flex flex-1 flex-col overflow-y-auto text-left ${
-                items.length === 0 ? 'justify-center' : 'justify-start'
-              }`}
+              className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
               {accommodation && (
-                <section className="flex flex-row gap-2 px-4 py-2">
+                <section className="flex flex-row gap-2 self-start px-4 py-2">
                   <div className="flex items-center justify-center">
                     <MapPin className="size-6" />
                   </div>
@@ -81,15 +86,23 @@ const Cart = () => {
                 </section>
               )}
 
-              <div className="grid overflow-y-auto px-4 text-left">
+              <div className="grid flex-1 overflow-y-auto px-4 text-left">
                 {items.length === 0 && (
-                  <div className="flex flex-col justify-center">
+                  <div className="flex flex-col items-center justify-center">
                     <p className="px-4 py-2 text-center text-sm">
                       Your bag is empty
                     </p>
                     <p className="px-4 py-2 text-center text-lg font-semibold">
                       Add some items to get started!
                     </p>
+                    <Link
+                      className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+                      href="/tastings"
+                      onClick={() => setDialogOpen(null)}
+                    >
+                      Discover our tastings
+                      <ArrowRight className="ml-2 inline size-5" />
+                    </Link>
                   </div>
                 )}
                 {items.length > 0 &&
