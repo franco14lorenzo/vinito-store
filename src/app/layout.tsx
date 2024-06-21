@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Kalnia, Raleway } from 'next/font/google'
 
 import { Footer, Header } from '@/app/components/layout'
-import { AccommodationProvider } from '@/app/contexts/accommodation'
+import { AccommodationSuspense } from '@/app/contexts/accommodation-suspense'
 import { CartProvider } from '@/app/contexts/cart'
 import { DialogProvider } from '@/app/contexts/dialogs'
 
@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${raleway.variable} ${kalnia.variable} flex min-h-screen w-full flex-col items-center justify-start bg-pearl-50 font-raleway text-zinc-950`}
       >
-        <AccommodationProvider>
+        <AccommodationSuspense>
           <CartProvider>
             <DialogProvider>
               <Header />
@@ -45,7 +45,7 @@ export default function RootLayout({
               <Footer />
             </DialogProvider>
           </CartProvider>
-        </AccommodationProvider>
+        </AccommodationSuspense>
       </body>
     </html>
   )
