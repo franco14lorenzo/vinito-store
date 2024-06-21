@@ -17,6 +17,16 @@ import { useAccommodation } from '@/app/contexts/accommodation'
 import { useCart } from '@/app/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -199,20 +209,42 @@ const Item = ({
       </section>
 
       <section className="flex flex-col items-end justify-between">
-        <button
-          className="grid place-content-center rounded-full leading-5 text-zinc-950/50 hover:text-zinc-950/80"
-          aria-label="Remove item"
-          onClick={() => {
-            const confirm = window.confirm(
-              `Are you sure you want to remove ${item.name} from your cart?`
-            )
-            if (confirm) {
-              removeItem(item.id)
-            }
-          }}
-        >
-          <Trash className="size-4" />
-        </button>
+        <Dialog>
+          <DialogTrigger
+            className="grid place-content-center rounded-full leading-5 text-zinc-950/50 hover:text-zinc-950/80"
+            aria-label="Remove item"
+          >
+            <Trash className="size-4" />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Remove {item.name} tasting from your cart
+              </DialogTitle>
+              <DialogDescription>
+                Are you sure you want to remove {item.name} from your cart?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="flex flex-row-reverse justify-center gap-4">
+              <DialogClose
+                asChild
+                className="rounded-full bg-black px-4 py-2 text-white"
+              >
+                <button type="button">Close</button>
+              </DialogClose>
+              <button
+                type="button"
+                className="rounded-full border border-black px-4 py-2 "
+                onClick={() => {
+                  removeItem(item.id)
+                  setDialogOpen(null)
+                }}
+              >
+                Remove
+              </button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
         <p className="text-base font-bold">
           ${(item.price * item.quantity).toFixed(2)}
         </p>
