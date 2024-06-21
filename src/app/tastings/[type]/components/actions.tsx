@@ -16,7 +16,10 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
   return (
     <section className="grid w-full grid-cols-1 gap-4 self-start py-2 md:w-72">
       <div className="flex w-full justify-between">
-        <p className="text-xl font-bold leading-10">${item.price.toFixed(2)}</p>
+        <p className="text-xl font-bold leading-10">
+          ${item.price.toFixed(2)}{' '}
+          <span className="text-[10px] font-light"> Inc. all taxes</span>
+        </p>
         <div className="flex w-20  items-center font-semibold">
           <button
             aria-label="Decrease quantity"
