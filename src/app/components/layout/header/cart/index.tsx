@@ -83,11 +83,11 @@ const Cart = () => {
               className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
               {accommodation && (
-                <section className="flex max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 py-2">
+                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 py-2">
                   <div className="flex items-center justify-center">
                     <MapPin className="size-6" />
                   </div>
-                  <div className="flex flex-col overflow-hidden ">
+                  <div className="flex flex-1 flex-col overflow-hidden">
                     <p className="text-[8px] leading-[10px]">Deliver to</p>
                     <p className="truncate text-xs font-semibold">
                       {accommodation?.name} - {accommodation?.address}
@@ -96,7 +96,7 @@ const Cart = () => {
                 </section>
               )}
 
-              <div className="grid flex-1 overflow-y-auto px-4 text-left">
+              <div className="grid overflow-y-auto px-4 text-left">
                 {items.length === 0 && (
                   <div className="flex flex-col items-center justify-center">
                     <p className="px-4 py-2 text-center text-sm">
