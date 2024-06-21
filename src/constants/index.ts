@@ -4,8 +4,8 @@ export const NAV_ITEMS = [
     label: 'Tastings'
   },
   {
-    href: '/about',
-    label: 'About'
+    href: '/faqs',
+    label: 'FAQs'
   },
   {
     href: '/contact',
