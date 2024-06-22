@@ -25,7 +25,7 @@ export const Tasting = ({
 }) => {
   return (
     <Link
-      className="rounded-3xl hover:opacity-70"
+      className="rounded-3xl hover:opacity-80"
       href={`/tastings/${title.toLowerCase()}`}
     >
       <article className="flex flex-col items-start justify-start gap-4 rounded-lg p-4 text-left text-sm">

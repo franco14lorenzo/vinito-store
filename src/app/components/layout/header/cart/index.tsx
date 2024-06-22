@@ -96,7 +96,11 @@ const Cart = () => {
                 </section>
               )}
 
-              <div className="grid overflow-y-auto px-4 text-left">
+              <div
+                className={`grid overflow-y-auto px-4 text-left ${
+                  items.length === 0 && 'flex-1'
+                }`}
+              >
                 {items.length === 0 && (
                   <div className="flex flex-col items-center justify-center">
                     <p className="px-4 py-2 text-center text-sm">
