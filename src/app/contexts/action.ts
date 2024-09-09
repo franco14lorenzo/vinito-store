@@ -13,3 +13,9 @@ export async function setCartCookie(items: CartItem[]) {
     value: JSON.stringify(items)
   })
 }
+
+export async function clearCartCookie() {
+  const cookieStore = cookies()
+
+  cookieStore.delete('cartItems')
+}

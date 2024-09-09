@@ -8,7 +8,7 @@ import React, {
   useState
 } from 'react'
 
-import { setCartCookie } from './action'
+import { clearCartCookie, setCartCookie } from './action'
 
 export interface CartItem {
   id: string
@@ -76,8 +76,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({
     )
   }
 
-  const clearCart = () => {
+  const clearCart = async () => {
     setItems([])
+    await clearCartCookie()
   }
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)

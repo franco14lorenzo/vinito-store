@@ -1,10 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { Banknote, CalendarIcon, CreditCard } from 'lucide-react'
 import { z } from 'zod'
+
+import { useRouter } from 'next/navigation'
 
 import { Item } from '@/app/components/layout/header/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
@@ -78,7 +81,9 @@ const formSchema = z.object({
 })
 
 const ClientPage = () => {
-  const { items, totalPrice } = useCart()
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { items, totalPrice, clearCart } = useCart()
   const [accommodation] = useAccommodation()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -96,9 +101,11 @@ const ClientPage = () => {
   })
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    setLoading(true)
     const orderId = crypto.randomUUID()
     const order = {
       id: orderId,
+      status: 'pending',
       contact: {
         name: values.name,
         surname: values.surname,
@@ -114,10 +121,12 @@ const ClientPage = () => {
         method: values.paymentMethod
       },
       items,
-      totalPrice
+      total: totalPrice
     }
 
     console.log(order)
+    clearCart()
+    router.push(`/checkout/success/?name=${values.name}&email=${values.email}`)
   }
 
   return (
@@ -290,7 +299,7 @@ const ClientPage = () => {
                 name="accommodation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Accommodation</FormLabel>
+                    <FormLabel>Accommodation</FormLabel>
                     <FormControl>
                       <Input
                         readOnly
@@ -441,8 +450,12 @@ const ClientPage = () => {
           </div>
         </section>
 
-        <Button type="submit" className="w-full rounded-full md:hidden">
-          Buy Now
+        <Button
+          type="submit"
+          className="w-full rounded-full disabled:cursor-not-allowed disabled:opacity-50 md:hidden"
+          disabled={loading}
+        >
+          {loading ? 'Processing...' : 'Buy Now'}
         </Button>
       </form>
     </Form>
