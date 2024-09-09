@@ -6,8 +6,6 @@ import { format } from 'date-fns'
 import { Banknote, CalendarIcon, CreditCard } from 'lucide-react'
 import { z } from 'zod'
 
-import { redirect } from 'next/navigation'
-
 import { Item } from '@/app/components/layout/header/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
 import { useCart } from '@/app/contexts/cart'
