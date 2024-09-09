@@ -29,7 +29,7 @@ export const Tasting = ({
       href={`/tastings/${title.toLowerCase()}`}
     >
       <article className="flex flex-col items-start justify-start gap-4 rounded-lg p-4 text-left text-sm">
-        <div className="aspect-square w-full rounded-xl bg-pearl-100" />
+        <div className="aspect-square w-full rounded-xl bg-neutral-100" />
         <section className="flex flex-col items-start justify-start gap-2">
           <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">
             {title}

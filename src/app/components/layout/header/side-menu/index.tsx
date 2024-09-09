@@ -39,14 +39,14 @@ const SideMenu = () => {
     <div className="flex w-12 justify-end md:hidden md:w-[152px]">
       <Sheet open={dialogOpen === Dialogs.Menu} onOpenChange={handleOpenChange}>
         <SheetTrigger
-          className="grid size-12 place-content-center rounded-lg hover:bg-pearl-100"
+          className="grid size-12 place-content-center rounded-lg hover:bg-neutral-100"
           aria-label="menu"
         >
           <Menu className="size-8 stroke-zinc-950" />
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="bg-pearl-50 px-0 pt-0"
+          className="bg-neutral-50 px-0 pt-0"
           onOpenAutoFocus={(event) => event.preventDefault()}
         >
           <SheetHeader>
@@ -66,7 +66,7 @@ const SideMenu = () => {
                 <NavItem
                   key={index}
                   href={item.href}
-                  className="flex h-12 items-center justify-between rounded-lg px-4 text-base font-semibold text-zinc-950 hover:bg-pearl-100"
+                  className="flex h-12 items-center justify-between rounded-lg px-4 text-base font-semibold text-zinc-950 hover:bg-neutral-100"
                   label={item.label}
                   side
                   onClick={handleOpenClose}

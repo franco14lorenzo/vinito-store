@@ -46,7 +46,7 @@ const ContactForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-1 rounded-lg bg-pearl-100 p-4 px-4 md:w-1/2"
+        className="w-full space-y-1 rounded-lg bg-neutral-100 p-4 px-4 md:w-1/2"
       >
         <FormField
           control={form.control}
@@ -58,7 +58,7 @@ const ContactForm = () => {
                 <Input
                   placeholder="John Doe"
                   {...field}
-                  className="border-none bg-pearl-50"
+                  className="border-none bg-neutral-50"
                 />
               </FormControl>
               <FormMessage />
@@ -75,7 +75,7 @@ const ContactForm = () => {
                 <Input
                   placeholder="example@email.com"
                   {...field}
-                  className="border-none bg-pearl-50"
+                  className="border-none bg-neutral-50"
                 />
               </FormControl>
               <FormMessage />
@@ -90,7 +90,7 @@ const ContactForm = () => {
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  className="rounded-lg border-none bg-pearl-50"
+                  className="rounded-lg border-none bg-neutral-50"
                   placeholder="Hello, I would like to know more about..."
                   {...field}
                 />

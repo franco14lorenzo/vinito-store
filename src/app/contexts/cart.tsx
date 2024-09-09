@@ -8,7 +8,9 @@ import React, {
   useState
 } from 'react'
 
-interface CartItem {
+import { setCartCookie } from './action'
+
+export interface CartItem {
   id: string
   name: string
   quantity: number
@@ -21,25 +23,28 @@ interface CartContextType {
   removeItem: (itemId: string) => void
   updateItem: (itemId: string, quantity: number) => void
   clearCart: () => void
+  totalItems: number
+  totalPrice: string
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 interface CartProviderProps {
   children: ReactNode
+  cookieCartItems: CartItem[]
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    if (typeof window !== 'undefined') {
-      const storedItems = localStorage.getItem('cartItems')
-      return storedItems ? JSON.parse(storedItems) : []
-    }
-    return []
-  })
+export const CartProvider: React.FC<CartProviderProps> = ({
+  cookieCartItems,
+  children
+}) => {
+  const [items, setItems] = useState<CartItem[]>(cookieCartItems || [])
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(items))
+    const updateCartCookie = async () => {
+      await setCartCookie(items)
+    }
+    updateCartCookie()
   }, [items])
 
   const addItem = (item: CartItem) => {
@@ -75,9 +80,23 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setItems([])
   }
 
+  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
+
+  const totalPrice = items
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2)
+
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateItem, clearCart }}
+      value={{
+        items,
+        addItem,
+        removeItem,
+        updateItem,
+        clearCart,
+        totalItems,
+        totalPrice
+      }}
     >
       {children}
     </CartContext.Provider>

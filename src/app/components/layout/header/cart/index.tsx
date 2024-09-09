@@ -41,14 +41,9 @@ const Cart = () => {
 
   const isClient = useIsClient()
 
-  const { items } = useCart()
+  const { items, totalItems, totalPrice } = useCart()
+
   const [accommodation] = useAccommodation()
-
-  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
-
-  const totalPrice = items
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
-    .toFixed(2)
 
   const [dialogOpen, setDialogOpen] = useDialog()
 
@@ -63,14 +58,14 @@ const Cart = () => {
           className="relative grid size-12 place-content-center rounded-lg hover:opacity-70"
           aria-label="shopping bag"
         >
-          <ShoppingBag className="size-8 fill-black stroke-pearl-50" />
-          <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full border border-pearl-50 bg-red-500 text-xs font-medium leading-5 text-white">
+          <ShoppingBag className="size-8 fill-black stroke-neutral-50" />
+          <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full border border-neutral-50 bg-red-500 text-xs font-medium leading-5 text-white">
             {isClient ? totalItems : '...'}
           </span>
         </SheetTrigger>
         <SheetContent
           side="right"
-          className="flex flex-col gap-0 bg-pearl-50 px-0 pt-0"
+          className="flex flex-col gap-0 bg-neutral-50 px-0 pt-0"
           onOpenAutoFocus={(event) => event.preventDefault()}
         >
           <SheetHeader>
@@ -125,7 +120,7 @@ const Cart = () => {
             </div>
           </SheetDescription>
           <SheetFooter>
-            <div className="grid w-full pt-4">
+            <div className="grid w-full border-t border-zinc-950/20 pt-4">
               <section className="mb-2 flex justify-between px-4 text-sm font-semibold">
                 <p>Subtotal</p>
                 <span className="font-semibold text-zinc-800">
@@ -165,10 +160,12 @@ const Cart = () => {
   )
 }
 
-const Item = ({
-  item
+export const Item = ({
+  item,
+  isCheckoutVariant = false
 }: {
   item: { id: string; name: string; quantity: number; price: number }
+  isCheckoutVariant?: boolean
 }) => {
   const { removeItem, updateItem } = useCart()
   const [, setDialogOpen] = useDialog()
@@ -176,9 +173,13 @@ const Item = ({
   return (
     <article key={item.id} className="flex h-[89px] justify-between py-4">
       <section className="flex gap-4">
-        <div className=" flex size-14 items-center rounded-lg bg-pearl-100" />
+        <div className=" flex size-14 items-center rounded-lg bg-neutral-100" />
 
-        <div className="flex flex-col justify-between">
+        <div
+          className={`flex ${
+            isCheckoutVariant ? 'flex-col md:flex-row md:gap-4' : 'flex-col'
+          } justify-between`}
+        >
           <Link
             href={`/tastings/${item.id.toLowerCase().replace(/ /g, '-')}`}
             className="text-base font-semibold hover:underline"

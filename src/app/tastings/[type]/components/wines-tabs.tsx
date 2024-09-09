@@ -18,13 +18,13 @@ export function WinesTabs({
       orientation="vertical"
       className="flex gap-4"
     >
-      <TabsList className="grid h-auto gap-2 bg-pearl-100 px-4 py-4 text-xs">
+      <TabsList className="grid h-auto gap-2 bg-neutral-100 px-4 py-4 text-xs">
         {wines.map((wine) => (
           <TabsTrigger
             aria-label={wine.type}
             key={`${wine.name}-${wine.type}`}
             value={`${wine.name}-${wine.type}`}
-            className="h-auto text-wrap p-2 text-xs shadow hover:bg-pearl-200 active:bg-pearl-200"
+            className="h-auto text-wrap p-2 text-xs shadow hover:bg-neutral-200 active:bg-neutral-200"
           >
             {wine.name} - {wine.type}
           </TabsTrigger>

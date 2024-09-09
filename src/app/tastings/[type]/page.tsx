@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Actions from '@/app/tastings/[type]/components/actions'
-import WinesTabs from '@/app/tastings/[type]/components/wines-tabs'
+/* import WinesTabs from '@/app/tastings/[type]/components/wines-tabs' */
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 
 export async function generateStaticParams() {
@@ -161,7 +161,7 @@ export default function TastingDetailsPage({
 
       <section className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
         <section className="flex flex-col px-4">
-          <div className="aspect-square w-full rounded-lg bg-pearl-100" />
+          <div className="aspect-square w-full rounded-lg bg-neutral-100" />
         </section>
 
         <article className="flex flex-col justify-between gap-4 px-4">
@@ -182,14 +182,14 @@ export default function TastingDetailsPage({
         </article>
       </section>
 
-      <section className="grid w-full gap-4 px-4 py-2">
+      {/*       <section className="grid w-full gap-4 px-4 py-2">
         <h2 className="font-bold">Wines Details</h2>
         <WinesTabs wines={wines} />
-      </section>
+      </section> */}
 
       <div className="h-[60px] w-full md:hidden" />
 
-      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-pearl-50 px-4 pb-4 shadow md:hidden">
+      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow md:hidden">
         <Actions item={{ price: tasting.price, name: tasting.title }} />
       </div>
     </>
