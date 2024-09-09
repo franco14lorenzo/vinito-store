@@ -189,6 +189,7 @@ export const Item = ({
           </Link>
           <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button
+              type="button"
               aria-label="Decrease quantity"
               className={`grid size-5 place-content-center rounded-l-full border-r border-zinc-950/50 leading-5
             ${item.quantity === 1 ? 'cursor-not-allowed opacity-50' : ''}`}
@@ -203,6 +204,7 @@ export const Item = ({
 
             <span className="flex-1 px-1.5 text-center">{item.quantity}</span>
             <button
+              type="button"
               aria-label="Increase quantity"
               className="grid size-5 place-content-center rounded-r-full border-l border-zinc-950/50 leading-5"
               onClick={() => updateItem(item.id, item.quantity + 1)}
