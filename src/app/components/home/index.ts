@@ -1,2 +1,5 @@
+export { default as Experience } from './experience'
 export { default as Features } from './features'
+export { default as Help } from './help'
 export { default as Hero } from './hero'
+export { default as LineBarSteps } from './steps'

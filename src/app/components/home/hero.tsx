@@ -12,8 +12,8 @@ const Hero = () => {
         <h1 className="font-kalnia text-6xl font-bold text-zinc-950">
           Taste Vinito
         </h1>
-        <p className="mb-4 mt-3 text-2xl font-medium text-zinc-950">
-          Live the best experience
+        <p className="mb-4 mt-3 text-lg font-medium text-zinc-950">
+          Embark on a journey of flavors with our curated wine experiences
         </p>
         <Link
           className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"

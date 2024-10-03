@@ -8,22 +8,27 @@ interface IIconMap {
 }
 
 const iconsMap: IIconMap = {
-  wine: <Wine className="size-8" />,
-  experience: <ClipboardList className="size-8" />,
-  delivery: <Truck className="size-8" />
+  wine: <Wine className="size-6" />,
+  experience: <ClipboardList className="size-6" />,
+  delivery: <Truck className="size-6" />
 }
 
 const Features = () => {
   return (
-    <section className="my-12 mt-12 grid grid-cols-1 gap-6 px-3 md:grid-cols-3">
-      {FEATURES.map((feature, index) => (
-        <Feature
-          key={index}
-          icon={iconsMap[feature.icon]}
-          title={feature.title}
-          description={feature.description}
-        />
-      ))}
+    <section className="mx-auto max-w-6xl px-4">
+      <h2 className="mb-10 text-center text-2xl font-semibold">
+        Why choose our experiences?
+      </h2>
+      <div className="grid grid-cols-1 gap-8 py-4 md:grid-cols-3">
+        {FEATURES.map((feature, index) => (
+          <Feature
+            key={index}
+            icon={iconsMap[feature.icon]}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
     </section>
   )
 }
@@ -38,10 +43,10 @@ export const Feature = ({
   description: string
 }>) => {
   return (
-    <article className="flex flex-col items-start justify-start gap-2 text-balance rounded-lg bg-gradient-to-b from-neutral-100 to-neutral-50 p-6 text-left">
-      {icon && icon}
-      <h2 className="text-base font-bold">{title}</h2>
-      <p className="text-sm">{description}</p>
+    <article className="flex flex-col items-start text-left">
+      <div className="mb-4 rounded-full bg-primary/10 p-2">{icon}</div>
+      <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
     </article>
   )
 }

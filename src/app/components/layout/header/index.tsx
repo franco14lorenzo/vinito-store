@@ -5,7 +5,7 @@ import SideMenu from '@/app/components/layout/header/side-menu'
 
 const Header = () => {
   return (
-    <header className="fixed z-10 flex w-full max-w-screen-xl items-center justify-between overflow-hidden rounded-xl rounded-t-none bg-neutral-50 p-2 shadow">
+    <header className="fixed z-20 flex w-full max-w-screen-xl items-center justify-between overflow-hidden rounded-xl rounded-t-none bg-neutral-50 p-2 shadow">
       <SideMenu />
       <Logo />
       <Navigation />
