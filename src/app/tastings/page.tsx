@@ -1,7 +1,10 @@
+import { QueryData } from '@supabase/supabase-js'
+
 import { Metadata } from 'next'
 
 import { HeadingSection, Tastings } from '@/app/tastings/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
+import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: 'Tastings',
@@ -13,7 +16,14 @@ const breadcrumbs = [
   { name: 'Tastings', isCurrentPage: true }
 ]
 
-export default function TastingListPage() {
+export default async function TastingListPage() {
+  const { data, error } = await getTastingsWithWines()
+
+  if (error) {
+    // TODO: Handle error
+    throw error
+  }
+
   return (
     <>
       <Breadcrumbs elements={breadcrumbs} />
@@ -21,7 +31,21 @@ export default function TastingListPage() {
         title="Tastings"
         description="Discover our wine tasting packages"
       />
-      <Tastings />
+      <Tastings tastings={data} />
     </>
   )
+}
+
+async function getTastingsWithWines() {
+  const supabase = createClient()
+  const tastingsWithWinesQuery = supabase
+    .from('tastings')
+    .select('id, name, short_description, slug, image, wines (id)')
+    .eq('status', 'active')
+
+  type TastingsWithWines = QueryData<typeof tastingsWithWinesQuery>
+
+  const { data, error } = await tastingsWithWinesQuery
+
+  return { data: data as TastingsWithWines, error }
 }

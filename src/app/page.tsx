@@ -6,7 +6,7 @@ import {
   LineBarSteps
 } from '@/app/components/home'
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <>
       <Hero />
