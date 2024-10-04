@@ -42,6 +42,7 @@ async function getTastingsWithWines() {
     .from('tastings')
     .select('id, name, short_description, slug, image, wines (id)')
     .eq('status', 'active')
+    .order('id', { ascending: true })
 
   type TastingsWithWines = QueryData<typeof tastingsWithWinesQuery>
 
