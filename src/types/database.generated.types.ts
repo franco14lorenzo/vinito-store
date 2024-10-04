@@ -110,7 +110,7 @@ export type Database = {
           short_description: string | null
           slug: string
           status: Database['public']['Enums']['tasting_status']
-          stock: number | null
+          stock: number
           updated_at: string
           updated_by: number | null
         }
@@ -126,7 +126,7 @@ export type Database = {
           short_description?: string | null
           slug: string
           status?: Database['public']['Enums']['tasting_status']
-          stock?: number | null
+          stock?: number
           updated_at?: string
           updated_by?: number | null
         }
@@ -142,7 +142,7 @@ export type Database = {
           short_description?: string | null
           slug?: string
           status?: Database['public']['Enums']['tasting_status']
-          stock?: number | null
+          stock?: number
           updated_at?: string
           updated_by?: number | null
         }

@@ -1,5 +1,5 @@
 ALTER TABLE "public"."tastings"
-ADD COLUMN "stock" INT DEFAULT 0,
+ADD COLUMN "stock" INT DEFAULT 0 NOT NULL,
 ADD COLUMN "image" TEXT,
 ADD COLUMN "slug" TEXT NOT NULL,
 ADD COLUMN "long_description" TEXT;

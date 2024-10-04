@@ -5,7 +5,11 @@ import { Minus, Plus } from 'lucide-react'
 import { useCart } from '@/app/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 
-const Actions = ({ item }: { item: { price: number; name: string } }) => {
+const Actions = ({
+  item
+}: {
+  item: { id: number; price: number; name: string; stock: number; slug: string }
+}) => {
   const [quantity, setQuantity] = useState(1)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,23 +26,21 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
         </p>
         <div className="flex w-20  items-center font-semibold">
           <button
+            disabled={quantity === 1}
             aria-label="Decrease quantity"
-            className={`grid size-6 place-content-center rounded-full bg-black leading-5 text-white ${
-              quantity === 1 ? 'cursor-not-allowed opacity-50' : ''
-            }
+            className={`grid size-6 place-content-center rounded-full bg-black leading-5 text-white disabled:cursor-not-allowed disabled:opacity-50
               `}
             onClick={() => {
-              if (quantity > 1) {
-                setQuantity(quantity - 1)
-              }
+              setQuantity(quantity - 1)
             }}
           >
             <Minus size={10} strokeWidth={4} />
           </button>
           <span className="flex-1 text-center">{quantity}</span>
           <button
+            disabled={quantity === item.stock}
             aria-label="Increase quantity"
-            className="grid size-6 place-content-center rounded-full bg-black leading-5 text-white"
+            className={`grid size-6 place-content-center rounded-full bg-black leading-5 text-white disabled:cursor-not-allowed disabled:opacity-50`}
             onClick={() => setQuantity(quantity + 1)}
           >
             <Plus size={10} strokeWidth={4} />
@@ -49,10 +51,12 @@ const Actions = ({ item }: { item: { price: number; name: string } }) => {
         className="w-full rounded-full bg-black py-3 text-white hover:opacity-80"
         onClick={() => {
           addItem({
-            id: item.name,
+            id: item.id,
             name: item.name,
+            slug: item.slug,
             quantity,
-            price: item.price
+            price: item.price,
+            stock: item.stock
           })
           setDialogOpen(Dialogs.Cart)
         }}

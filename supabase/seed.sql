@@ -1,8 +1,8 @@
--- Seed data for the admin table (a single admin)
+-- Seed data for the admin table
 INSERT INTO admin (name, surname, email) VALUES
 ('Franco', 'Lorenzo', 'franco14lorenzo@gmail.com');
 
--- Seed data for the wines table (descriptions in Spanish)
+-- Seed data for the wines table
 INSERT INTO wines (name, description, winery, year, variety, volume_ml, price, cost_usd_blue, status, created_by, stock) VALUES
 ('Malbec Reserva', 'Un Malbec intenso y aromático con notas de frutas rojas y especias', 'Bodega del Valle', 2018, 'Malbec', 750, 2500.00, 12.50, 'active', 1, 100),
 ('Chardonnay Premium', 'Chardonnay fresco y frutado con toques de vainilla y roble', 'Viñas del Sur', 2020, 'Chardonnay', 750, 1800.00, 9.00, 'active', 1, 150),
@@ -15,16 +15,16 @@ INSERT INTO wines (name, description, winery, year, variety, volume_ml, price, c
 ('Bonarda Clásica', 'Bonarda frutada y de cuerpo medio con notas de cereza y especias', 'Bodega Tradicional', 2020, 'Bonarda', 750, 1900.00, 9.50, 'active', 1, 80),
 ('Syrah Intenso', 'Syrah de gran intensidad y complejidad con notas de pimienta y frutos negros', 'Finca del Norte', 2017, 'Syrah', 750, 2700.00, 13.50, 'active', 1, 70);
 
--- Seed data for the tastings table (short_description in Spanish)
-INSERT INTO tastings (name, slug, short_description, pairings, price, status, created_by, stock) VALUES
-('Degustación Malbec', 'degustacion-malbec', 'Experiencia de cata de diferentes Malbecs, explorando la variedad emblemática de Argentina', 'Carnes rojas, quesos maduros', 5000.00, 'draft', 1, 10),
-('Blancos de Verano', 'blancos-de-verano', 'Cata de vinos blancos refrescantes, perfectos para la temporada estival', 'Mariscos, ensaladas', 4500.00, 'draft', 1, 10),
-('Tintos Premium', 'tintos-premium', 'Selección de los mejores tintos, una experiencia para paladares exigentes', 'Carnes a la parrilla, chocolates', 6000.00, 'draft', 1, 10),
-('Standard', 'standard', 'Nuestra degustación Estándar es perfecta para principiantes, con una selección de tres vinos deliciosos', 'Variedad de quesos, frutos secos', 3500.00, 'active', 1, 10),
-('Premium', 'premium', 'La degustación Premium eleva tu experiencia con cuatro vinos excepcionales, ideal para expandir tu conocimiento enológico', 'Tabla de fiambres, panes artesanales', 4500.00, 'active', 1, 10),
-('Deluxe', 'deluxe', 'Para la máxima indulgencia, nuestra degustación Deluxe incluye cinco de los mejores vinos, perfecta para conocedores y ocasiones especiales', 'Selección de carnes, chocolates gourmet', 6500.00, 'active', 1, 10);
+-- Seed data for the tastings table
+INSERT INTO tastings (name, slug, short_description, long_description, pairings, price, status, created_by, stock) VALUES
+('Degustación Malbec', 'degustacion-malbec', 'Experiencia de cata de diferentes Malbecs, explorando la variedad emblemática de Argentina', '', 'Carnes rojas, quesos maduros', 5000.00, 'draft', 1, 10),
+('Blancos de Verano', 'blancos-de-verano', 'Cata de vinos blancos refrescantes, perfectos para la temporada estival', '', 'Mariscos, ensaladas', 4500.00, 'draft', 1, 10),
+('Tintos Premium', 'tintos-premium', 'Selección de los mejores tintos, una experiencia para paladares exigentes', '', 'Carnes a la parrilla, chocolates', 6000.00, 'draft', 1, 10),
+('Standard', 'standard', 'Nuestra degustación Estándar es perfecta para principiantes, con una selección de vinos deliciosos', 'Nuestra cata estándar es perfecta para principiantes, ya que incluye una deliciosa selección de vinos. Con una mezcla de vinos tintos y blancos, esta cata es una excelente introducción al mundo de los vinos de Mendoza. Comenzamos con un Chardonnay ligero y refrescante, seguido de un Merlot rico y suave, y terminamos con un Cabernet Sauvignon audaz y complejo.', 'Variedad de quesos, frutos secos', 3500.00, 'active', 1, 10),
+('Premium', 'premium', 'La degustación Premium eleva tu experiencia con cuatro vinos excepcionales, ideal para expandir tu conocimiento enológico', 'La degustación Premium eleva tu experiencia con vinos excepcionales, ideales para ampliar tu conocimiento sobre el vino. Esta degustación incluye un Chardonnay, Merlot, Cabernet Sauvignon y un vino de postre, cada uno cuidadosamente seleccionado para mostrar lo mejor de Mendoza. Deléitate con una variedad de sabores y estilos, desde blancos ligeros y frescos hasta tintos audaces y complejos. Perfecto para los entusiastas del vino y aquellos que buscan explorar nuevos vinos.', 'Tabla de fiambres, panes artesanales', 4500.00, 'active', 1, 10),
+('Deluxe', 'deluxe', 'Para la máxima indulgencia, nuestra degustación Deluxe incluye cinco de los mejores vinos, perfecta para conocedores y ocasiones especiales', 'Para disfrutar al máximo, nuestra degustación Deluxe incluye los mejores vinos, perfectos para conocedores y ocasiones especiales. Esta degustación incluye un Chardonnay, Merlot, Cabernet Sauvignon, un vino de postre y un vino de reserva especial, cada uno seleccionado a mano para mostrar lo mejor de Mendoza. Experimente una variedad de sabores y estilos, desde blancos ligeros y frescos hasta tintos audaces y complejos. Regálese una experiencia de degustación inolvidable con nuestra selección de vinos más exclusiva.', 'Selección de carnes, chocolates gourmet', 6500.00, 'active', 1, 10);
 
--- Seed data for the tasting_wines table (no changes)
+-- Seed data for the tasting_wines table
 INSERT INTO tasting_wines (tasting_id, wine_id) VALUES
 -- de Malbecs
 (1, 1), (1, 5), (1, 8), (1, 3),

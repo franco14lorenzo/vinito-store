@@ -164,7 +164,14 @@ export const Item = ({
   item,
   isCheckoutVariant = false
 }: {
-  item: { id: string; name: string; quantity: number; price: number }
+  item: {
+    id: number
+    slug: string
+    name: string
+    quantity: number
+    price: number
+    stock: number
+  }
   isCheckoutVariant?: boolean
 }) => {
   const { removeItem, updateItem } = useCart()
@@ -181,7 +188,7 @@ export const Item = ({
           } justify-between`}
         >
           <Link
-            href={`/tastings/${item.id.toLowerCase().replace(/ /g, '-')}`}
+            href={`/tastings/${item.slug}`}
             className="text-base font-semibold hover:underline"
             onClick={() => setDialogOpen(null)}
           >
@@ -189,10 +196,10 @@ export const Item = ({
           </Link>
           <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button
+              disabled={item.quantity === 1}
               type="button"
               aria-label="Decrease quantity"
-              className={`grid size-5 place-content-center rounded-l-full border-r border-zinc-950/50 leading-5
-            ${item.quantity === 1 ? 'cursor-not-allowed opacity-50' : ''}`}
+              className={`grid size-5 place-content-center rounded-l-full border-r border-zinc-950/50 leading-5 disabled:cursor-not-allowed disabled:opacity-50`}
               onClick={() => {
                 if (item.quantity > 1) {
                   updateItem(item.id, item.quantity - 1)
@@ -204,9 +211,10 @@ export const Item = ({
 
             <span className="flex-1 px-1.5 text-center">{item.quantity}</span>
             <button
+              disabled={item.quantity >= item.stock}
               type="button"
               aria-label="Increase quantity"
-              className="grid size-5 place-content-center rounded-r-full border-l border-zinc-950/50 leading-5"
+              className="grid size-5 place-content-center rounded-r-full border-l border-zinc-950/50 leading-5 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => updateItem(item.id, item.quantity + 1)}
             >
               <Plus size={10} strokeWidth={4} />

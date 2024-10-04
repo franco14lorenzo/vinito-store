@@ -11,17 +11,19 @@ import React, {
 import { clearCartCookie, setCartCookie } from './action'
 
 export interface CartItem {
-  id: string
+  id: number
+  slug: string
   name: string
   quantity: number
   price: number
+  stock: number
 }
 
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
-  removeItem: (itemId: string) => void
-  updateItem: (itemId: string, quantity: number) => void
+  removeItem: (itemId: number) => void
+  updateItem: (itemId: number, quantity: number) => void
   clearCart: () => void
   totalItems: number
   totalPrice: string
@@ -62,13 +64,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({
     })
   }
 
-  const removeItem = (itemId: string) => {
+  const removeItem = (itemId: number) => {
     setItems((prevItems) =>
       prevItems.filter((cartItem) => cartItem.id !== itemId)
     )
   }
 
-  const updateItem = (itemId: string, quantity: number) => {
+  const updateItem = (itemId: number, quantity: number) => {
     setItems((prevItems) =>
       prevItems.map((cartItem) =>
         cartItem.id === itemId ? { ...cartItem, quantity } : cartItem

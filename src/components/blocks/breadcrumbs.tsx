@@ -21,6 +21,10 @@ interface BreadcrumbsProps {
   elements: BreadcrumbElement[]
 }
 
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ elements }) => {
   return (
     <div className="w-full px-4 py-2">
@@ -31,10 +35,14 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ elements }) => {
               <BreadcrumbItem>
                 {element.href ? (
                   <BreadcrumbLink asChild>
-                    <Link href={element.href}>{element.name}</Link>
+                    <Link href={element.href}>
+                      {capitalizeFirstLetter(element.name)}
+                    </Link>
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbPage>{element.name}</BreadcrumbPage>
+                  <BreadcrumbPage>
+                    {capitalizeFirstLetter(element.name)}
+                  </BreadcrumbPage>
                 )}
               </BreadcrumbItem>
               {index < elements.length - 1 && <BreadcrumbSeparator />}
