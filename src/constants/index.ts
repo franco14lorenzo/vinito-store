@@ -102,3 +102,5 @@ export const EXPERIENCE_FEATURES = [
     description: 'Elevate your stay with our premium service.'
   }
 ]
+
+export const IS_DEV_ENVIRONMENT = process.env.IS_DEV_MODE === 'true'

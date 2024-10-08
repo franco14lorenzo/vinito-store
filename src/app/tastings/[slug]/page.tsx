@@ -3,14 +3,16 @@ import { QueryData } from '@supabase/supabase-js'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import Actions from '@/app/tastings/[type]/components/actions'
-/* import WinesTabs from '@/app/tastings/[type]/components/wines-tabs' */
+import Actions from '@/app/tastings/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
+import { IS_DEV_ENVIRONMENT } from '@/constants'
+import { createClient as createClientBrowser } from '@/lib/supabase/client'
 import { createClient } from '@/lib/supabase/server'
 
 export async function generateStaticParams() {
-  const tastings = ['standard', 'premium', 'deluxe']
-  return tastings.map((type) => ({ type }))
+  const { data } = await getTastingsSlugs()
+
+  return data.map(({ slug }) => ({ params: { slug } }))
 }
 
 export const metadata: Metadata = {
@@ -21,12 +23,13 @@ export const metadata: Metadata = {
 export default async function TastingDetailsPage({
   params
 }: {
-  params: { type: string }
+  params: { slug: string }
 }) {
-  const { data, error } = await getTastingWithWines(params.type)
+  const { data, error } = await getTastingWithWines(params.slug)
 
   if (error) {
-    // TODO: Handle error
+    IS_DEV_ENVIRONMENT && console.error(error)
+    // TODO: Handle error in production environment
     throw error
   }
 
@@ -75,11 +78,6 @@ export default async function TastingDetailsPage({
         </article>
       </section>
 
-      {/*       <section className="grid w-full gap-4 px-4 py-2">
-        <h2 className="font-bold">Wines Details</h2>
-        <WinesTabs wines={wines} />
-      </section> */}
-
       <div className="h-[60px] w-full md:hidden" />
 
       <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow md:hidden">
@@ -117,4 +115,18 @@ async function getTastingWithWines(slug: string) {
   }
 
   return { data: data as TastingWithWines, error }
+}
+
+async function getTastingsSlugs() {
+  const supabase = createClientBrowser()
+  const tastingsSlugsQuery = supabase
+    .from('tastings')
+    .select('slug')
+    .eq('status', 'active')
+
+  type TastingsSlugs = QueryData<typeof tastingsSlugsQuery>
+
+  const { data, error } = await tastingsSlugsQuery
+
+  return { data: data as TastingsSlugs, error }
 }

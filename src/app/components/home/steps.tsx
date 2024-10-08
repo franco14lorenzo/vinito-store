@@ -21,7 +21,7 @@ function LineBarSteps() {
           How it works
         </h2>
         <div className="relative">
-          <div className="absolute bottom-12 left-[19px] top-0 h-[530px] w-0.5 bg-primary md:left-1/2 md:top-12 md:h-auto" />
+          <div className="absolute bottom-12 left-[19px] top-0 h-[530px] w-0.5 bg-gray-700 md:left-1/2 md:top-12 md:h-auto" />
           <div className="space-y-12">
             {STEPS.map((step, index) => (
               <article
