@@ -6,8 +6,7 @@ import { notFound } from 'next/navigation'
 import Actions from '@/app/(store)/tastings/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
-import { createClient as createClientBrowser } from '@/lib/supabase/client'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/client'
 
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
@@ -118,7 +117,7 @@ async function getTastingWithWines(slug: string) {
 }
 
 async function getTastingsSlugs() {
-  const supabase = createClientBrowser()
+  const supabase = createClient()
   const tastingsSlugsQuery = supabase
     .from('tastings')
     .select('slug')

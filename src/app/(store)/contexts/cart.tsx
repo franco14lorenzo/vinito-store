@@ -8,7 +8,11 @@ import React, {
   useState
 } from 'react'
 
-import { clearCartCookie, setCartCookie } from './actions'
+import {
+  clearCartCookie,
+  getCartCookie,
+  setCartCookie
+} from '@/app/(store)/contexts/actions'
 
 export interface CartItem {
   id: number
@@ -33,20 +37,28 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 
 interface CartProviderProps {
   children: ReactNode
-  cookieCartItems: CartItem[]
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({
-  cookieCartItems,
-  children
-}) => {
-  const [items, setItems] = useState<CartItem[]>(cookieCartItems || [])
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+  const [items, setItems] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    const fetchCartCookie = async () => {
+      const cartItems = await getCartCookie()
+      setItems(cartItems)
+    }
+
+    fetchCartCookie()
+  }, [])
 
   useEffect(() => {
     const updateCartCookie = async () => {
       await setCartCookie(items)
     }
-    updateCartCookie()
+
+    if (items.length > 0) {
+      updateCartCookie()
+    }
   }, [items])
 
   const addItem = (item: CartItem) => {

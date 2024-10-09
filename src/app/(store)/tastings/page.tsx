@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 
 import { HeadingSection, Tastings } from '@/app/(store)/tastings/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/client'
 
 export const metadata: Metadata = {
   title: 'Tastings',
