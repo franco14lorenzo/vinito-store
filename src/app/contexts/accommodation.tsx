@@ -1,6 +1,8 @@
 'use client'
 
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+
+import { getAccommodationCookie } from './actions'
 
 export type Accommodation = {
   id: string
@@ -25,6 +27,16 @@ export function AccommodationProvider({
   const [accommodation, setAccommodation] = useState<Accommodation | undefined>(
     undefined
   )
+
+  useEffect(() => {
+    const fetchAccommodationCookie = async () => {
+      const accommodation = await getAccommodationCookie()
+      console.log('accommodation', accommodation)
+      setAccommodation(accommodation)
+    }
+
+    fetchAccommodationCookie()
+  }, [])
 
   return (
     <AccommodationContext.Provider value={[accommodation, setAccommodation]}>

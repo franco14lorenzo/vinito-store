@@ -10,13 +10,24 @@ import { createClient } from '@/lib/supabase/server'
 import type { Accommodation } from './accommodation'
 
 export async function setAccommodationCookie(accommodation: Accommodation) {
+  const expires = new Date()
+  expires.setDate(expires.getDate() + 7)
+
   const cookieStore = cookies()
 
   cookieStore.set({
     name: 'accommodation',
     path: '/',
-    value: JSON.stringify(accommodation)
+    value: JSON.stringify(accommodation),
+    expires
   })
+}
+
+export async function getAccommodationCookie() {
+  const cookieStore = cookies()
+  const accommodation = cookieStore.get('accommodation')?.value
+
+  return accommodation ? JSON.parse(accommodation) : null
 }
 
 export async function clearAccommodationCookie() {

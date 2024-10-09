@@ -16,7 +16,6 @@ export function middleware(request: NextRequest) {
 
   const accommodationCookie = cookieStore.get('accommodation')
 
-  // If the accommodation cookie is not set, redirect to /scan-qr
   if (!accommodationCookie && pathname !== '/scan-qr') {
     const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
     return NextResponse.redirect(redirectUrl.toString())
