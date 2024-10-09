@@ -8,7 +8,8 @@ import { useAccommodation } from '@/app/contexts/accommodation'
 
 import {
   clearAccommodationCookie,
-  getAccommodationById
+  getAccommodationById,
+  setAccommodationCookie
 } from '../contexts/actions'
 
 const AccommodationParams = () => {
@@ -26,6 +27,7 @@ const AccommodationParams = () => {
         const { data } = await getAccommodationById(accommodationId)
 
         if (data) {
+          await setAccommodationCookie(data)
           setAccommodation(data)
         } else {
           await clearAccommodationCookie()
