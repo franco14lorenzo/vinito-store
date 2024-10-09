@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 
-import ClientPage from '@/app/checkout/components/checkout-client-page'
+import ClientPage from '@/app/(store)/checkout/components/checkout-client-page'
 
 export const metadata: Metadata = {
   title: 'Checkout',

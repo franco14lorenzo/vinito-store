@@ -3,7 +3,7 @@ import { QueryData } from '@supabase/supabase-js'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import Actions from '@/app/tastings/[slug]/components/actions'
+import Actions from '@/app/(store)/tastings/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient as createClientBrowser } from '@/lib/supabase/client'
@@ -12,7 +12,7 @@ import { createClient } from '@/lib/supabase/server'
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
 
-  return data.map(({ slug }) => ({ params: { slug } }))
+  return data.map(({ slug }) => ({ slug }))
 }
 
 export const metadata: Metadata = {

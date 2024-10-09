@@ -5,7 +5,7 @@ import { ChevronRight, Grape, Menu } from 'lucide-react'
 
 import Link from 'next/link'
 
-import NavItem from '@/app/components/layout/header/nav-item'
+import NavItem from '@/app/(store)/components/layout/header/nav-item'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 import {
   Sheet,

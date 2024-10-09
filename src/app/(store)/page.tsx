@@ -4,7 +4,7 @@ import {
   Help,
   Hero,
   LineBarSteps
-} from '@/app/components/home'
+} from '@/app/(store)/components/home'
 
 export default async function HomePage() {
   return (

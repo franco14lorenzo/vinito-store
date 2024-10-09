@@ -9,9 +9,9 @@ import { z } from 'zod'
 
 import { useRouter } from 'next/navigation'
 
-import { Item } from '@/app/components/layout/header/cart'
+import { Item } from '@/app/(store)/components/layout/header/cart'
+import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
-import { useCart } from '@/app/contexts/cart'
 import {
   Accordion,
   AccordionContent,

@@ -34,6 +34,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      accommodations: {
+        Row: {
+          address: string
+          created_at: string
+          created_by: number | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          name: string
+          qr_code: string
+          status: Database['public']['Enums']['accommodation_status']
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          created_by?: number | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          qr_code: string
+          status?: Database['public']['Enums']['accommodation_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          created_by?: number | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          qr_code?: string
+          status?: Database['public']['Enums']['accommodation_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'accommodations_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'accommodations_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       admin: {
         Row: {
           created_at: string
@@ -229,6 +286,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      accommodation_status: 'draft' | 'active' | 'inactive' | 'deleted'
       order_state:
         | 'pending'
         | 'processing'

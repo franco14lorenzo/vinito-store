@@ -1,7 +1,7 @@
-import Cart from '@/app/components/layout/header/cart'
-import Logo from '@/app/components/layout/header/logo'
-import Navigation from '@/app/components/layout/header/navigation'
-import SideMenu from '@/app/components/layout/header/side-menu'
+import Cart from '@/app/(store)/components/layout/header/cart'
+import Navigation from '@/app/(store)/components/layout/header/navigation'
+import SideMenu from '@/app/(store)/components/layout/header/side-menu'
+import Logo from '@/app/components/logo'
 
 const Header = () => {
   return (

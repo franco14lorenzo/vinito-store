@@ -2,7 +2,9 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-interface Accommodation {
+import { setAccommodationCookie } from './actions'
+
+export type Accommodation = {
   id: string
   name: string
   address: string
@@ -23,22 +25,12 @@ export function AccommodationProvider({
   children: React.ReactNode
 }) {
   const [accommodation, setAccommodation] = useState<Accommodation | undefined>(
-    () => {
-      if (typeof window !== 'undefined') {
-        const accommodationSaved = localStorage.getItem('accommodation')
-
-        // Attempt to parse the saved accommodation if it exists
-        return accommodationSaved && accommodationSaved !== 'undefined'
-          ? JSON.parse(accommodationSaved)
-          : undefined
-      }
-      return undefined
-    }
+    undefined
   )
 
   useEffect(() => {
     if (accommodation) {
-      localStorage.setItem('accommodation', JSON.stringify(accommodation))
+      setAccommodationCookie(accommodation)
     }
   }, [accommodation])
 

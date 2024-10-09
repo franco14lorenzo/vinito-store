@@ -1,4 +1,4 @@
-import NavItem from '@/app/components/layout/header/nav-item'
+import NavItem from '@/app/(store)/components/layout/header/nav-item'
 import { NAV_ITEMS } from '@/constants'
 
 const Navigation = () => {

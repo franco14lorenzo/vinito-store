@@ -10,7 +10,7 @@ const Logo = () => {
       aria-label="home"
     >
       <Grape className="size-8" />
-      <p className="hidden font-kalnia text-2xl font-medium md:block">Vinito</p>
+      <p className="font-kalnia text-2xl font-medium">Vinito</p>
     </Link>
   )
 }

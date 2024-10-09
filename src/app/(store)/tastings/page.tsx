@@ -2,7 +2,7 @@ import { QueryData } from '@supabase/supabase-js'
 
 import { Metadata } from 'next'
 
-import { HeadingSection, Tastings } from '@/app/tastings/components'
+import { HeadingSection, Tastings } from '@/app/(store)/tastings/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { createClient } from '@/lib/supabase/server'
 

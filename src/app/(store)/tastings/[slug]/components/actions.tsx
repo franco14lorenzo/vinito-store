@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Minus, Plus } from 'lucide-react'
 
-import { useCart } from '@/app/contexts/cart'
+import { useCart } from '@/app/(store)/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 
 const Actions = ({

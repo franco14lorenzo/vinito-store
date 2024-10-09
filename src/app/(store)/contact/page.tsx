@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import ContactForm from '@/app/contact/components/contact-form'
+import ContactForm from '@/app/(store)/contact/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 
 export const metadata: Metadata = {

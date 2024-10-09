@@ -38,3 +38,11 @@ INSERT INTO tasting_wines (tasting_id, wine_id) VALUES
 (5, 5), (5, 6), (5, 7), (5, 8),
 -- Deluxe
 (6, 9), (6, 10), (6, 1), (6, 2);
+
+-- Seed data for the accommodations table
+INSERT INTO accommodations (name, address, qr_code, latitude, longitude, created_by, status) VALUES
+('Hotel Mendoza', 'Av. San Martín 1234, Mendoza, Argentina', 'https://example.com/hotel-mendoza-qr', -32.889458, -68.845839, 1, 'active'),
+('Casa de Campo', 'Ruta 40, Km 123, Luján de Cuyo, Mendoza, Argentina', 'https://example.com/casa-de-campo-qr', -33.016667, -68.866667, 1, 'active'),
+('Hostería del Valle', 'Calle San Juan 567, San Rafael, Mendoza, Argentina', 'https://example.com/hosteria-del-valle-qr', -34.617778, -68.330278, 1, 'active'),
+('Cabañas del Sur', 'Ruta 143, Km 12, Malargüe, Mendoza, Argentina', 'https://example.com/cabanas-del-sur-qr', -35.483333, -69.583333, 1, 'active'),
+('Posada de Montaña', 'Ruta 7, Km 1000, Uspallata, Mendoza, Argentina', 'https://example.com/posada-de-montana-qr', -32.593056, -69.344167, 1, 'active');

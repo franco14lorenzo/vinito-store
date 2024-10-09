@@ -13,8 +13,8 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
-import { useCart } from '@/app/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 import {
   Dialog,

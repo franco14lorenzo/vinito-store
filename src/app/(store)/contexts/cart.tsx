@@ -8,7 +8,7 @@ import React, {
   useState
 } from 'react'
 
-import { clearCartCookie, setCartCookie } from './action'
+import { clearCartCookie, setCartCookie } from './actions'
 
 export interface CartItem {
   id: number
