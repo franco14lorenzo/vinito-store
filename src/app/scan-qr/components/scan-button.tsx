@@ -10,7 +10,7 @@ function ScanQRButton() {
 
   return (
     <Button
-      className="w-full rounded-full md:w-auto"
+      className="h-10 w-full rounded-full md:w-auto"
       onClick={isScanning ? closeCamera : openCamera}
     >
       <Camera className="mr-2 h-4 w-4" />

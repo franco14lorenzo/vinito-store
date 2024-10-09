@@ -69,7 +69,7 @@ export default function ScanQRPage() {
             <CardFooter className="flex flex-col gap-2 sm:space-x-4 md:flex-row md:justify-between">
               <Button
                 variant="outline"
-                className="w-full rounded-full bg-white md:w-auto"
+                className="h-10 w-full rounded-full bg-white md:w-auto"
                 asChild
               >
                 <a target="_blank" href={wppLink} rel="noopener noreferrer">
