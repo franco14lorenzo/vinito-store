@@ -81,10 +81,12 @@ const formSchema = z.object({
 })
 
 const ClientPage = () => {
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const { items, totalPrice, clearCart } = useCart()
   const [accommodation] = useAccommodation()
+
+  console.log(accommodation)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -299,7 +301,7 @@ const ClientPage = () => {
                 name="accommodation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Accommodation</FormLabel>
+                    <FormLabel>Accommodation Address</FormLabel>
                     <FormControl>
                       <Input
                         readOnly

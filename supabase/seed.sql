@@ -40,9 +40,52 @@ INSERT INTO tasting_wines (tasting_id, wine_id) VALUES
 (6, 9), (6, 10), (6, 1), (6, 2);
 
 -- Seed data for the accommodations table
-INSERT INTO accommodations (name, address, qr_code, latitude, longitude, created_by, status) VALUES
-('Hotel Mendoza', 'Av. San Martín 1234, Mendoza, Argentina', 'https://example.com/hotel-mendoza-qr', -32.889458, -68.845839, 1, 'active'),
-('Casa de Campo', 'Ruta 40, Km 123, Luján de Cuyo, Mendoza, Argentina', 'https://example.com/casa-de-campo-qr', -33.016667, -68.866667, 1, 'active'),
-('Hostería del Valle', 'Calle San Juan 567, San Rafael, Mendoza, Argentina', 'https://example.com/hosteria-del-valle-qr', -34.617778, -68.330278, 1, 'active'),
-('Cabañas del Sur', 'Ruta 143, Km 12, Malargüe, Mendoza, Argentina', 'https://example.com/cabanas-del-sur-qr', -35.483333, -69.583333, 1, 'active'),
-('Posada de Montaña', 'Ruta 7, Km 1000, Uspallata, Mendoza, Argentina', 'https://example.com/posada-de-montana-qr', -32.593056, -69.344167, 1, 'active');
+INSERT INTO accommodations (id, name, address, qr_code, latitude, longitude, created_by, status) VALUES
+('550e8400-e29b-41d4-a716-446655440010', 'Hotel Mendoza', 'Av. San Martín 1234, Mendoza, Argentina', 'https://example.com/hotel-mendoza-qr', -32.889458, -68.845839, 1, 'active'),
+('550e8400-e29b-41d4-a716-446655440011', 'Casa de Campo', 'Ruta 40, Km 123, Luján de Cuyo, Mendoza, Argentina', 'https://example.com/casa-de-campo-qr', -33.016667, -68.866667, 1, 'active'),
+('550e8400-e29b-41d4-a716-446655440012', 'Hostería del Valle', 'Calle San Juan 567, San Rafael, Mendoza, Argentina', 'https://example.com/hosteria-del-valle-qr', -34.617778, -68.330278, 1, 'active'),
+('550e8400-e29b-41d4-a716-446655440013', 'Cabañas del Sur', 'Ruta 143, Km 12, Malargüe, Mendoza, Argentina', 'https://example.com/cabanas-del-sur-qr', -35.483333, -69.583333, 1, 'active'),
+('550e8400-e29b-41d4-a716-446655440014', 'Posada de Montaña', 'Ruta 7, Km 1000, Uspallata, Mendoza, Argentina', 'https://example.com/posada-de-montana-qr', -32.593056, -69.344167, 1, 'active');
+
+-- Seed data for the delivery_schedules table
+INSERT INTO delivery_schedules (time_slot, from_time, to_time, status, created_by) VALUES
+('Mañana (09:00 - 12:00)', '09:00:00', '12:00:00', 'active', 1),
+('Tarde (14:00 - 17:00)', '14:00:00', '17:00:00', 'active', 1),
+('Noche (19:00 - 22:00)', '19:00:00', '22:00:00', 'active', 1),
+('Trasnoche (22:00 - 02:00)', '22:00:00', '02:00:00', 'active', 1);
+
+-- Seed data for the payment_methods table
+INSERT INTO payment_methods (name, status, created_by) VALUES
+('Pago contra entrega', 'active', 1),
+('Tarjeta de crédito', 'draft', 1),
+('Tarjeta de débito', 'draft', 1),
+('Transferencia bancaria', 'active', 1);
+
+-- Seed data for the customers table
+INSERT INTO customers (id, name, surname, email, phone, created_by) VALUES
+('550e8400-e29b-41d4-a716-446655440000', 'Franco', 'Armani', 'franco.armani@riverplate.com', '123-456-7890', 1),
+('550e8400-e29b-41d4-a716-446655440001', 'Enzo', 'Perez', 'enzo.perez@riverplate.com', '345-678-9012', 1),
+('550e8400-e29b-41d4-a716-446655440002', 'Julian', 'Alvarez', 'julian.alvarez@riverplate.com', '456-789-0123', 1),
+('550e8400-e29b-41d4-a716-446655440003', 'Gonzalo', 'Montiel', 'gonzalo.montiel@riverplate.com', '567-890-1234', 1),
+('550e8400-e29b-41d4-a716-446655440004', 'Nicolas', 'De La Cruz', 'nicolas.delacruz@riverplate.com', '678-901-2345', 1);
+
+-- Seed data for the orders table
+INSERT INTO orders (id, status, customer_id, delivery_date, delivery_schedule_id, payment_method_id, total_amount, created_by, accommodation_id, customer_note) VALUES
+('550e8400-e29b-41d4-a716-446655440005', 'pending', '550e8400-e29b-41d4-a716-446655440000', '2024-10-15', 1, 1, 5000.00, 1, '550e8400-e29b-41d4-a716-446655440010', 'Por favor, entregar entre las 9 AM y las 12 PM'),
+('550e8400-e29b-41d4-a716-446655440006', 'pending', '550e8400-e29b-41d4-a716-446655440001', '2024-10-16', 2, 1, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440011', 'Dejar en la recepción'),
+('550e8400-e29b-41d4-a716-446655440007', 'pending', '550e8400-e29b-41d4-a716-446655440002', '2024-11-17', 3, 1, 6000.00, 1, '550e8400-e29b-41d4-a716-446655440012', 'Llamar al llegar'),
+('550e8400-e29b-41d4-a716-446655440008', 'pending', '550e8400-e29b-41d4-a716-446655440003', '2024-10-18', 4, 1, 3500.00, 1, '550e8400-e29b-41d4-a716-446655440013', 'Tocar el timbre dos veces'),
+('550e8400-e29b-41d4-a716-446655440009', 'pending', '550e8400-e29b-41d4-a716-446655440004', '2025-10-19', 1, 1, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440014', 'Dejar el paquete con el vecino');
+
+-- Seed data for the order_tastings table
+INSERT INTO order_tastings (order_id, tasting_id, quantity) VALUES
+-- Franco Armani
+('550e8400-e29b-41d4-a716-446655440005', 1, 2), ('550e8400-e29b-41d4-a716-446655440005', 2, 1), ('550e8400-e29b-41d4-a716-446655440005', 3, 1),
+-- Enzo Perez
+('550e8400-e29b-41d4-a716-446655440006', 4, 1), ('550e8400-e29b-41d4-a716-446655440006', 5, 2), ('550e8400-e29b-41d4-a716-446655440006', 6, 1),
+-- Julian Alvarez
+('550e8400-e29b-41d4-a716-446655440007', 4, 1), ('550e8400-e29b-41d4-a716-446655440007', 5, 1), ('550e8400-e29b-41d4-a716-446655440007', 6, 2),
+-- Gonzalo Montiel
+('550e8400-e29b-41d4-a716-446655440008', 4, 1), ('550e8400-e29b-41d4-a716-446655440008', 5, 1), ('550e8400-e29b-41d4-a716-446655440008', 6, 1),
+-- Nicolas De La Cruz
+('550e8400-e29b-41d4-a716-446655440009', 4, 2), ('550e8400-e29b-41d4-a716-446655440009', 5, 1), ('550e8400-e29b-41d4-a716-446655440009', 6, 1);

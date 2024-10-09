@@ -31,7 +31,7 @@ export function AccommodationProvider({
   useEffect(() => {
     const fetchAccommodationCookie = async () => {
       const accommodation = await getAccommodationCookie()
-      setAccommodation(accommodation)
+      accommodation && setAccommodation(accommodation)
     }
 
     fetchAccommodationCookie()
