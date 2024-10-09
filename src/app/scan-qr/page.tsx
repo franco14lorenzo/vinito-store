@@ -62,7 +62,7 @@ export default function ScanQRPage() {
                   <li>
                     Apunta la cámara al código QR y espera a que se escanee.
                   </li>
-                  <li>¡Listo! Accede al link que se abrirá en tu navegador.</li>
+                  <li>¡Listo! Serás redirigido a la tienda en línea. 🍷</li>
                 </ol>
               </QRVideo>
             </CardContent>
