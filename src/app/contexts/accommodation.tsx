@@ -1,8 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
-
-import { setAccommodationCookie } from './actions'
+import React, { createContext, useContext, useState } from 'react'
 
 export type Accommodation = {
   id: string
@@ -27,12 +25,6 @@ export function AccommodationProvider({
   const [accommodation, setAccommodation] = useState<Accommodation | undefined>(
     undefined
   )
-
-  useEffect(() => {
-    if (accommodation) {
-      setAccommodationCookie(accommodation)
-    }
-  }, [accommodation])
 
   return (
     <AccommodationContext.Provider value={[accommodation, setAccommodation]}>

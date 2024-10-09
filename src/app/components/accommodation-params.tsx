@@ -5,12 +5,11 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 import { useAccommodation } from '@/app/contexts/accommodation'
-
 import {
   clearAccommodationCookie,
   getAccommodationById,
   setAccommodationCookie
-} from '../contexts/actions'
+} from '@/app/contexts/actions'
 
 const AccommodationParams = () => {
   const searchParams = useSearchParams()
