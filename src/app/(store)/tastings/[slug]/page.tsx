@@ -37,7 +37,7 @@ export default async function TastingDetailsPage({
   }
 
   const breadcrumbs = [
-    { name: 'Home', href: '/' },
+    { name: 'Inicio', href: '/' },
     { name: 'Tastings', href: '/tastings' },
     { name: data.slug, isCurrentPage: true }
   ]
@@ -47,20 +47,22 @@ export default async function TastingDetailsPage({
       <Breadcrumbs elements={breadcrumbs} />
 
       <section className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
-        <section className="flex flex-col px-4">
-          <div className="aspect-square w-full rounded-lg bg-neutral-100" />
-        </section>
+        <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
+          {data.stock === 0 && (
+            <div className="absolute right-0 top-0 rounded-bl-lg bg-neutral-500/50 px-2 py-1 text-white">
+              Sin Stock
+            </div>
+          )}
+        </div>
 
         <article className="flex flex-col justify-between gap-4 px-4">
           <section className="py-4 md:py-0">
-            <h1 className="h-14 font-kalnia text-3xl font-bold">
-              {data.name} Tasting
-            </h1>
-            <h2 className="font-bold">Tasting Description</h2>
+            <h1 className="h-14 font-kalnia text-3xl font-bold">{data.name}</h1>
+            <h2 className="font-bold">Descripción de la Cata</h2>
             <p className="my-4">{data.long_description}</p>
-            <h2 className="font-bold">Wines</h2>
-            <p className="my-4">{data.wines.length} units of 750ml</p>
-            <h2 className="font-bold">Pairings</h2>
+            <h2 className="font-bold">Vinos</h2>
+            <p className="my-4">{data.wines.length} unidades de 750ml</p>
+            <h2 className="font-bold">Maridajes</h2>
             <p className="my-4">{data.pairings}</p>
           </section>
           <div className="hidden md:block">

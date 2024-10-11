@@ -1,5 +1,7 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
+
 import { createClient } from '@/lib/supabase/server'
 
 type Order = {
@@ -9,7 +11,7 @@ type Order = {
   delivery: { date: string; time: number }
   payment: { method: number }
   total: number
-  items: { id: number; quantity: number }[]
+  items: { id: number; quantity: number; slug: string }[]
 }
 
 export async function createOrder(order: Order) {
@@ -28,6 +30,10 @@ export async function createOrder(order: Order) {
 
   if (error) {
     return { data: null, error }
+  }
+
+  for (const item of order.items) {
+    revalidatePath(`/tastings/${item.slug}`)
   }
 
   return { data, error: null }

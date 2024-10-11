@@ -27,7 +27,7 @@ type Order = {
   delivery: { date: string; time: number }
   payment: { method: number }
   total: number
-  items: { id: number; quantity: number }[]
+  items: { id: number; quantity: number; slug: string }[]
 }
 
 const formSchema = z.object({
@@ -130,7 +130,8 @@ const CheckoutForm = ({
       },
       items: items.map((item) => ({
         id: item.id,
-        quantity: item.quantity
+        quantity: item.quantity,
+        slug: item.slug
       })),
       total: Number(totalPrice) || 0
     }
