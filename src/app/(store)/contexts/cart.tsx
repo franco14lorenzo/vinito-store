@@ -14,7 +14,7 @@ import {
   setCartCookie
 } from '@/app/(store)/contexts/actions'
 
-export interface CartItem {
+export type CartItem = {
   id: number
   slug: string
   name: string

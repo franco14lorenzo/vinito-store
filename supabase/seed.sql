@@ -48,18 +48,18 @@ INSERT INTO accommodations (id, name, address, qr_code, latitude, longitude, cre
 ('550e8400-e29b-41d4-a716-446655440014', 'Posada de Montaña', 'Ruta 7, Km 1000, Uspallata, Mendoza, Argentina', 'https://example.com/posada-de-montana-qr', -32.593056, -69.344167, 1, 'active');
 
 -- Seed data for the delivery_schedules table
-INSERT INTO delivery_schedules (time_slot, from_time, to_time, status, created_by) VALUES
+INSERT INTO delivery_schedules (name, start_time, end_time, status, created_by) VALUES
 ('Mañana (09:00 - 12:00)', '09:00:00', '12:00:00', 'active', 1),
 ('Tarde (14:00 - 17:00)', '14:00:00', '17:00:00', 'active', 1),
 ('Noche (19:00 - 22:00)', '19:00:00', '22:00:00', 'active', 1),
 ('Trasnoche (22:00 - 02:00)', '22:00:00', '02:00:00', 'active', 1);
 
 -- Seed data for the payment_methods table
-INSERT INTO payment_methods (name, status, created_by) VALUES
-('Pago contra entrega', 'active', 1),
-('Tarjeta de crédito', 'draft', 1),
-('Tarjeta de débito', 'draft', 1),
-('Transferencia bancaria', 'active', 1);
+INSERT INTO payment_methods (name, status, created_by, description, type) VALUES
+('Pago contra entrega', 'active', 1, 'Pago en efectivo al recibir el producto', 'cash'),
+('Tarjeta de crédito', 'draft', 1, 'Pago con tarjeta de crédito', 'non_cash'),
+('Tarjeta de débito', 'draft', 1, 'Pago con tarjeta de débito', 'non_cash'),
+('Transferencia bancaria', 'active', 1, 'Pago mediante transferencia bancaria', 'non_cash');
 
 -- Seed data for the customers table
 INSERT INTO customers (id, name, surname, email, phone, created_by) VALUES

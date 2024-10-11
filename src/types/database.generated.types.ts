@@ -124,6 +124,292 @@ export type Database = {
         }
         Relationships: []
       }
+      customers: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          email: string
+          id: string
+          name: string
+          phone: string
+          surname: string
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          email: string
+          id?: string
+          name: string
+          phone: string
+          surname: string
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          surname?: string
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'customers_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'customers_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      delivery_schedules: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          end_time: string
+          id: number
+          name: string
+          start_time: string
+          status: Database['public']['Enums']['delivery_schedule_status']
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          end_time: string
+          id?: number
+          name: string
+          start_time: string
+          status?: Database['public']['Enums']['delivery_schedule_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          end_time?: string
+          id?: number
+          name?: string
+          start_time?: string
+          status?: Database['public']['Enums']['delivery_schedule_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'delivery_schedules_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'delivery_schedules_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      order_tastings: {
+        Row: {
+          order_id: string
+          quantity: number
+          tasting_id: number
+        }
+        Insert: {
+          order_id: string
+          quantity: number
+          tasting_id: number
+        }
+        Update: {
+          order_id?: string
+          quantity?: number
+          tasting_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'order_tastings_order_id_fkey'
+            columns: ['order_id']
+            isOneToOne: false
+            referencedRelation: 'orders'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'order_tastings_tasting_id_fkey'
+            columns: ['tasting_id']
+            isOneToOne: false
+            referencedRelation: 'tastings'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      orders: {
+        Row: {
+          accommodation_id: string | null
+          created_at: string
+          created_by: number | null
+          customer_id: string
+          customer_note: string | null
+          delivery_date: string
+          delivery_schedule_id: number
+          discount_amount: number | null
+          id: string
+          payment_method_id: number
+          shipping_amount: number | null
+          status: Database['public']['Enums']['order_state']
+          tax_amount: number | null
+          total_amount: number
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          accommodation_id?: string | null
+          created_at?: string
+          created_by?: number | null
+          customer_id: string
+          customer_note?: string | null
+          delivery_date: string
+          delivery_schedule_id: number
+          discount_amount?: number | null
+          id?: string
+          payment_method_id: number
+          shipping_amount?: number | null
+          status?: Database['public']['Enums']['order_state']
+          tax_amount?: number | null
+          total_amount: number
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          accommodation_id?: string | null
+          created_at?: string
+          created_by?: number | null
+          customer_id?: string
+          customer_note?: string | null
+          delivery_date?: string
+          delivery_schedule_id?: number
+          discount_amount?: number | null
+          id?: string
+          payment_method_id?: number
+          shipping_amount?: number | null
+          status?: Database['public']['Enums']['order_state']
+          tax_amount?: number | null
+          total_amount?: number
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'orders_accommodation_id_fkey'
+            columns: ['accommodation_id']
+            isOneToOne: false
+            referencedRelation: 'accommodations'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'orders_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'orders_customer_id_fkey'
+            columns: ['customer_id']
+            isOneToOne: false
+            referencedRelation: 'customers'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'orders_delivery_schedule_id_fkey'
+            columns: ['delivery_schedule_id']
+            isOneToOne: false
+            referencedRelation: 'delivery_schedules'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'orders_payment_method_id_fkey'
+            columns: ['payment_method_id']
+            isOneToOne: false
+            referencedRelation: 'payment_methods'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'orders_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      payment_methods: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          description: string | null
+          id: number
+          name: string
+          status: Database['public']['Enums']['payment_methods_status']
+          type: Database['public']['Enums']['payment_type']
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          description?: string | null
+          id?: number
+          name: string
+          status?: Database['public']['Enums']['payment_methods_status']
+          type?: Database['public']['Enums']['payment_type']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          description?: string | null
+          id?: number
+          name?: string
+          status?: Database['public']['Enums']['payment_methods_status']
+          type?: Database['public']['Enums']['payment_type']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'payment_methods_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'payment_methods_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       tasting_wines: {
         Row: {
           tasting_id: number
@@ -283,16 +569,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_order: {
+        Args: {
+          customer: Json
+          customer_note: string
+          accommodation_id: string
+          delivery_date: string
+          delivery_schedule_id: number
+          payment_method_id: number
+          total_amount: number
+          items: Json
+        }
+        Returns: {
+          order_id: string
+        }[]
+      }
     }
     Enums: {
       accommodation_status: 'draft' | 'active' | 'inactive' | 'deleted'
+      delivery_schedule_status: 'draft' | 'active' | 'inactive' | 'deleted'
       order_state:
         | 'pending'
         | 'processing'
         | 'shipped'
         | 'delivered'
         | 'cancelled'
+      payment_methods_status: 'draft' | 'active' | 'inactive' | 'deleted'
+      payment_type: 'cash' | 'non_cash'
       tasting_status: 'draft' | 'active' | 'inactive' | 'deleted'
       wine_status: 'draft' | 'active' | 'inactive' | 'deleted'
     }

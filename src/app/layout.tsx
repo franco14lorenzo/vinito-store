@@ -6,6 +6,7 @@ import { Kalnia, Raleway } from 'next/font/google'
 import AccommodationParams from '@/app/components/accommodation-params'
 import { AccommodationProvider } from '@/app/contexts/accommodation'
 import { DialogProvider } from '@/app/contexts/dialogs'
+import { Toaster } from '@/components/ui/toaster'
 
 import './globals.css'
 
@@ -40,6 +41,7 @@ export default function RootLayout({
           </Suspense>
           <DialogProvider>{children}</DialogProvider>
         </AccommodationProvider>
+        <Toaster />
       </body>
     </html>
   )
