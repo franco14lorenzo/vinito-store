@@ -70,7 +70,7 @@ const Cart = () => {
         >
           <SheetHeader>
             <SheetTitle className="rounded-b-lg border-zinc-950/50 px-4 pb-4 pt-4 text-left font-kalnia text-2xl font-medium shadow">
-              Bag
+              Tu compra
             </SheetTitle>
           </SheetHeader>
           <SheetDescription asChild>
@@ -78,12 +78,12 @@ const Cart = () => {
               className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
               {accommodation && (
-                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 py-2">
+                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 pb-2 pt-3">
                   <div className="flex items-center justify-center">
                     <MapPin className="size-6" />
                   </div>
                   <div className="flex flex-1 flex-col overflow-hidden">
-                    <p className="text-[8px] leading-[10px]">Deliver to</p>
+                    <p className="text-[8px] leading-[10px]">Entrega en</p>
                     <p className="truncate text-xs font-semibold">
                       {accommodation?.name} - {accommodation?.address}
                     </p>
@@ -99,17 +99,17 @@ const Cart = () => {
                 {items.length === 0 && (
                   <div className="flex flex-col items-center justify-center">
                     <p className="px-4 py-2 text-center text-sm">
-                      Your bag is empty
+                      No hay artículos en tu compra
                     </p>
                     <p className="px-4 py-2 text-center text-lg font-semibold">
-                      Add some items to get started!
+                      ¡Agrega algunos artículos para comenzar!
                     </p>
                     <Link
                       className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
                       href="/tastings"
                       onClick={() => setDialogOpen(null)}
                     >
-                      Discover our tastings
+                      Descubre nuestras catas
                       <ArrowRight className="ml-2 inline size-5" />
                     </Link>
                   </div>
@@ -128,8 +128,8 @@ const Cart = () => {
                 </span>
               </section>
               <section className="flex justify-between px-4 text-sm font-semibold">
-                <p>Shipping</p>
-                <span className="font-semibold text-green-500">Free</span>
+                <p>Envío</p>
+                <span className="font-semibold text-green-500">Gratis</span>
               </section>
               <div className="mt-4 flex flex-1 flex-col gap-6 border-t border-zinc-950/20 p-4 pb-0">
                 <section className="flex justify-between text-xl font-bold">
@@ -148,7 +148,7 @@ const Cart = () => {
                       }
                     }}
                   >
-                    Go to Checkout
+                    Finalizar compra
                   </button>
                 </section>
               </div>
@@ -233,12 +233,9 @@ export const Item = ({
           </DialogTrigger>
           <DialogContent className="gap-8">
             <DialogHeader>
-              <DialogTitle>
-                Remove {item.name} tasting from your cart
-              </DialogTitle>
+              <DialogTitle>Eliminar {item.name} de tu compra</DialogTitle>
               <DialogDescription>
-                Are you sure you want to remove {item.name} tasting from your
-                cart?
+                ¿Estás seguro de que deseas eliminar {item.name} de tu compra?
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="flex justify-center gap-2">
@@ -250,13 +247,13 @@ export const Item = ({
                   setDialogOpen(null)
                 }}
               >
-                Remove
+                Eliminar
               </button>
               <DialogClose
                 asChild
                 className="rounded-full bg-black px-4 py-2 text-white"
               >
-                <button type="button">Close</button>
+                <button type="button">Cerrar</button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>

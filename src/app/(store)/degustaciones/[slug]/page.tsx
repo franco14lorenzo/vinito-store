@@ -15,8 +15,8 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'Detalles de la degustación',
-  description: 'Descubre nuestras degustaciones de vinos'
+  title: 'Tasting Details',
+  description: 'Discover our wine tastings'
 }
 
 export default async function TastingDetailsPage({

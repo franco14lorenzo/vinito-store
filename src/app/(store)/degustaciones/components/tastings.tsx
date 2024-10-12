@@ -44,7 +44,7 @@ export const Tasting = ({ tasting }: { tasting: TastingType }) => {
           <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">
             {name}
           </h2>
-          <p className="text-zinc-500">{winesCount} wines</p>
+          <p className="text-zinc-500">{winesCount} vinos</p>
           <p className="text-zinc-950">{shortDescription}</p>
         </section>
         {/*  <Link

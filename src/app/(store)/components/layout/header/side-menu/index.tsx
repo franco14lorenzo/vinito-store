@@ -54,7 +54,7 @@ const SideMenu = () => {
               <Link
                 className="flex items-center space-x-2 p-0 hover:opacity-70 md:pl-2"
                 href="/"
-                aria-label="home"
+                aria-label="inicio"
                 onClick={handleOpenClose}
               >
                 <Grape className="size-8" />

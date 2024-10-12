@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 
-import ContactForm from '@/app/(store)/contact/components/contact-form'
+import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Get in touch with us'
+  title: 'Contacto',
+  description: 'Contactanos para cualquier consulta'
 }
 
 const breadcrumbs = [
   { name: 'Inicio', href: '/' },
-  { name: 'Contact', isCurrentPage: true }
+  { name: 'Contacto', isCurrentPage: true }
 ]
 
 export default function ContactPage() {
@@ -20,11 +20,11 @@ export default function ContactPage() {
       <section className="flex w-full flex-col items-start justify-center gap-4 p-4 text-left md:my-20 md:flex-row">
         <article className="flex w-full flex-col items-center justify-center px-4 md:w-1/2">
           <h1 className="mb-6 w-full font-kalnia text-3xl font-bold">
-            Contact us
+            Contáctenos
           </h1>
           <p className="w-full text-sm">
-            We are here to help you with any questions you may have. Feel free
-            to reach out to us. We will get back to you as soon as possible
+            Si tienes alguna consulta, sugerencia o simplemente quieres saludar,
+            no dudes en contactarnos. Estamos aquí para ayudarte.
           </p>
           <ContactSvg />
         </article>

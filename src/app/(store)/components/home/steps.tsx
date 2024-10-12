@@ -18,7 +18,7 @@ function LineBarSteps() {
     <section className="w-full py-16">
       <div className="mx-auto max-w-2xl px-4">
         <h2 className="mb-10 text-center text-2xl font-semibold">
-          How it works
+          ¿Cómo funciona?
         </h2>
         <div className="relative">
           <div className="absolute bottom-12 left-[19px] top-0 h-[530px] w-0.5 bg-gray-700 md:left-1/2 md:top-12 md:h-auto" />

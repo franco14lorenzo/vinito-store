@@ -21,7 +21,7 @@ export default function NotFound() {
         >
           <Link href="/tastings">
             <Wine className="mr-2 h-5 w-5" />
-            Explora nuestras catas
+            Explora nuestras degustaciones
           </Link>
         </Button>
         <Button

@@ -71,12 +71,12 @@ const Actions = ({
           setDialogOpen(Dialogs.Cart)
         }}
       >
-        Añadir al carrito
+        Añadir a tu compra
       </Button>
       {item.stock <= 0 ||
         (totalDesiredQuantity > item.stock && (
           <span className="text-[10px] font-light">
-            Ya añadiste la cantidad máxima de este producto al carrito
+            Ya añadiste la cantidad máxima de este producto a tu compra
           </span>
         ))}
     </section>

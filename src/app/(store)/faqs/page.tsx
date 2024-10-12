@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'FAQs',
-  description: 'Frequently asked questions about Vinito'
+  description: 'Preguntas frecuentes'
 }
 
 const breadcrumbs = [
@@ -20,34 +20,34 @@ const breadcrumbs = [
 
 const faqs = [
   {
-    question: 'What is Vinito?',
+    question: '¿Qué es Vinito?',
     answer:
-      'Vinito is a wine delivery service that allows you to order wine online and have it delivered to your accommodation.'
+      'Vinito es un servicio de entrega de vinos que te permite pedir vino en línea y recibirlo en tu alojamiento.'
   },
   {
-    question: 'Why should I choose Vinito?',
+    question: '¿Por qué debería elegir Vinito?',
     answer:
-      'Vinito offers a wide selection of wines from Mendoza, Argentina. We deliver to your accommodation, so you can enjoy your wine without having to leave your room.'
+      'Vinito ofrece una amplia selección de vinos de Mendoza, Argentina. Entregamos a tu alojamiento, para que puedas disfrutar de tu vino sin tener que salir de tu habitación.'
   },
   {
-    question: 'How do I place an order?',
+    question: '¿Cómo hago un pedido?',
     answer:
-      'To place an order, simply browse our selection of wines, add the ones you want to your cart, and proceed to checkout.'
+      'Para hacer un pedido, simplemente navega por nuestra selección de vinos, añade los que quieras a tu carrito y procede al pago.'
   },
   {
-    question: 'How long does delivery take?',
+    question: '¿Cuánto tarda la entrega?',
     answer:
-      'Delivery times vary depending on your location. You can choose your preferred delivery date and time during checkout. You can order 30 minutes in advance or up to 30 days in advance.'
+      'Los tiempos de entrega varían según tu ubicación. Puedes elegir tu fecha y hora de entrega preferida durante el pago. Puedes pedir con 30 minutos de anticipación o hasta con 30 días de anticipación.'
   },
   {
-    question: 'How much does delivery cost?',
+    question: '¿Cuánto cuesta la entrega?',
     answer:
-      'Delivery is free for all our accommodation customers. For other customers, delivery costs vary depending on your location.'
+      'La entrega es gratuita para todos nuestros clientes de alojamiento. Para otros clientes, los costos de entrega varían según tu ubicación.'
   },
   {
-    question: 'What payment methods do you accept?',
+    question: '¿Qué métodos de pago aceptan?',
     answer:
-      'We accept all major credit and debit cards with Mercado Pago. We also accept cryptocurrency payments with Binance Pay. You can also pay with cash on delivery.'
+      'Aceptamos todas las principales tarjetas de crédito y débito con Mercado Pago. También aceptamos pagos con criptomonedas a través de Binance Pay. También puedes pagar en efectivo al momento de la entrega.'
   }
 ]
 
@@ -55,8 +55,8 @@ export default function FaqsPage() {
   return (
     <>
       <Breadcrumbs elements={breadcrumbs} />
-      <h1 className="mb-6 mt-10 w-full text-center font-kalnia text-3xl font-bold">
-        Frequently Asked Questions
+      <h1 className="my-6 w-full text-center font-kalnia text-3xl font-bold">
+        Preguntas frecuentes
       </h1>
       <Accordion type="single" collapsible className="w-full px-4">
         {faqs.map((faq, index) => (

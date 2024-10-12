@@ -53,7 +53,7 @@ const ContactForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Nombre</FormLabel>
               <FormControl>
                 <Input
                   placeholder="John Doe"
@@ -87,11 +87,11 @@ const ContactForm = () => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>Mensaje</FormLabel>
               <FormControl>
                 <Textarea
                   className="rounded-lg border-none bg-neutral-50"
-                  placeholder="Hello, I would like to know more about..."
+                  placeholder="Hola, me gustaría saber más sobre..."
                   {...field}
                 />
               </FormControl>
@@ -100,7 +100,7 @@ const ContactForm = () => {
           )}
         />
         <Button type="submit" className="w-full rounded-full">
-          Submit
+          Enviar
         </Button>
       </form>
     </Form>

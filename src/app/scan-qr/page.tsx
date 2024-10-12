@@ -18,8 +18,8 @@ import QRVideo from './components/scan-video'
 import { ScanQRProvider } from './contexts/scan-qr'
 
 export const metadata: Metadata = {
-  title: 'Scan QR Code',
-  description: 'Scan the QR code to access the store front'
+  title: 'Escanear Código QR',
+  description: 'Escanea el código QR para acceder a la tienda'
 }
 
 export default function ScanQRPage() {

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: '%s | Vinito',
     default: 'Vinito Store'
   },
-  description: 'Live the best wine tasting experience with Vinito',
+  description: 'Vive la mejor experiencia de degustaciones de vinos con Vinito',
   robots: {
     follow: false,
     index: false
