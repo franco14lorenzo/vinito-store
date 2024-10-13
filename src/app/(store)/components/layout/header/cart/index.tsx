@@ -101,12 +101,12 @@ const Cart = () => {
                     <p className="px-4 py-2 text-center text-sm">
                       No hay artículos en tu compra
                     </p>
-                    <p className="px-4 py-2 text-center text-lg font-semibold">
+                    <p className="px-4 py-2 text-center text-base font-semibold">
                       ¡Agrega algunos artículos para comenzar!
                     </p>
                     <Link
                       className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
-                      href="/tastings"
+                      href="/degustaciones"
                       onClick={() => setDialogOpen(null)}
                     >
                       Descubre nuestras catas
@@ -188,11 +188,11 @@ export const Item = ({
           } justify-between`}
         >
           <Link
-            href={`/tastings/${item.slug}`}
+            href={`/degustaciones/${item.slug}`}
             className="text-base font-semibold hover:underline"
             onClick={() => setDialogOpen(null)}
           >
-            {item.name} Tasting
+            {item.name}
           </Link>
           <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button

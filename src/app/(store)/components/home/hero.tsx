@@ -18,7 +18,7 @@ const Hero = () => {
         </p>
         <Link
           className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
-          href="/tastings"
+          href="/degustaciones"
         >
           Descubre nuestras catas
           <ArrowRight className="ml-2 inline size-5" />

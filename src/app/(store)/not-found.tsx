@@ -19,7 +19,7 @@ export default function NotFound() {
           asChild
           className="flex w-full items-center justify-center rounded-full sm:w-auto"
         >
-          <Link href="/tastings">
+          <Link href="/degustaciones">
             <Wine className="mr-2 h-5 w-5" />
             Explora nuestras degustaciones
           </Link>

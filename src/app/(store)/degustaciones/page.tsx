@@ -10,8 +10,8 @@ import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { createClient } from '@/lib/supabase/client'
 
 export const metadata: Metadata = {
-  title: 'Tastings',
-  description: 'Discover our wine tasting packages'
+  title: 'Degustaciones',
+  description: 'Descubre nuestros paquetes de degustación de vinos'
 }
 
 const breadcrumbs = [

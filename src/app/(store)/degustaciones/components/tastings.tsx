@@ -35,7 +35,10 @@ export const Tasting = ({ tasting }: { tasting: TastingType }) => {
   } = tasting
   const winesCount = wines.length
   return (
-    <Link className="rounded-3xl hover:opacity-80" href={`/tastings/${slug}`}>
+    <Link
+      className="rounded-3xl hover:opacity-80"
+      href={`/degustaciones/${slug}`}
+    >
       <article className="flex flex-col items-start justify-start gap-4 rounded-lg p-4 text-left text-sm">
         {!image && (
           <div className="aspect-square w-full rounded-xl bg-neutral-100" />
@@ -49,7 +52,7 @@ export const Tasting = ({ tasting }: { tasting: TastingType }) => {
         </section>
         {/*  <Link
         className="mt-4 rounded-full bg-black px-4 py-2 text-white hover:bg-opacity-80"
-        href={`/tastings/${slug}`}
+        href={`/degustaciones/${slug}`}
       >
         View details
         <ArrowRight className="ml-1 inline size-5" />

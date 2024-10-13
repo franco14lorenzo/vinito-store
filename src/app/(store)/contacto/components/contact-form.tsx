@@ -72,8 +72,6 @@ const ContactForm = () => {
       return
     }
 
-    setLoading(false)
-
     router.push(`/contacto/gracias?name=${data.name}`)
   }
 

@@ -33,7 +33,7 @@ export async function createOrder(order: Order) {
   }
 
   for (const item of order.items) {
-    revalidatePath(`/tastings/${item.slug}`)
+    revalidatePath(`/degustaciones/${item.slug}`)
   }
 
   return { data, error: null }

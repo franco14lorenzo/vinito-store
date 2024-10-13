@@ -11,8 +11,8 @@ import type { Accommodation } from '@/app/contexts/accommodation'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: 'Checkout',
-  description: 'Buy your favorite wines'
+  title: 'Finalizar Compra',
+  description: 'Compra tus vinos favoritos'
 }
 
 export default async function CheckoutPage() {
@@ -32,7 +32,7 @@ export default async function CheckoutPage() {
   return (
     <>
       <h1 className="my-6 w-full text-center font-kalnia text-3xl font-bold">
-        Checkout
+        Finalizar Compra
       </h1>
       {items?.length ? (
         <CheckoutForm
@@ -44,15 +44,17 @@ export default async function CheckoutPage() {
       ) : (
         <section className="flex w-full flex-1 flex-col items-center justify-center px-4 pb-56 text-center">
           <div className="flex w-full flex-1 flex-col items-center justify-center">
-            <p className="px-4 py-2 text-center text-sm">Your bag is empty</p>
+            <p className="px-4 py-2 text-center text-sm">
+              Tu carrito está vacío
+            </p>
             <p className="px-4 py-2 text-center text-lg font-semibold">
-              Add some items to get started!
+              ¡Agrega algunos artículos para comenzar!
             </p>
             <Link
               className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
-              href="/tastings"
+              href="/degustaciones"
             >
-              Discover our tastings
+              Descubre nuestras degustaciones
               <ArrowRight className="ml-2 inline size-5" />
             </Link>
           </div>

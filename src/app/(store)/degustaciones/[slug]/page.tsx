@@ -1,6 +1,5 @@
 import { QueryData } from '@supabase/supabase-js'
 
-import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Actions from '@/app/(store)/degustaciones/[slug]/components/actions'
@@ -14,9 +13,17 @@ export async function generateStaticParams() {
   return data.map(({ slug }) => ({ slug }))
 }
 
-export const metadata: Metadata = {
-  title: 'Tasting Details',
-  description: 'Discover our wine tastings'
+export async function generateMetadata({
+  params
+}: {
+  params: { slug: string }
+}) {
+  const { data } = await getTastingWithWines(params.slug)
+
+  return {
+    title: data?.name,
+    description: data?.short_description
+  }
 }
 
 export default async function TastingDetailsPage({
@@ -101,7 +108,7 @@ async function getTastingWithWines(slug: string) {
   const tastingWithWinesQuery = supabase
     .from('tastings')
     .select(
-      'id, name, slug, stock, long_description, pairings, image, price, wines (id)'
+      'id, name, slug, stock, short_description, long_description, pairings, image, price, wines (id)'
     )
     .eq('status', 'active')
     .eq('slug', slug)
