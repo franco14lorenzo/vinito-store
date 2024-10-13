@@ -89,3 +89,12 @@ INSERT INTO order_tastings (order_id, tasting_id, quantity) VALUES
 ('550e8400-e29b-41d4-a716-446655440008', 4, 1), ('550e8400-e29b-41d4-a716-446655440008', 5, 1), ('550e8400-e29b-41d4-a716-446655440008', 6, 1),
 -- Nicolas De La Cruz
 ('550e8400-e29b-41d4-a716-446655440009', 4, 2), ('550e8400-e29b-41d4-a716-446655440009', 5, 1), ('550e8400-e29b-41d4-a716-446655440009', 6, 1);
+
+-- Seed data for the faqs table
+INSERT INTO faqs (question, answer, status, created_by) VALUES
+('¿Qué es Vinito?', 'Vinito es un servicio de entrega de vinos que te permite pedir vino en línea y recibirlo en tu alojamiento.', 'active', 1),
+('¿Por qué debería elegir Vinito?', 'Vinito ofrece una amplia selección de vinos de Mendoza, Argentina. Entregamos a tu alojamiento, para que puedas disfrutar de tu vino sin tener que salir de tu habitación.', 'active', 1),
+('¿Cómo hago un pedido?', 'Para hacer un pedido, simplemente navega por nuestra selección de vinos, añade los que quieras a tu carrito y procede al pago.', 'active', 1),
+('¿Cuánto tarda la entrega?', 'Los tiempos de entrega varían según tu ubicación. Puedes elegir tu fecha y hora de entrega preferida durante el pago. Puedes pedir con 30 minutos de anticipación o hasta con 30 días de anticipación.', 'active', 1),
+('¿Cuánto cuesta la entrega?', 'La entrega es gratuita para todos nuestros clientes de alojamiento. Para otros clientes, los costos de entrega varían según tu ubicación.', 'active', 1),
+('¿Qué métodos de pago aceptan?', 'Aceptamos todas las principales tarjetas de crédito y débito con Mercado Pago. También aceptamos pagos con criptomonedas a través de Binance Pay. También puedes pagar en efectivo al momento de la entrega.', 'active', 1);

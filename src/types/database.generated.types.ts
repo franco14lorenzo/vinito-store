@@ -226,6 +226,57 @@ export type Database = {
           }
         ]
       }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          created_by: number | null
+          id: number
+          order: number
+          question: string
+          status: Database['public']['Enums']['faq_status']
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          created_by?: number | null
+          id?: number
+          order?: number
+          question: string
+          status?: Database['public']['Enums']['faq_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          created_by?: number | null
+          id?: number
+          order?: number
+          question?: string
+          status?: Database['public']['Enums']['faq_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'faqs_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'faqs_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       order_tastings: {
         Row: {
           order_id: string
@@ -588,6 +639,7 @@ export type Database = {
     Enums: {
       accommodation_status: 'draft' | 'active' | 'inactive' | 'deleted'
       delivery_schedule_status: 'draft' | 'active' | 'inactive' | 'deleted'
+      faq_status: 'draft' | 'active' | 'inactive' | 'deleted'
       order_state:
         | 'pending'
         | 'processing'
