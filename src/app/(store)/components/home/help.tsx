@@ -21,7 +21,7 @@ function Help() {
 
           <Link
             className="w-full gap-2 rounded-full border border-white bg-black px-4 py-2 text-sm font-medium text-white hover:bg-opacity-80 md:w-fit"
-            href="/contact"
+            href="/contacto"
           >
             <MessageCircle className="mr-2 inline size-5" />
             Contactanos

@@ -1,8 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -15,6 +18,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { IS_DEV_ENVIRONMENT } from '@/constants'
+import { useToast } from '@/hooks/use-toast'
+
+import { sendContact } from '../actions'
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -29,6 +36,10 @@ const formSchema = z.object({
 })
 
 const ContactForm = () => {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,15 +49,39 @@ const ContactForm = () => {
     }
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function handleSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true)
+
+    const contact = {
+      name: values.name,
+      email: values.email,
+      message: values.message
+    }
+
+    const { data, error } = await sendContact(contact)
+
+    if (error) {
+      IS_DEV_ENVIRONMENT && console.error(error)
+      toast({
+        variant: 'destructive',
+        title: 'Error al enviar el mensaje',
+        description:
+          'Hubo un error al enviar tu mensaje. Por favor, intenta de nuevo.'
+      })
+      setLoading(false)
+      return
+    }
+
+    setLoading(false)
+
+    router.push(`/contacto/gracias?name=${data.name}`)
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-1 rounded-lg bg-neutral-100 p-4 px-4 md:w-1/2"
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="w-full space-y-1 rounded-lg border bg-white p-4 px-4 md:w-1/2"
       >
         <FormField
           control={form.control}
@@ -55,11 +90,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Nombre</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="John Doe"
-                  {...field}
-                  className="border-none bg-neutral-50"
-                />
+                <Input placeholder="John Doe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,11 +103,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="example@email.com"
-                  {...field}
-                  className="border-none bg-neutral-50"
-                />
+                <Input placeholder="example@email.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +117,6 @@ const ContactForm = () => {
               <FormLabel>Mensaje</FormLabel>
               <FormControl>
                 <Textarea
-                  className="rounded-lg border-none bg-neutral-50"
                   placeholder="Hola, me gustaría saber más sobre..."
                   {...field}
                 />
@@ -99,8 +125,12 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full rounded-full">
-          Enviar
+        <Button
+          type="submit"
+          className="h-10 w-full rounded-full"
+          disabled={loading}
+        >
+          {loading ? 'Enviando...' : 'Enviar mensaje'}
         </Button>
       </form>
     </Form>

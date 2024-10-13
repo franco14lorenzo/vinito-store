@@ -124,6 +124,39 @@ export type Database = {
         }
         Relationships: []
       }
+      contacts: {
+        Row: {
+          created_at: string
+          email: string
+          id: number
+          message: string
+          name: string
+          phone: string | null
+          status: Database['public']['Enums']['contact_status']
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: number
+          message: string
+          name: string
+          phone?: string | null
+          status?: Database['public']['Enums']['contact_status']
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: number
+          message?: string
+          name?: string
+          phone?: string | null
+          status?: Database['public']['Enums']['contact_status']
+          updated_at?: string
+        }
+        Relationships: []
+      }
       customers: {
         Row: {
           created_at: string
@@ -638,6 +671,7 @@ export type Database = {
     }
     Enums: {
       accommodation_status: 'draft' | 'active' | 'inactive' | 'deleted'
+      contact_status: 'unread' | 'read' | 'answered' | 'deleted'
       delivery_schedule_status: 'draft' | 'active' | 'inactive' | 'deleted'
       faq_status: 'draft' | 'active' | 'inactive' | 'deleted'
       order_state:

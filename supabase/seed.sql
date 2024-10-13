@@ -98,3 +98,11 @@ INSERT INTO faqs (question, answer, status, created_by) VALUES
 ('¿Cuánto tarda la entrega?', 'Los tiempos de entrega varían según tu ubicación. Puedes elegir tu fecha y hora de entrega preferida durante el pago. Puedes pedir con 30 minutos de anticipación o hasta con 30 días de anticipación.', 'active', 1),
 ('¿Cuánto cuesta la entrega?', 'La entrega es gratuita para todos nuestros clientes de alojamiento. Para otros clientes, los costos de entrega varían según tu ubicación.', 'active', 1),
 ('¿Qué métodos de pago aceptan?', 'Aceptamos todas las principales tarjetas de crédito y débito con Mercado Pago. También aceptamos pagos con criptomonedas a través de Binance Pay. También puedes pagar en efectivo al momento de la entrega.', 'active', 1);
+
+-- Seed data for the contacts table
+INSERT INTO "public"."contacts" (name, email, phone, message, status) VALUES
+('Juan Pérez', 'juan.perez@example.com', '123456789', 'Hola, me gustaría saber más sobre sus servicios.', 'read'),
+('María García', 'maria.garcia@example.com', '987654321', 'Tengo una consulta sobre mi pedido.', 'read'),
+('Carlos López', 'carlos.lopez@example.com', '555555555', '¿Pueden enviarme un catálogo de productos?', 'read'),
+('Ana Martínez', 'ana.martinez@example.com', '444444444', 'Estoy interesada en una colaboración.', 'read'),
+('Luis Fernández', 'luis.fernandez@example.com', '333333333', 'Quisiera saber los tiempos de entrega.', 'read');

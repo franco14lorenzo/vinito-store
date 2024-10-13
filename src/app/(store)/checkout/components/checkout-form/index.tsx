@@ -109,7 +109,7 @@ const CheckoutForm = ({
     }
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true)
 
     const order: Order = {
@@ -160,7 +160,7 @@ const CheckoutForm = ({
     <Form {...form}>
       <form
         className="flex min-h-screen w-full flex-1 flex-col items-start justify-center gap-4 px-4 pb-56 md:flex-row-reverse md:justify-center"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(handleSubmit)}
       >
         <OrderSummary items={items} totalPrice={totalPrice} loading={loading} />
 
