@@ -24,12 +24,8 @@ export const metadata: Metadata = {
 
 export default function ScanQRPage() {
   const wppNumber = '5492615040179'
-  const wppMessage =
-    'Hola Vinito, me gustaría recibir enlace de acceso a la tienda. Mi nombre es: '
 
-  const wppLink = `https://wa.me/${wppNumber}?text=${encodeURIComponent(
-    wppMessage
-  )}`
+  const wppLink = `https://wa.me/${wppNumber}?text=Hola! Me gustaría acceder a Vinito.`
 
   return (
     <div className="grid gap-4">

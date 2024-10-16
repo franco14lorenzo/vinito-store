@@ -1,8 +1,16 @@
 'use server'
 
+import { Resend } from 'resend'
+import { v4 as uuid } from 'uuid'
+
 import { revalidatePath } from 'next/cache'
 
+import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient } from '@/lib/supabase/server'
+
+import { EmailTemplate } from './email-template'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 type Order = {
   customer: { [key: string]: any }
@@ -34,6 +42,26 @@ export async function createOrder(order: Order) {
 
   for (const item of order.items) {
     revalidatePath(`/degustaciones/${item.slug}`)
+  }
+
+  try {
+    const { error } = await resend.emails.send({
+      from: 'Vinito <noreply@vinito.store>',
+      to: [order.customer.email],
+      subject: '¡Gracias por tu compra!',
+      react: EmailTemplate({ firstName: order.customer.name }),
+      headers: {
+        'X-Entity-Ref-ID': uuid()
+      }
+    })
+
+    if (error) {
+      // TODO: Handle production error
+      IS_DEV_ENVIRONMENT && console.error(error)
+    }
+  } catch (error) {
+    // TODO: Handle production error
+    IS_DEV_ENVIRONMENT && console.error(error)
   }
 
   return { data, error: null }
