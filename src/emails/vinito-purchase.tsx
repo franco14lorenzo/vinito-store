@@ -8,6 +8,7 @@ import {
   Hr,
   Html,
   Img,
+  Link,
   Preview,
   Row,
   Section,
@@ -46,7 +47,7 @@ interface VinitoPurchaseEmailProps {
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : ''
+  : 'http://localhost:3000'
 
 export const VinitoPurchaseEmail = ({
   customer,
@@ -84,7 +85,7 @@ export const VinitoPurchaseEmail = ({
               <Row>
                 <Column align="center">
                   <Img
-                    src={`${baseUrl}/static/vinito-logo.png`}
+                    src={`${baseUrl}/vinito-logo.png`}
                     width="115"
                     height="32"
                     alt="Vinito"
@@ -326,7 +327,14 @@ export const VinitoPurchaseEmail = ({
             </Text>
             <Text className="text-center text-sm text-gray-600">
               📧 Email: {settings.contact_email} | 📞 WhatsApp:{' '}
-              {settings.contact_phone_number}
+              {settings.contact_phone_number} <br />
+              🌐 Web:{' '}
+              <Link
+                href={`${baseUrl}/contacto`}
+                className="text-blue-600 hover:underline"
+              >
+                {baseUrl}/contacto
+              </Link>
             </Text>
           </Container>
         </Body>
@@ -349,14 +357,14 @@ VinitoPurchaseEmail.PreviewProps = {
       name: 'Vino Tinto Reserva',
       price: 25.99,
       quantity: 2,
-      image: `${baseUrl}/static/vino-tinto-reserva.png`
+      image: `${baseUrl}/vino-tinto-reserva.png`
     },
     {
       id: 2,
       name: 'Vino Blanco Chardonnay',
       price: 19.99,
       quantity: 1,
-      image: `${baseUrl}/static/vino-blanco-chardonnay.png`
+      image: `${baseUrl}/vino-blanco-chardonnay.png`
     }
   ],
   subtotal: 71.97,

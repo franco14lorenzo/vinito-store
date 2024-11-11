@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import { z } from 'zod'
 
 import { useRouter } from 'next/navigation'
@@ -188,13 +189,22 @@ const CheckoutForm = ({
           <ContactInformation form={form} />
           <PaymentInformation form={form} paymentMethods={paymentMethods} />
         </div>
-
         <Button
           type="submit"
           className="w-full rounded-full disabled:cursor-not-allowed disabled:opacity-50 md:hidden"
           disabled={loading}
         >
-          {loading ? 'Procesando...' : 'Compra ahora'}
+          {!loading ? (
+            'Compra ahora'
+          ) : (
+            <>
+              <Loader2
+                className="mr-2 h-4 w-4 animate-spin text-white"
+                aria-label="Cargando"
+              />
+              <span>Procesando tu compra</span>
+            </>
+          )}
         </Button>
       </form>
     </Form>

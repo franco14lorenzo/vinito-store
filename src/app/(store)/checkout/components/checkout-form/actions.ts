@@ -111,7 +111,7 @@ export async function createOrder(order: Order) {
       react: VinitoPurchaseEmail({
         customer: { name: order.customer.name, email: order.customer.email },
         orderNumber: data[0].order_id,
-        orderDate: order.delivery.date,
+        orderDate: new Date().toISOString(),
         items: order.items.map((item) => ({
           id: item.id,
           name: item.name,
