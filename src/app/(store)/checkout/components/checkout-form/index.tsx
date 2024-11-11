@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { useToast } from '@/hooks/use-toast'
+import { formatCurrency } from '@/lib/utils'
 
 type Order = {
   customer: { [key: string]: any }
@@ -178,7 +179,11 @@ const CheckoutForm = ({
         className="flex min-h-screen w-full flex-1 flex-col items-start justify-center gap-4 px-4 pb-56 md:flex-row-reverse md:justify-center"
         onSubmit={form.handleSubmit(handleSubmit)}
       >
-        <OrderSummary items={items} totalPrice={totalPrice} loading={loading} />
+        <OrderSummary
+          items={items}
+          totalPrice={formatCurrency(totalPrice)}
+          loading={loading}
+        />
 
         <div className="flex w-full flex-1 flex-col items-start justify-start gap-4 py-4">
           <DeliveryInformation
@@ -191,11 +196,11 @@ const CheckoutForm = ({
         </div>
         <Button
           type="submit"
-          className="w-full rounded-full disabled:cursor-not-allowed disabled:opacity-50 md:hidden"
+          className="h-10 w-full rounded-full disabled:cursor-not-allowed disabled:opacity-50 md:hidden"
           disabled={loading}
         >
           {!loading ? (
-            'Compra ahora'
+            'Comprar ahora'
           ) : (
             <>
               <Loader2

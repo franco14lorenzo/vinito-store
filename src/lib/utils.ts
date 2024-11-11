@@ -18,3 +18,9 @@ export function transformSettingsToObject(
     return obj
   }, {} as Record<string, string>)
 }
+
+export function formatCurrency(value: number | undefined) {
+  return typeof value === 'number'
+    ? value.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })
+    : '$0,00'
+}

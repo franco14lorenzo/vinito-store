@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useCart } from '@/app/(store)/contexts/cart'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'
 import { Button } from '@/components/ui/button'
+import { formatCurrency } from '@/lib/utils'
 
 const Actions = ({
   item
@@ -33,7 +34,7 @@ const Actions = ({
     <section className="grid w-full grid-cols-1 gap-4 self-start py-2 md:w-72">
       <div className="flex w-full justify-between">
         <p className="text-xl font-bold leading-10">
-          ${item.price.toFixed(2)}{' '}
+          {formatCurrency(item.price)}{' '}
           <span className="text-[10px] font-light">
             {' '}
             Inc. todos los impuestos

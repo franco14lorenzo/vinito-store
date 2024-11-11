@@ -50,7 +50,7 @@ function OrderSummary({
                 <section className="mb-2 flex justify-between px-4 text-sm font-semibold">
                   <p>Subtotal</p>
                   <span className="font-semibold text-zinc-800">
-                    ${totalPrice}
+                    {totalPrice}
                   </span>
                 </section>
                 <section className="flex justify-between px-4 text-sm font-semibold">
@@ -60,7 +60,7 @@ function OrderSummary({
                 <div className="mt-4 flex flex-col gap-6 border-t p-4 pb-0">
                   <section className="flex justify-between text-xl font-bold">
                     <p>Total</p>
-                    <p>${totalPrice}</p>
+                    <p>{totalPrice}</p>
                   </section>
                 </div>
               </div>
@@ -80,7 +80,7 @@ function OrderSummary({
         <div className="mt-auto grid w-full border-t pt-4">
           <section className="mb-2 flex justify-between px-4 text-sm font-semibold">
             <p>Subtotal</p>
-            <span className="font-semibold text-zinc-800">${totalPrice}</span>
+            <span className="font-semibold text-zinc-800">{totalPrice}</span>
           </section>
           <section className="flex justify-between px-4 text-sm font-semibold">
             <p>Shipping</p>
@@ -89,15 +89,15 @@ function OrderSummary({
           <div className="mt-4 flex flex-col gap-6 border-t p-4 pb-0">
             <section className="flex justify-between text-xl font-bold">
               <p>Total</p>
-              <p>${totalPrice}</p>
+              <p>{totalPrice}</p>
             </section>
             <Button
               disabled={loading}
               type="submit"
-              className="hidden w-full rounded-full md:block"
+              className="hidden h-10 w-full rounded-full md:inline-flex"
             >
               {!loading ? (
-                'Compra ahora'
+                'Comprar ahora'
               ) : (
                 <>
                   <Loader2

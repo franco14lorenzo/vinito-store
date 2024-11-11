@@ -35,6 +35,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
+import { formatCurrency } from '@/lib/utils'
 
 const Cart = () => {
   const { push } = useRouter()
@@ -124,7 +125,7 @@ const Cart = () => {
               <section className="mb-2 flex justify-between px-4 text-sm font-semibold">
                 <p>Subtotal</p>
                 <span className="font-semibold text-zinc-800">
-                  ${totalPrice}
+                  {formatCurrency(totalPrice)}
                 </span>
               </section>
               <section className="flex justify-between px-4 text-sm font-semibold">
@@ -134,7 +135,7 @@ const Cart = () => {
               <div className="mt-4 flex flex-1 flex-col gap-6 border-t border-zinc-950/20 p-4 pb-0">
                 <section className="flex justify-between text-xl font-bold">
                   <p>Total</p>
-                  <p>${totalPrice}</p>
+                  <p>{formatCurrency(totalPrice)}</p>
                 </section>
                 <section className="flex flex-col gap-2 font-medium">
                   <button
@@ -259,7 +260,7 @@ export const Item = ({
           </DialogContent>
         </Dialog>
         <p className="text-base font-bold">
-          ${(item.price * item.quantity).toFixed(2)}
+          {formatCurrency(item.price * item.quantity)}
         </p>
       </section>
     </article>

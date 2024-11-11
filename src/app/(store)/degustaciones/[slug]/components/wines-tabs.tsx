@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { formatCurrency } from '@/lib/utils'
 
 export function WinesTabs({
   wines
@@ -42,7 +43,9 @@ export function WinesTabs({
             <p className="text-sm text-zinc-950">
               {wine.year} {wine.region} {wine.alcohol}%
             </p>
-            <p className="text-lg font-semibold">${wine.price.toFixed(2)}</p>
+            <p className="text-lg font-semibold">
+              ${formatCurrency(wine.price)}
+            </p>
           </TabsContent>
         ))}
       </div>

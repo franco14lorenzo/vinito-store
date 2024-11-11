@@ -31,7 +31,7 @@ interface CartContextType {
   updateItem: (itemId: number, quantity: number) => void
   clearCart: () => void
   totalItems: number
-  totalPrice: string
+  totalPrice: number
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
@@ -98,9 +98,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
 
-  const totalPrice = items
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
-    .toFixed(2)
+  const totalPrice = items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )
 
   return (
     <CartContext.Provider

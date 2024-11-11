@@ -16,6 +16,8 @@ import {
   Text
 } from '@react-email/components'
 
+import { formatCurrency } from '@/lib/utils'
+
 interface VinitoPurchaseEmailProps {
   customer: {
     name: string
@@ -68,11 +70,6 @@ export const VinitoPurchaseEmail = ({
   settings
 }: VinitoPurchaseEmailProps) => {
   const previewText = `Vinito - Confirmación de Pedido ${orderNumber}`
-  const formatCurrency = (value: number | undefined) => {
-    return typeof value === 'number'
-      ? value.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })
-      : '$0,00'
-  }
 
   return (
     <Html>
