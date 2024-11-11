@@ -79,7 +79,8 @@ export default async function TastingDetailsPage({
                 price: data.price,
                 name: data.name,
                 stock: data.stock,
-                id: data.id
+                id: data.id,
+                image: data.image
               }}
             />
           </div>
@@ -95,7 +96,8 @@ export default async function TastingDetailsPage({
             slug: data.slug,
             price: data.price,
             name: data.name,
-            stock: data.stock
+            stock: data.stock,
+            image: data.image
           }}
         />
       </div>

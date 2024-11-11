@@ -34,7 +34,7 @@ function PaymentInformation({
   paymentMethods: {
     id: number
     name: string
-    type: 'cash' | 'non_cash'
+    type: 'cash_on_delivery' | 'bank_transfer' | null
   }[]
 }) {
   return (
@@ -66,10 +66,10 @@ function PaymentInformation({
                         htmlFor={method.id.toString()}
                         className="flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
-                        {method.type === 'cash' ? (
-                          <Banknote className="mb-3 h-6 w-6" />
-                        ) : (
+                        {method.type === 'bank_transfer' ? (
                           <Landmark className="mb-3 h-6 w-6" />
+                        ) : (
+                          <Banknote className="mb-3 h-6 w-6" />
                         )}
                         <span className="text-sm font-medium">
                           {method.name}

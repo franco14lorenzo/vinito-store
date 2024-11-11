@@ -354,7 +354,7 @@ export type Database = {
           delivery_schedule_id: number
           discount_amount: number | null
           id: string
-          payment_method_id: number
+          payment_id: number | null
           shipping_amount: number | null
           status: Database['public']['Enums']['order_state']
           tax_amount: number | null
@@ -372,7 +372,7 @@ export type Database = {
           delivery_schedule_id: number
           discount_amount?: number | null
           id?: string
-          payment_method_id: number
+          payment_id?: number | null
           shipping_amount?: number | null
           status?: Database['public']['Enums']['order_state']
           tax_amount?: number | null
@@ -390,7 +390,7 @@ export type Database = {
           delivery_schedule_id?: number
           discount_amount?: number | null
           id?: string
-          payment_method_id?: number
+          payment_id?: number | null
           shipping_amount?: number | null
           status?: Database['public']['Enums']['order_state']
           tax_amount?: number | null
@@ -428,10 +428,10 @@ export type Database = {
             referencedColumns: ['id']
           },
           {
-            foreignKeyName: 'orders_payment_method_id_fkey'
-            columns: ['payment_method_id']
+            foreignKeyName: 'orders_payment_id_fkey'
+            columns: ['payment_id']
             isOneToOne: false
-            referencedRelation: 'payment_methods'
+            referencedRelation: 'payments'
             referencedColumns: ['id']
           },
           {
@@ -451,7 +451,7 @@ export type Database = {
           id: number
           name: string
           status: Database['public']['Enums']['payment_methods_status']
-          type: Database['public']['Enums']['payment_type']
+          type: Database['public']['Enums']['payment_type'] | null
           updated_at: string
           updated_by: number | null
         }
@@ -462,7 +462,7 @@ export type Database = {
           id?: number
           name: string
           status?: Database['public']['Enums']['payment_methods_status']
-          type?: Database['public']['Enums']['payment_type']
+          type?: Database['public']['Enums']['payment_type'] | null
           updated_at?: string
           updated_by?: number | null
         }
@@ -473,7 +473,7 @@ export type Database = {
           id?: number
           name?: string
           status?: Database['public']['Enums']['payment_methods_status']
-          type?: Database['public']['Enums']['payment_type']
+          type?: Database['public']['Enums']['payment_type'] | null
           updated_at?: string
           updated_by?: number | null
         }
@@ -487,6 +487,106 @@ export type Database = {
           },
           {
             foreignKeyName: 'payment_methods_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          created_by: number | null
+          id: number
+          order_id: string
+          payment_method_id: number
+          status: Database['public']['Enums']['payment_status']
+          updated_at: string
+          updated_by: number | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          created_by?: number | null
+          id?: number
+          order_id: string
+          payment_method_id: number
+          status: Database['public']['Enums']['payment_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          created_by?: number | null
+          id?: number
+          order_id?: string
+          payment_method_id?: number
+          status?: Database['public']['Enums']['payment_status']
+          updated_at?: string
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'payments_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'payments_order_id_fkey'
+            columns: ['order_id']
+            isOneToOne: false
+            referencedRelation: 'orders'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'payments_payment_method_id_fkey'
+            columns: ['payment_method_id']
+            isOneToOne: false
+            referencedRelation: 'payment_methods'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'payments_updated_by_fkey'
+            columns: ['updated_by']
+            isOneToOne: false
+            referencedRelation: 'admin'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      settings: {
+        Row: {
+          description: string | null
+          id: number
+          key: string
+          updated_at: string
+          updated_by: number | null
+          value: string
+        }
+        Insert: {
+          description?: string | null
+          id?: number
+          key: string
+          updated_at?: string
+          updated_by?: number | null
+          value: string
+        }
+        Update: {
+          description?: string | null
+          id?: number
+          key?: string
+          updated_at?: string
+          updated_by?: number | null
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'settings_updated_by_fkey'
             columns: ['updated_by']
             isOneToOne: false
             referencedRelation: 'admin'
@@ -536,6 +636,7 @@ export type Database = {
           price: number
           short_description: string | null
           slug: string
+          sold: number | null
           status: Database['public']['Enums']['tasting_status']
           stock: number
           updated_at: string
@@ -552,6 +653,7 @@ export type Database = {
           price: number
           short_description?: string | null
           slug: string
+          sold?: number | null
           status?: Database['public']['Enums']['tasting_status']
           stock?: number
           updated_at?: string
@@ -568,6 +670,7 @@ export type Database = {
           price?: number
           short_description?: string | null
           slug?: string
+          sold?: number | null
           status?: Database['public']['Enums']['tasting_status']
           stock?: number
           updated_at?: string
@@ -593,6 +696,7 @@ export type Database = {
           image: string | null
           name: string
           price: number
+          sold: number | null
           status: Database['public']['Enums']['wine_status']
           stock: number | null
           updated_at: string
@@ -611,6 +715,7 @@ export type Database = {
           image?: string | null
           name: string
           price: number
+          sold?: number | null
           status?: Database['public']['Enums']['wine_status']
           stock?: number | null
           updated_at?: string
@@ -629,6 +734,7 @@ export type Database = {
           image?: string | null
           name?: string
           price?: number
+          sold?: number | null
           status?: Database['public']['Enums']['wine_status']
           stock?: number | null
           updated_at?: string
@@ -666,6 +772,7 @@ export type Database = {
         }
         Returns: {
           order_id: string
+          payment_id: number
         }[]
       }
     }
@@ -681,7 +788,8 @@ export type Database = {
         | 'delivered'
         | 'cancelled'
       payment_methods_status: 'draft' | 'active' | 'inactive' | 'deleted'
-      payment_type: 'cash' | 'non_cash'
+      payment_status: 'pending' | 'completed' | 'failed' | 'refunded'
+      payment_type: 'cash_on_delivery' | 'bank_transfer'
       tasting_status: 'draft' | 'active' | 'inactive' | 'deleted'
       wine_status: 'draft' | 'active' | 'inactive' | 'deleted'
     }
@@ -771,4 +879,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
   ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+  : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema['CompositeTypes']
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    : never = never
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
+  ? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
   : never

@@ -9,7 +9,14 @@ import { Button } from '@/components/ui/button'
 const Actions = ({
   item
 }: {
-  item: { id: number; price: number; name: string; stock: number; slug: string }
+  item: {
+    id: number
+    price: number
+    name: string
+    stock: number
+    slug: string
+    image: string | null
+  }
 }) => {
   const [quantity /* setQuantity */] = useState(1)
 
@@ -66,7 +73,8 @@ const Actions = ({
             slug: item.slug,
             quantity,
             price: item.price,
-            stock: item.stock
+            stock: item.stock,
+            image: item.image || null
           })
           setDialogOpen(Dialogs.Cart)
         }}

@@ -56,10 +56,8 @@ INSERT INTO delivery_schedules (name, start_time, end_time, status, created_by) 
 
 -- Seed data for the payment_methods table
 INSERT INTO payment_methods (name, status, created_by, description, type) VALUES
-('Pago contra entrega', 'active', 1, 'Pago en efectivo al recibir el producto', 'cash'),
-('Tarjeta de crédito', 'draft', 1, 'Pago con tarjeta de crédito', 'non_cash'),
-('Tarjeta de débito', 'draft', 1, 'Pago con tarjeta de débito', 'non_cash'),
-('Transferencia bancaria', 'active', 1, 'Pago mediante transferencia bancaria', 'non_cash');
+('Pago contra entrega', 'active', 1, 'Pago en efectivo al recibir el producto', 'cash_on_delivery'),
+('Transferencia bancaria', 'active', 1, 'Pago mediante transferencia bancaria', 'bank_transfer');
 
 -- Seed data for the customers table
 INSERT INTO customers (id, name, surname, email, phone, created_by) VALUES
@@ -70,12 +68,12 @@ INSERT INTO customers (id, name, surname, email, phone, created_by) VALUES
 ('550e8400-e29b-41d4-a716-446655440004', 'Nicolas', 'De La Cruz', 'nicolas.delacruz@riverplate.com', '678-901-2345', 1);
 
 -- Seed data for the orders table
-INSERT INTO orders (id, status, customer_id, delivery_date, delivery_schedule_id, payment_method_id, total_amount, created_by, accommodation_id, customer_note) VALUES
-('550e8400-e29b-41d4-a716-446655440005', 'pending', '550e8400-e29b-41d4-a716-446655440000', '2024-10-15', 1, 1, 5000.00, 1, '550e8400-e29b-41d4-a716-446655440010', 'Por favor, entregar entre las 9 AM y las 12 PM'),
-('550e8400-e29b-41d4-a716-446655440006', 'pending', '550e8400-e29b-41d4-a716-446655440001', '2024-10-16', 2, 1, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440011', 'Dejar en la recepción'),
-('550e8400-e29b-41d4-a716-446655440007', 'pending', '550e8400-e29b-41d4-a716-446655440002', '2024-11-17', 3, 1, 6000.00, 1, '550e8400-e29b-41d4-a716-446655440012', 'Llamar al llegar'),
-('550e8400-e29b-41d4-a716-446655440008', 'pending', '550e8400-e29b-41d4-a716-446655440003', '2024-10-18', 4, 1, 3500.00, 1, '550e8400-e29b-41d4-a716-446655440013', 'Tocar el timbre dos veces'),
-('550e8400-e29b-41d4-a716-446655440009', 'pending', '550e8400-e29b-41d4-a716-446655440004', '2025-10-19', 1, 1, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440014', 'Dejar el paquete con el vecino');
+INSERT INTO orders (id, status, customer_id, delivery_date, delivery_schedule_id, total_amount, created_by, accommodation_id, customer_note) VALUES
+('550e8400-e29b-41d4-a716-446655440005', 'pending', '550e8400-e29b-41d4-a716-446655440000', '2024-10-15', 1, 5000.00, 1, '550e8400-e29b-41d4-a716-446655440010', 'Por favor, entregar entre las 9 AM y las 12 PM'),
+('550e8400-e29b-41d4-a716-446655440006', 'pending', '550e8400-e29b-41d4-a716-446655440001', '2024-10-16', 2, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440011', 'Dejar en la recepción'),
+('550e8400-e29b-41d4-a716-446655440007', 'pending', '550e8400-e29b-41d4-a716-446655440002', '2024-11-17', 3, 6000.00, 1, '550e8400-e29b-41d4-a716-446655440012', 'Llamar al llegar'),
+('550e8400-e29b-41d4-a716-446655440008', 'pending', '550e8400-e29b-41d4-a716-446655440003', '2024-10-18', 4, 3500.00, 1, '550e8400-e29b-41d4-a716-446655440013', 'Tocar el timbre dos veces'),
+('550e8400-e29b-41d4-a716-446655440009', 'pending', '550e8400-e29b-41d4-a716-446655440004', '2025-10-19', 1, 4500.00, 1, '550e8400-e29b-41d4-a716-446655440014', 'Dejar el paquete con el vecino');
 
 -- Seed data for the order_tastings table
 INSERT INTO order_tastings (order_id, tasting_id, quantity) VALUES
@@ -106,3 +104,31 @@ INSERT INTO "public"."contacts" (name, email, phone, message, status) VALUES
 ('Carlos López', 'carlos.lopez@example.com', '555555555', '¿Pueden enviarme un catálogo de productos?', 'read'),
 ('Ana Martínez', 'ana.martinez@example.com', '444444444', 'Estoy interesada en una colaboración.', 'read'),
 ('Luis Fernández', 'luis.fernandez@example.com', '333333333', 'Quisiera saber los tiempos de entrega.', 'read');
+
+-- Seed data for the payments table
+INSERT INTO payments (id, order_id, payment_method_id, amount, status, created_by, updated_by) VALUES
+(1, '550e8400-e29b-41d4-a716-446655440005', 1, 5000.00, 'pending', 1, 1),
+(2, '550e8400-e29b-41d4-a716-446655440006', 1, 4500.00, 'completed', 1, 1),
+(3, '550e8400-e29b-41d4-a716-446655440007', 1, 6000.00, 'failed', 1, 1),
+(4, '550e8400-e29b-41d4-a716-446655440008', 1, 3500.00, 'refunded', 1, 1),
+(5, '550e8400-e29b-41d4-a716-446655440009', 1, 4500.00, 'pending', 1, 1);
+
+-- Set sequence for payments
+SELECT setval(pg_get_serial_sequence('public.payments', 'id'), coalesce(max(id), 1) + 1, false) FROM public.payments;
+
+-- Update orders with payment_id
+UPDATE orders
+SET payment_id = payments.id
+FROM payments
+WHERE orders.id = payments.order_id;
+
+-- Seed data for settings table
+INSERT INTO settings (key, value, description) VALUES
+('delivery_fee', '0', 'Cargo por entrega'),
+('tax_rate', '0.21', 'Tasa de impuestos'),
+('bank_name', 'Banco Ejemplo', 'Nombre del banco para transferencias bancarias'),
+('bank_account_holder_name', 'Juan Pérez', 'Nombre del titular de la cuenta bancaria'),
+('bank_account_cbu', '1234567890123456789012', 'CBU de la cuenta bancaria'),
+('bank_account_alias', 'banco.ejemplo', 'Alias del CBU de la cuenta bancaria'),
+('contact_email', 'franco14lorenzo@gmail.com', 'Correo electrónico de contacto'),
+('contact_phone_number', '5492615040179', 'Número de teléfono de contacto');

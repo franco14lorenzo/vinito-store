@@ -27,7 +27,14 @@ type Order = {
   delivery: { date: string; time: number }
   payment: { method: number }
   total: number
-  items: { id: number; quantity: number; slug: string }[]
+  items: {
+    id: number
+    quantity: number
+    slug: string
+    price: number
+    image: string | null
+    name: string
+  }[]
 }
 
 const formSchema = z.object({
@@ -81,7 +88,11 @@ const CheckoutForm = ({
 }: {
   items: CartItem[]
   accommodation: Accommodation | null
-  paymentMethods: { id: number; name: string; type: 'cash' | 'non_cash' }[]
+  paymentMethods: {
+    id: number
+    name: string
+    type: 'cash_on_delivery' | 'bank_transfer' | null
+  }[]
   deliverySchedules: {
     id: number
     name: string
@@ -89,6 +100,7 @@ const CheckoutForm = ({
     end_time: string
   }[]
 }) => {
+  console.log('items', items)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { totalPrice, clearCart } = useCart()
@@ -131,7 +143,10 @@ const CheckoutForm = ({
       items: items.map((item) => ({
         id: item.id,
         quantity: item.quantity,
-        slug: item.slug
+        slug: item.slug,
+        price: Number(item.price),
+        image: item.image,
+        name: item.name
       })),
       total: Number(totalPrice) || 0
     }

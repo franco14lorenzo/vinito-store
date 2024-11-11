@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
 import { CalendarIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -133,7 +134,7 @@ function DeliveryInformation({
                       )}
                     >
                       {field.value ? (
-                        format(field.value, 'PPP')
+                        format(field.value, 'PPP', { locale: es })
                       ) : (
                         <span>Seleccione una fecha</span>
                       )}
@@ -144,6 +145,7 @@ function DeliveryInformation({
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
+                    locale={es}
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) => {
