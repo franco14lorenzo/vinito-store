@@ -68,10 +68,10 @@ export default function OrderConfirmation({
           <Separator />
           <p className="text-sm text-muted-foreground">
             Si tienes alguna duda o necesitas ayuda, por favor{' '}
-            <Link href="/contact" className="text-gray-900 underline">
-              contáctanos
+            <Link href="/contacto" className="text-blue-600 hover:underline">
+              contáctenos
             </Link>
-            ..
+            .
           </p>
         </CardContent>
         <CardFooter className="flex flex-col gap-y-2 sm:flex-row sm:justify-between sm:gap-x-6 sm:gap-y-0">
