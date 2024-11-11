@@ -6,10 +6,9 @@ import { v4 as uuid } from 'uuid'
 import { revalidatePath } from 'next/cache'
 
 import { IS_DEV_ENVIRONMENT } from '@/constants'
+import VinitoPurchaseEmail from '@/emails/vinito-purchase'
 import { createClient } from '@/lib/supabase/server'
 import { transformSettingsToObject } from '@/lib/utils'
-
-import VinitoPurchaseEmail from '../../../../../../react-email-starter/emails/vinito-purchase'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
