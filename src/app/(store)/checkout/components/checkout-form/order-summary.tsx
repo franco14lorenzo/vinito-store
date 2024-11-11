@@ -1,3 +1,5 @@
+import { Loader2 } from 'lucide-react'
+
 import { Item } from '@/app/(store)/components/layout/header/cart'
 import {
   Accordion,
@@ -94,7 +96,17 @@ function OrderSummary({
               type="submit"
               className="hidden w-full rounded-full md:block"
             >
-              {loading ? 'Procesando...' : 'Compra ahora'}
+              {!loading ? (
+                'Compra ahora'
+              ) : (
+                <>
+                  <Loader2
+                    className="mr-2 h-4 w-4 animate-spin text-white"
+                    aria-label="Cargando"
+                  />
+                  <span>Procesando tu compra</span>
+                </>
+              )}
             </Button>
           </div>
         </div>
