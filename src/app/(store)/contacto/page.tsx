@@ -1,11 +1,10 @@
-import { QueryData } from '@supabase/supabase-js'
 import { Mail, MessageCircle } from 'lucide-react'
 
 import { Metadata } from 'next'
 
 import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
-import { createClient } from '@/lib/supabase/server'
+import { getSettings } from '@/lib/db'
 import { transformSettingsToObject } from '@/lib/utils'
 
 export const metadata: Metadata = {
@@ -18,15 +17,13 @@ const breadcrumbs = [
   { name: 'Contacto', isCurrentPage: true }
 ]
 
-const settingsKeys = ['contact_email', 'contact_phone_number']
+const SETTINGS_KEYS = ['contact_email', 'contact_phone_number']
 
 export default async function ContactPage() {
-  const { data: settingsData } = await getSettings(settingsKeys)
+  const { data: settingsData } = await getSettings(SETTINGS_KEYS)
   const settings = transformSettingsToObject(settingsData)
 
   const wppLink = `https://wa.me/${settings.contact_phone_number}?text=Hola! Me gustaría contactar con ustedes.`
-
-  console.log(settings)
 
   return (
     <>
@@ -72,20 +69,6 @@ export default async function ContactPage() {
       </section>
     </>
   )
-}
-
-async function getSettings(settings: string[]) {
-  const supabase = createClient()
-  const settingsQuery = supabase
-    .from('settings')
-    .select('key, value')
-    .in('key', settings)
-
-  type Settings = QueryData<typeof settingsQuery>
-
-  const { data, error } = await settingsQuery
-
-  return { data: data as Settings, error }
 }
 
 const ContactSvg = () => (

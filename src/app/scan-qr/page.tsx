@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
+import { getSettings } from '@/lib/db'
+import { transformSettingsToObject } from '@/lib/utils'
 
 import ScanQRButton from './components/scan-button'
 import QRVideo from './components/scan-video'
@@ -22,10 +24,13 @@ export const metadata: Metadata = {
   description: 'Escanea el código QR para acceder a la tienda'
 }
 
-export default function ScanQRPage() {
-  const wppNumber = '5492615040179'
+const SETTINGS_KEYS = ['contact_phone_number']
 
-  const wppLink = `https://wa.me/${wppNumber}?text=Hola! Me gustaría acceder a Vinito.`
+export default async function ScanQRPage() {
+  const { data: settingsData } = await getSettings(SETTINGS_KEYS)
+  const settings = transformSettingsToObject(settingsData)
+
+  const wppLink = `https://wa.me/${settings.contact_phone_number}?text=Hola! Me gustaría acceder a Vinito.`
 
   return (
     <div className="grid gap-4">

@@ -46,9 +46,12 @@ export default function ThankYouContactPage({
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-start space-x-4 rounded-lg bg-muted p-4">
-            <Clock className="mt-1 h-6 w-6 flex-shrink-0 text-muted-foreground" />
             <div>
-              <h3 className="font-semibold">Tiempo de respuesta estimado</h3>
+              <h3 className="inline-flex items-center gap-2 font-semibold">
+                {' '}
+                <Clock className=" h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                Tiempo de respuesta estimado
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Nos esforzamos por responder a todas las consultas dentro de
                 24hs horas hábiles.
