@@ -83,7 +83,7 @@ function OrderSummary({
             <span className="font-semibold text-zinc-800">{totalPrice}</span>
           </section>
           <section className="flex justify-between px-4 text-sm font-semibold">
-            <p>Shipping</p>
+            <p>Envío</p>
             <span className="font-semibold text-green-500">Gratis</span>
           </section>
           <div className="mt-4 flex flex-col gap-6 border-t p-4 pb-0">

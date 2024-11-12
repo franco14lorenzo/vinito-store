@@ -102,7 +102,6 @@ const CheckoutForm = ({
     end_time: string
   }[]
 }) => {
-  console.log('items', items)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { totalPrice, clearCart } = useCart()
