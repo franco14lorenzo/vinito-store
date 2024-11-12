@@ -114,10 +114,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Mensaje</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Hola, me gustaría saber más sobre..."
-                  {...field}
-                />
+                <Textarea placeholder="Escribe tu mensaje aquí..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

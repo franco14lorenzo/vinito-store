@@ -1,11 +1,16 @@
+import { QueryData } from '@supabase/supabase-js'
+import { Mail, MessageCircle } from 'lucide-react'
+
 import { Metadata } from 'next'
 
 import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
+import { createClient } from '@/lib/supabase/server'
+import { transformSettingsToObject } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Contacto',
-  description: 'Contactanos para cualquier consulta'
+  description: 'Contáctenos para cualquier consulta'
 }
 
 const breadcrumbs = [
@@ -13,25 +18,74 @@ const breadcrumbs = [
   { name: 'Contacto', isCurrentPage: true }
 ]
 
-export default function ContactPage() {
+const settingsKeys = ['contact_email', 'contact_phone_number']
+
+export default async function ContactPage() {
+  const { data: settingsData } = await getSettings(settingsKeys)
+  const settings = transformSettingsToObject(settingsData)
+
+  const wppLink = `https://wa.me/${settings.contact_phone_number}?text=Hola! Me gustaría contactar con ustedes.`
+
+  console.log(settings)
+
   return (
     <>
       <Breadcrumbs elements={breadcrumbs} />
-      <section className="flex w-full flex-col items-start justify-center gap-4 p-4 text-left md:my-20 md:flex-row">
-        <article className="flex w-full flex-col items-center justify-center px-4 md:w-1/2">
-          <h1 className="mb-6 w-full font-kalnia text-3xl font-bold">
-            Contáctenos
-          </h1>
-          <p className="w-full text-sm">
-            Si tienes alguna consulta, sugerencia o simplemente quieres saludar,
-            no dudes en contactarnos. Estamos aquí para ayudarte.
-          </p>
-          <ContactSvg />
-        </article>
-        <ContactForm />
+      <section className="flex w-full flex-col items-start justify-center gap-4 p-4 text-left md:my-20">
+        <h1 className="mb-6 w-full px-4 font-kalnia text-3xl font-bold">
+          Contacto
+        </h1>
+        <div className="flex w-full flex-col items-start justify-start gap-4 md:flex-row md:items-center md:justify-center">
+          <article className="flex w-full flex-col items-center justify-center p-4 md:w-1/2">
+            <p className="w-full text-sm">
+              Si tienes alguna consulta, sugerencia o simplemente quieres
+              saludar, no dudes en escribirnos. Estamos aquí para ayudarte.
+            </p>
+            <ul className="mt-4 w-full text-sm">
+              <li className="mb-2 flex items-center gap-2">
+                <span className="sr-only">WhatsApp:</span>{' '}
+                <a
+                  target="_blank"
+                  href={wppLink}
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 hover:underline"
+                >
+                  <MessageCircle size={16} />
+                  Escríbenos por WhatsApp
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="sr-only">Email:</span>{' '}
+                <a
+                  href={`mailto:${settings.contact_email}`}
+                  className="inline-flex items-center gap-2 hover:underline"
+                >
+                  <Mail size={16} />
+                  Envíanos un correo electrónico
+                </a>
+              </li>
+            </ul>
+            <ContactSvg />
+          </article>
+          <ContactForm />
+        </div>
       </section>
     </>
   )
+}
+
+async function getSettings(settings: string[]) {
+  const supabase = createClient()
+  const settingsQuery = supabase
+    .from('settings')
+    .select('key, value')
+    .in('key', settings)
+
+  type Settings = QueryData<typeof settingsQuery>
+
+  const { data, error } = await settingsQuery
+
+  return { data: data as Settings, error }
 }
 
 const ContactSvg = () => (
@@ -39,7 +93,7 @@ const ContactSvg = () => (
     xmlns="http://www.w3.org/2000/svg"
     id="ff713591-a5ec-4982-8bd0-7cb56a3a8581"
     data-name="Layer 1"
-    className="mt-8 hidden h-auto w-4/5 md:block"
+    className="mt-4 hidden h-auto w-4/5 md:block"
     viewBox="0 0 894.24907 448.2822"
   >
     <path
