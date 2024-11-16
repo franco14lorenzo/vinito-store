@@ -24,3 +24,7 @@ export function formatCurrency(value: number | undefined) {
     ? value.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })
     : '$0,00'
 }
+
+export function getImageUrl(image: string) {
+  return `${process.env.NEXT_PUBLIC_SUPABASE_URL}${image}`
+}

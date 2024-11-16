@@ -16,7 +16,7 @@ import {
   Text
 } from '@react-email/components'
 
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, getImageUrl } from '@/lib/utils'
 
 interface VinitoPurchaseEmailProps {
   customer: {
@@ -70,6 +70,9 @@ export const VinitoPurchaseEmail = ({
   settings
 }: VinitoPurchaseEmailProps) => {
   const previewText = `Vinito - Confirmación de Pedido ${orderNumber}`
+  const logoUrl = getImageUrl(
+    '/storage/v1/object/public/images/vinito-logo.png'
+  )
 
   return (
     <Html>
@@ -82,10 +85,10 @@ export const VinitoPurchaseEmail = ({
               <Row>
                 <Column align="center">
                   <Img
-                    src={`${baseUrl}/vinito-logo.png`}
+                    src={logoUrl}
                     width="115"
                     height="32"
-                    alt="Vinito"
+                    alt="Vinito Logo"
                     className="mx-auto my-0"
                   />
                 </Column>
@@ -219,7 +222,7 @@ export const VinitoPurchaseEmail = ({
                 >
                   <Column className="w-[70%]">
                     <Text className="text-sm text-gray-800">
-                      {item.quantity}x {item.name}
+                      {item.name} x {item.quantity}
                     </Text>
                   </Column>
                   <Column align="right">
