@@ -21,6 +21,7 @@ function OrderSummary({
     quantity: number
     price: number
     stock: number
+    image: string | null
   }[]
   totalPrice: string
   loading: boolean
