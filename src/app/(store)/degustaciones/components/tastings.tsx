@@ -1,6 +1,9 @@
 /* import { ArrowRight } from 'lucide-react' */
 
+import Image from 'next/image'
 import Link from 'next/link'
+
+import { getImageUrl } from '@/lib/utils'
 
 type TastingType = {
   id: number
@@ -19,13 +22,19 @@ const Tastings = ({ tastings }: { tastings: TastingsType }) => {
   return (
     <section className="mt-4 grid w-full grid-cols-1 gap-4 px-4 sm:grid-cols-2 lg:grid-cols-3">
       {tastings.map((tasting, index) => (
-        <Tasting key={index} tasting={tasting} />
+        <Tasting key={index} tasting={tasting} index={index} />
       ))}
     </section>
   )
 }
 
-export const Tasting = ({ tasting }: { tasting: TastingType }) => {
+export const Tasting = ({
+  tasting,
+  index
+}: {
+  tasting: TastingType
+  index: number
+}) => {
   const {
     name,
     short_description: shortDescription,
@@ -39,10 +48,16 @@ export const Tasting = ({ tasting }: { tasting: TastingType }) => {
       className="rounded-3xl hover:opacity-80"
       href={`/degustaciones/${slug}`}
     >
-      <article className="flex flex-col items-start justify-start gap-4 rounded-lg p-4 text-left text-sm">
-        {!image && (
-          <div className="aspect-square w-full rounded-xl bg-neutral-100" />
-        )}
+      <article className="flex flex-col items-start justify-start gap-4 overflow-hidden rounded-lg p-4 text-left text-sm">
+        <Image
+          className="overflow-hidden rounded-xl bg-neutral-100"
+          src={getImageUrl(image as string)}
+          priority={index === 0}
+          width={368}
+          height={368}
+          alt={name}
+        />
+
         <section className="flex flex-col items-start justify-start gap-2">
           <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">
             {name}

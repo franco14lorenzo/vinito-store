@@ -10,6 +10,7 @@ import {
   Trash
 } from 'lucide-react'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -35,7 +36,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, getImageUrl } from '@/lib/utils'
 
 const Cart = () => {
   const { push } = useRouter()
@@ -172,6 +173,7 @@ export const Item = ({
     quantity: number
     price: number
     stock: number
+    image: string | null
   }
   isCheckoutVariant?: boolean
 }) => {
@@ -181,7 +183,13 @@ export const Item = ({
   return (
     <article key={item.id} className="flex h-[89px] justify-between py-4">
       <section className="flex gap-4">
-        <div className=" flex size-14 items-center rounded-lg bg-neutral-100" />
+        <Image
+          className="overflow-hidden rounded-lg bg-neutral-100"
+          src={getImageUrl(item.image as string)}
+          width={56}
+          height={56}
+          alt={item.name}
+        />
 
         <div
           className={`flex ${

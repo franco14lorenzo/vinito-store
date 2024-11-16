@@ -70,9 +70,7 @@ export const VinitoPurchaseEmail = ({
   settings
 }: VinitoPurchaseEmailProps) => {
   const previewText = `Vinito - Confirmación de Pedido ${orderNumber}`
-  const logoUrl = getImageUrl(
-    '/storage/v1/object/public/images/vinito-logo.png'
-  )
+  const logoUrl = getImageUrl('/vinito-logo.png')
 
   return (
     <Html>
@@ -80,7 +78,7 @@ export const VinitoPurchaseEmail = ({
       <Preview>{previewText}</Preview>
       <Tailwind>
         <Body className="mx-auto my-auto bg-gray-50 p-2 font-sans">
-          <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-neutral-50 p-4 shadow-sm">
+          <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-neutral-50 p-4 pt-6 shadow-sm">
             <Section className="mb-8">
               <Row>
                 <Column align="center">

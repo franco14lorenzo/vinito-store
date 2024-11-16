@@ -1,11 +1,13 @@
 import { QueryData } from '@supabase/supabase-js'
 
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import Actions from '@/app/(store)/degustaciones/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient } from '@/lib/supabase/client'
+import { getImageUrl } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
@@ -60,6 +62,13 @@ export default async function TastingDetailsPage({
               Sin Stock
             </div>
           )}
+          <Image
+            src={getImageUrl(data.image as string)}
+            priority
+            width={624}
+            height={624}
+            alt={data.name}
+          />
         </div>
 
         <article className="flex flex-col justify-between gap-4 px-4">
