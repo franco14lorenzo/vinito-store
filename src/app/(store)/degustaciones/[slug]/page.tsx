@@ -56,6 +56,10 @@ export default async function TastingDetailsPage({
       <Breadcrumbs elements={breadcrumbs} />
 
       <section className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
+        <div className="flex flex-col justify-between gap-0 px-4 md:hidden">
+          <h1 className="h-14 font-kalnia text-3xl font-bold">{data.name}</h1>
+          <p className="">{data.short_description}</p>
+        </div>
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
           {data.stock === 0 && (
             <div className="absolute right-0 top-0 rounded-bl-lg bg-neutral-500/50 px-2 py-1 text-white">
@@ -75,7 +79,9 @@ export default async function TastingDetailsPage({
 
         <article className="flex flex-col justify-between gap-4 px-4">
           <section className="py-4 md:py-0">
-            <h1 className="h-14 font-kalnia text-3xl font-bold">{data.name}</h1>
+            <h1 className="hidden h-14 font-kalnia text-3xl font-bold md:block">
+              {data.name}
+            </h1>
             <h2 className="font-bold">Descripción de la degustación</h2>
             <p className="my-4">{data.long_description}</p>
             <h2 className="font-bold">Vinos</h2>

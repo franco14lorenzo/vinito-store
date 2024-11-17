@@ -31,7 +31,7 @@ const Actions = ({
   const totalDesiredQuantity = currentQuantityInCart + quantity
 
   return (
-    <section className="grid w-full grid-cols-1 gap-2 self-start py-3 md:w-72">
+    <section className="grid w-full grid-cols-1 gap-2 self-start py-2 md:w-72">
       <div className="flex w-full justify-between">
         <p className="text-xl font-bold leading-10">
           {formatCurrency(item.price)}{' '}
