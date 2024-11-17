@@ -12,7 +12,6 @@ import {
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
@@ -39,8 +38,6 @@ import {
 import { formatCurrency, getImageUrl } from '@/lib/utils'
 
 const Cart = () => {
-  const { push } = useRouter()
-
   const isClient = useIsClient()
 
   const { items, totalItems, totalPrice } = useCart()
@@ -139,19 +136,21 @@ const Cart = () => {
                   <p>{formatCurrency(totalPrice)}</p>
                 </section>
                 <section className="flex flex-col gap-2 font-medium">
-                  <button
+                  <Link
+                    href="/checkout"
                     type="button"
-                    disabled={items.length === 0}
-                    className="w-full cursor-pointer rounded-full bg-black py-3 text-center text-white hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+                    className={`w-full cursor-pointer rounded-full bg-black py-3 text-center text-white hover:opacity-80 ${
+                      items.length === 0 &&
+                      'pointer-events-none cursor-not-allowed opacity-50'
+                    }`}
                     onClick={() => {
                       if (items.length !== 0) {
-                        push('/checkout')
                         setDialogOpen(null)
                       }
                     }}
                   >
                     Finalizar compra
-                  </button>
+                  </Link>
                 </section>
               </div>
             </div>
