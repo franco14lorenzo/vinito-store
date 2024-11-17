@@ -12,6 +12,7 @@ import {
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
@@ -39,6 +40,7 @@ import { formatCurrency, getImageUrl } from '@/lib/utils'
 
 const Cart = () => {
   const isClient = useIsClient()
+  const pathname = usePathname()
 
   const { items, totalItems, totalPrice } = useCart()
 
@@ -104,10 +106,13 @@ const Cart = () => {
                       ¡Agrega algunos artículos para comenzar!
                     </p>
                     <Link
-                      className="mt-4 h-10 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+                      className="mt-4 flex h-12 max-w-fit items-center justify-center rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
                       href="/degustaciones"
+                      onClick={() =>
+                        pathname === '/degustaciones' && setDialogOpen(null)
+                      }
                     >
-                      Descubre nuestras catas
+                      <span>Descubre nuestras catas</span>
                       <ArrowRight className="ml-2 inline size-5" />
                     </Link>
                   </div>
@@ -142,6 +147,9 @@ const Cart = () => {
                       items.length === 0 &&
                       'pointer-events-none cursor-not-allowed opacity-50'
                     }`}
+                    onClick={() =>
+                      pathname === '/checkout' && setDialogOpen(null)
+                    }
                   >
                     Finalizar compra
                   </Link>
