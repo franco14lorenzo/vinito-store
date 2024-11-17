@@ -239,7 +239,7 @@ export const Item = ({
           >
             <Trash className="size-4" />
           </DialogTrigger>
-          <DialogContent className="gap-8">
+          <DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8">
             <DialogHeader>
               <DialogTitle>Eliminar {item.name} de tu compra</DialogTitle>
               <DialogDescription>
