@@ -31,7 +31,7 @@ const Actions = ({
   const totalDesiredQuantity = currentQuantityInCart + quantity
 
   return (
-    <section className="grid w-full grid-cols-1 gap-4 self-start py-2 md:w-72">
+    <section className="grid w-full grid-cols-1 gap-2 self-start py-3 md:w-72">
       <div className="flex w-full justify-between">
         <p className="text-xl font-bold leading-10">
           {formatCurrency(item.price)}{' '}
@@ -65,7 +65,7 @@ const Actions = ({
       </div>
 
       <Button
-        className="h-10 w-full rounded-full bg-black py-3 text-white hover:opacity-80"
+        className="h-12 w-full rounded-full bg-black py-3 text-white hover:opacity-80"
         disabled={item.stock <= 0 || totalDesiredQuantity > item.stock}
         onClick={() => {
           addItem({

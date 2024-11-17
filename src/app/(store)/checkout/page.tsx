@@ -51,7 +51,7 @@ export default async function CheckoutPage() {
               ¡Agrega algunos artículos para comenzar!
             </p>
             <Link
-              className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+              className="mt-4 h-10 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
               href="/degustaciones"
             >
               Descubre nuestras degustaciones

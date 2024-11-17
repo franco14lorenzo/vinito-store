@@ -65,9 +65,11 @@ export default async function TastingDetailsPage({
           <Image
             src={getImageUrl(data.image as string)}
             priority
-            width={624}
-            height={624}
+            /*             width={624}
+            height={624} */
             alt={data.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
 

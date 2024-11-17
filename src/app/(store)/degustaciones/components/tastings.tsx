@@ -49,14 +49,16 @@ export const Tasting = ({
       href={`/degustaciones/${slug}`}
     >
       <article className="flex flex-col items-start justify-start gap-4 overflow-hidden rounded-lg p-4 text-left text-sm">
-        <Image
-          className="overflow-hidden rounded-xl bg-neutral-100"
-          src={getImageUrl(image as string)}
-          priority={index === 0}
-          width={368}
-          height={368}
-          alt={name}
-        />
+        <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
+          <Image
+            className="overflow-hidden rounded-xl bg-neutral-100"
+            src={getImageUrl(image as string)}
+            priority={index === 0}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            alt={name}
+          />
+        </div>
 
         <section className="flex flex-col items-start justify-start gap-2">
           <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">

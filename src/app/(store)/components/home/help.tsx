@@ -11,7 +11,7 @@ function Help() {
         </h3>
         <div className="flex max-w-md flex-col items-center justify-center gap-2 md:flex-row md:justify-between">
           <Link
-            className="w-full gap-2 rounded-full border border-primary bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-opacity-80 md:w-fit"
+            className="w-full min-w-48 gap-2 rounded-full border border-primary bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-opacity-80 md:w-fit"
             href="/faqs"
           >
             <HelpCircle className="mr-2 inline size-5" />
@@ -20,7 +20,7 @@ function Help() {
           </Link>
 
           <Link
-            className="w-full gap-2 rounded-full border border-white bg-black px-4 py-2 text-sm font-medium text-white hover:bg-opacity-80 md:w-fit"
+            className="w-full min-w-48 gap-2 rounded-full border border-white bg-black px-4 py-2 text-sm font-medium text-white hover:bg-opacity-80 md:w-fit"
             href="/contacto"
           >
             <MessageCircle className="mr-2 inline size-5" />

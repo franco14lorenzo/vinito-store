@@ -17,11 +17,11 @@ const Hero = () => {
           seleccionadas
         </p>
         <Link
-          className="mt-4 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+          className="mt-4 flex h-12 min-w-48 max-w-fit items-center justify-center gap-2 rounded-full border border-white bg-black px-4 font-medium text-white hover:bg-opacity-80"
           href="/degustaciones"
         >
-          Descubre nuestras catas
-          <ArrowRight className="ml-2 inline size-5" />
+          <span>Descubre nuestras catas</span>
+          <ArrowRight className="inline size-5" />
         </Link>
       </div>
     </section>
