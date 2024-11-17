@@ -79,7 +79,7 @@ export const VinitoPurchaseEmail = ({
       <Tailwind>
         <Body className="mx-auto my-auto bg-gray-50 p-2 font-sans">
           <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-neutral-50 p-4 pt-6 shadow-sm">
-            <Section className="mb-8">
+            <Section className="mb-6">
               <Row>
                 <Column align="center">
                   <Img
@@ -92,10 +92,11 @@ export const VinitoPurchaseEmail = ({
                 </Column>
               </Row>
             </Section>
+            <Hr className="mt-2 border-gray-200" />
 
             {/* Header */}
             <Heading className="mx-0 mb-6 text-center text-2xl font-bold text-gray-800">
-              ¡Gracias por tu compra, {customer.name || 'Estimado cliente'}! 🎉
+              ¡{customer.name || 'Estimado cliente'}, gracias por tu compra ! 🎉
             </Heading>
 
             <Text className="mb-6 text-center text-gray-600">
