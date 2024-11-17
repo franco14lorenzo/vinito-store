@@ -5,8 +5,11 @@ import React, {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState
 } from 'react'
+
+import { usePathname } from 'next/navigation'
 
 export enum Dialogs {
   Menu,
@@ -22,6 +25,15 @@ const DialogContext = createContext<DialogContextType | undefined>(undefined)
 
 export function DialogProvider({ children }: { children: React.ReactNode }) {
   const [dialogOpen, setDialogOpen] = useState<Dialogs | null>(null)
+
+  const pathname = usePathname()
+  useEffect(() => {
+    setDialogOpen(null)
+
+    return () => {
+      setDialogOpen(null)
+    }
+  }, [pathname])
 
   return (
     <DialogContext.Provider value={[dialogOpen, setDialogOpen]}>

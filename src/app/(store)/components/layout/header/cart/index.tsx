@@ -106,7 +106,6 @@ const Cart = () => {
                     <Link
                       className="mt-4 h-10 max-w-fit rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
                       href="/degustaciones"
-                      onClick={() => setDialogOpen(null)}
                     >
                       Descubre nuestras catas
                       <ArrowRight className="ml-2 inline size-5" />
@@ -143,11 +142,6 @@ const Cart = () => {
                       items.length === 0 &&
                       'pointer-events-none cursor-not-allowed opacity-50'
                     }`}
-                    onClick={() => {
-                      if (items.length !== 0) {
-                        setDialogOpen(null)
-                      }
-                    }}
                   >
                     Finalizar compra
                   </Link>
