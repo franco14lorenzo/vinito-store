@@ -4,8 +4,7 @@ import { Metadata } from 'next'
 
 import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
-import { getSettings } from '@/lib/db'
-import { transformSettingsToObject } from '@/lib/utils'
+import { getCachedSettings } from '@/lib/db'
 
 export const metadata: Metadata = {
   title: 'Contacto',
@@ -20,8 +19,7 @@ const breadcrumbs = [
 const SETTINGS_KEYS = ['contact_email', 'contact_phone_number']
 
 export default async function ContactPage() {
-  const { data: settingsData } = await getSettings(SETTINGS_KEYS)
-  const settings = transformSettingsToObject(settingsData)
+  const settings = await getCachedSettings(SETTINGS_KEYS)
 
   const wppLink = `https://wa.me/${settings.contact_phone_number}?text=Hola! Me gustaría contactar con ustedes.`
 

@@ -12,8 +12,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { getSettings } from '@/lib/db'
-import { transformSettingsToObject } from '@/lib/utils'
+import { getCachedSettings } from '@/lib/db'
 
 import ScanQRButton from './components/scan-button'
 import QRVideo from './components/scan-video'
@@ -27,8 +26,7 @@ export const metadata: Metadata = {
 const SETTINGS_KEYS = ['contact_phone_number']
 
 export default async function ScanQRPage() {
-  const { data: settingsData } = await getSettings(SETTINGS_KEYS)
-  const settings = transformSettingsToObject(settingsData)
+  const settings = await getCachedSettings(SETTINGS_KEYS)
 
   const wppLink = `https://wa.me/${settings.contact_phone_number}?text=Hola! Me gustaría acceder a Vinito.`
 
