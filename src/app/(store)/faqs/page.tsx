@@ -1,6 +1,7 @@
 import { QueryData } from '@supabase/supabase-js'
 
 import type { Metadata } from 'next'
+import { unstable_cache as cache } from 'next/cache'
 
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import {
@@ -21,13 +22,10 @@ const breadcrumbs = [
   { name: 'FAQs', isCurrentPage: true }
 ]
 
-export default async function FaqsPage() {
-  const { data, error } = await getFaqs()
+export const dynamic = 'force-static'
 
-  if (error) {
-    // TODO: Handle error
-    throw error
-  }
+export default async function FaqsPage() {
+  const faqs = await getCachedFaqs()
 
   return (
     <>
@@ -36,7 +34,7 @@ export default async function FaqsPage() {
         Preguntas frecuentes
       </h1>
       <Accordion type="single" collapsible className="w-full px-4">
-        {data.map((faq) => (
+        {faqs.map((faq) => (
           <AccordionItem
             key={faq.id}
             value={`faq-${faq.id}`}
@@ -67,3 +65,14 @@ async function getFaqs() {
 
   return { data: data as Faqs, error }
 }
+
+const getCachedFaqs = cache(
+  async () => {
+    const { data: faqsData } = await getFaqs()
+    return faqsData
+  },
+  ['faqs'],
+  {
+    tags: ['faqs']
+  }
+)
