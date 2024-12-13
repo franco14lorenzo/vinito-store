@@ -1,6 +1,7 @@
 import { QueryData } from '@supabase/supabase-js'
 
 import { Metadata } from 'next'
+import { unstable_cache as cache } from 'next/cache'
 
 import {
   HeadingSection,
@@ -20,7 +21,7 @@ const breadcrumbs = [
 ]
 
 export default async function TastingListPage() {
-  const { data, error } = await getTastingsWithWines()
+  const { data, error } = await getCachedTastings()
 
   if (error) {
     // TODO: Handle error
@@ -53,3 +54,15 @@ async function getTastingsWithWines() {
 
   return { data: data as TastingsWithWines, error }
 }
+
+const getCachedTastings = cache(
+  async () => {
+    const { data, error } = await getTastingsWithWines()
+
+    return { data, error }
+  },
+  ['tastings'],
+  {
+    tags: ['tastings']
+  }
+)

@@ -1,5 +1,6 @@
 import { QueryData } from '@supabase/supabase-js'
 
+import { unstable_cache as cache } from 'next/cache'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
@@ -20,7 +21,19 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }) {
-  const { data } = await getTastingWithWines(params.slug)
+  const getCachedTastingWithWines = cache(
+    async (slug: string) => {
+      const { data, error } = await getTastingWithWines(slug)
+
+      return { data, error }
+    },
+    [params.slug],
+    {
+      tags: [params.slug]
+    }
+  )
+
+  const { data } = await getCachedTastingWithWines(params.slug)
 
   return {
     title: data?.name,
@@ -33,7 +46,19 @@ export default async function TastingDetailsPage({
 }: {
   params: { slug: string }
 }) {
-  const { data, error } = await getTastingWithWines(params.slug)
+  const getCachedTastingWithWines = cache(
+    async (slug: string) => {
+      const { data, error } = await getTastingWithWines(slug)
+
+      return { data, error }
+    },
+    [params.slug],
+    {
+      tags: [params.slug]
+    }
+  )
+
+  const { data, error } = await getCachedTastingWithWines(params.slug)
 
   if (error) {
     IS_DEV_ENVIRONMENT && console.error(error)

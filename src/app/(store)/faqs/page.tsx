@@ -25,7 +25,12 @@ const breadcrumbs = [
 export const dynamic = 'force-static'
 
 export default async function FaqsPage() {
-  const faqs = await getCachedFaqs()
+  const { data, error } = await getCachedFaqs()
+
+  if (error) {
+    // TODO: Handle error
+    throw error
+  }
 
   return (
     <>
@@ -34,7 +39,7 @@ export default async function FaqsPage() {
         Preguntas frecuentes
       </h1>
       <Accordion type="single" collapsible className="w-full px-4">
-        {faqs.map((faq) => (
+        {data.map((faq) => (
           <AccordionItem
             key={faq.id}
             value={`faq-${faq.id}`}
@@ -68,8 +73,8 @@ async function getFaqs() {
 
 const getCachedFaqs = cache(
   async () => {
-    const { data: faqsData } = await getFaqs()
-    return faqsData
+    const { data: faqsData, error } = await getFaqs()
+    return { data: faqsData, error }
   },
   ['faqs'],
   {
