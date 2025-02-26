@@ -44,6 +44,7 @@ export async function createOrder(order: Order) {
   })
 
   if (error) {
+    console.error(error)
     return { data: null, error }
   }
 

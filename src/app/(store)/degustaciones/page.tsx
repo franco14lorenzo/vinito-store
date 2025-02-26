@@ -44,7 +44,7 @@ async function getTastingsWithWines() {
   const supabase = createClient()
   const tastingsWithWinesQuery = supabase
     .from('tastings')
-    .select('id, name, short_description, slug, image, wines (id)')
+    .select('id, name, short_description, slug, image, wines (id), stock')
     .eq('status', 'active')
     .order('id', { ascending: true })
 

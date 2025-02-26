@@ -1,13 +1,14 @@
 /* import { ArrowRight } from 'lucide-react' */
 
+import { ImageOff } from 'lucide-react'
+
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { getImageUrl } from '@/lib/utils'
 
 type TastingType = {
   id: number
   name: string
+  stock: number
   short_description: string | null
   slug: string
   image: string | null
@@ -40,8 +41,10 @@ export const Tasting = ({
     short_description: shortDescription,
     slug,
     image,
-    wines
+    wines,
+    stock
   } = tasting
+  console.log('🚀 ~ image:', image)
   const winesCount = wines.length
   return (
     <Link
@@ -50,14 +53,27 @@ export const Tasting = ({
     >
       <article className="flex flex-col items-start justify-start gap-4 overflow-hidden rounded-lg p-4 text-left text-sm">
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
-          <Image
-            className="overflow-hidden rounded-xl bg-neutral-100"
-            src={getImageUrl(image as string)}
-            priority={index === 0}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            alt={name}
-          />
+          {stock <= 0 && (
+            <div className="absolute inset-0 z-10 overflow-hidden rounded-lg bg-black/10 backdrop-blur-[2px]">
+              <div className="absolute right-0 top-0 rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-sm backdrop-blur">
+                Sin stock
+              </div>
+            </div>
+          )}
+          {image ? (
+            <Image
+              className="overflow-hidden rounded-lg bg-neutral-100 object-cover"
+              src={image}
+              priority={index === 0}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              alt={name}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <ImageOff className="size-12 text-zinc-400" strokeWidth={1.5} />
+            </div>
+          )}
         </div>
 
         <section className="flex flex-col items-start justify-start gap-2">

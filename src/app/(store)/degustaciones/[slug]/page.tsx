@@ -1,4 +1,5 @@
 import { QueryData } from '@supabase/supabase-js'
+import { ImageOff } from 'lucide-react'
 
 import { unstable_cache as cache } from 'next/cache'
 import Image from 'next/image'
@@ -8,7 +9,6 @@ import Actions from '@/app/(store)/degustaciones/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient } from '@/lib/supabase/client'
-import { getImageUrl } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
@@ -86,20 +86,27 @@ export default async function TastingDetailsPage({
           <p className="">{data.short_description}</p>
         </div>
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
-          {data.stock === 0 && (
-            <div className="absolute right-0 top-0 rounded-bl-lg bg-neutral-500/50 px-2 py-1 text-white">
-              Sin Stock
+          {data.stock <= 0 && (
+            <div className="absolute inset-0 z-10 bg-black/10 backdrop-blur-[2px]">
+              <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-sm backdrop-blur">
+                Sin stock
+              </div>
             </div>
           )}
-          <Image
-            src={getImageUrl(data.image as string)}
-            priority
-            /*             width={624}
-            height={624} */
-            alt={data.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+          {data.image ? (
+            <Image
+              src={data.image}
+              priority
+              alt={data.name}
+              fill
+              className="overflow-hidden rounded-lg bg-neutral-100 object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <ImageOff className="size-12 text-zinc-400" strokeWidth={1.5} />
+            </div>
+          )}
         </div>
 
         <article className="flex flex-col justify-between gap-4 px-4">
