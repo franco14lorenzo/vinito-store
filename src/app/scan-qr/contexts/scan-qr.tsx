@@ -16,7 +16,7 @@ type ScanQRContextType = {
   isScanning: boolean
   openCamera: () => Promise<void>
   closeCamera: () => void
-  videoRef: React.RefObject<HTMLVideoElement>
+  videoRef: React.RefObject<HTMLVideoElement | null>
 }
 
 const ScanQRContext = createContext<ScanQRContextType | undefined>(undefined)

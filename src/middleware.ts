@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers'
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const accommodationParam =
     request.nextUrl.searchParams.get('accommodation_id')
 
-  const cookieStore = cookies()
+  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies)
 
   if (accommodationParam) {
     return NextResponse.next()

@@ -8,11 +8,12 @@ export const metadata: Metadata = {
   description: '¡Gracias por tu compra!'
 }
 
-export default async function SuccessCheckoutPage({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default async function SuccessCheckoutPage(
+  props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const customerName = searchParams.name as string
   const customerEmail = searchParams.email as string
   const orderId = searchParams.order_id as string

@@ -15,11 +15,12 @@ export async function generateStaticParams() {
   return data.map(({ slug }) => ({ slug }))
 }
 
-export async function generateMetadata({
-  params
-}: {
-  params: { slug: string }
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>
+  }
+) {
+  const params = await props.params;
   const getCachedTastingWithWines = cache(
     async (slug: string) => {
       const { data, error } = await getTastingWithWines(slug)
@@ -40,11 +41,12 @@ export async function generateMetadata({
   }
 }
 
-export default async function TastingDetailsPage({
-  params
-}: {
-  params: { slug: string }
-}) {
+export default async function TastingDetailsPage(
+  props: {
+    params: Promise<{ slug: string }>
+  }
+) {
+  const params = await props.params;
   const getCachedTastingWithWines = cache(
     async (slug: string) => {
       const { data, error } = await getTastingWithWines(slug)

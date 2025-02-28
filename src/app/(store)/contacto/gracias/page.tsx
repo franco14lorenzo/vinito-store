@@ -18,11 +18,12 @@ export const metadata: Metadata = {
   description: 'Hemos recibido tu mensaje y te responderemos pronto'
 }
 
-export default function ThankYouContactPage({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default async function ThankYouContactPage(
+  props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const customerName = searchParams.name as string
 
   if (!customerName) {

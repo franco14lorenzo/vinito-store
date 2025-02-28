@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 export default async function CheckoutPage() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const itemsCookie = cookieStore.get('cartItems')?.value
   const items = itemsCookie ? (JSON.parse(itemsCookie) as CartItem[]) : []
 

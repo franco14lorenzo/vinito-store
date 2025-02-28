@@ -5,14 +5,14 @@ import { cookies } from 'next/headers'
 import type { CartItem } from './cart'
 
 export async function getCartCookie() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const cartItems = cookieStore.get('cartItems')?.value
 
   return cartItems ? JSON.parse(cartItems) : []
 }
 
 export async function setCartCookie(items: CartItem[]) {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   cookieStore.set({
     name: 'cartItems',
@@ -22,7 +22,7 @@ export async function setCartCookie(items: CartItem[]) {
 }
 
 export async function clearCartCookie() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   cookieStore.delete('cartItems')
 }

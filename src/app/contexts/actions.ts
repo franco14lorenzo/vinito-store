@@ -12,7 +12,7 @@ export async function setAccommodationCookie(accommodation: Accommodation) {
   const expires = new Date()
   expires.setDate(expires.getDate() + 7)
 
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   cookieStore.set({
     name: 'accommodation',
@@ -23,14 +23,14 @@ export async function setAccommodationCookie(accommodation: Accommodation) {
 }
 
 export async function getAccommodationCookie() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const accommodation = cookieStore.get('accommodation')?.value
 
   return accommodation ? JSON.parse(accommodation) : null
 }
 
 export async function clearAccommodationCookie() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   cookieStore.delete('accommodation')
   redirect('/scan-qr')
