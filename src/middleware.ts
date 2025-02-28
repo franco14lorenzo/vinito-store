@@ -1,14 +1,14 @@
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
+import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   const accommodationParam =
     request.nextUrl.searchParams.get('accommodation_id')
 
-  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies)
+  const cookieStore = await cookies()
 
   if (accommodationParam) {
     return NextResponse.next()
