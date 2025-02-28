@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4 text-foreground">
-      <h1 className="-mt-10 mb-4 text-center font-kalnia text-4xl font-bold">
+    <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">
+      <h1 className="font-kalnia -mt-10 mb-4 text-center text-4xl font-bold">
         ¡Ups! Página no encontrada
       </h1>
       <p className="mb-8 text-center text-base">

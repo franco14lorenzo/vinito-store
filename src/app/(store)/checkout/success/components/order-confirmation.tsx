@@ -51,8 +51,8 @@ export default function OrderConfirmation({
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="rounded-lg bg-muted p-4">
-            <p className="text-sm font-medium text-muted-foreground">
+          <div className="bg-muted rounded-lg p-4">
+            <p className="text-muted-foreground text-sm font-medium">
               ID de la orden
             </p>
             <p className="mt-1 text-lg font-semibold">{orderId}</p>
@@ -65,7 +65,7 @@ export default function OrderConfirmation({
             <p className="font-semibold">{customerEmail}</p>
           </div>
           <Separator />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Si tienes alguna duda o necesitas ayuda, por favor{' '}
             <Link href="/contacto" className="text-blue-600 hover:underline">
               contáctenos

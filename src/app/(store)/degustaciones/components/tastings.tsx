@@ -54,7 +54,7 @@ export const Tasting = ({
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
           {stock <= 0 && (
             <div className="absolute inset-0 z-10 overflow-hidden rounded-lg bg-black/10 backdrop-blur-[2px]">
-              <div className="absolute right-0 top-0 rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
+              <div className="absolute top-0 right-0 rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
                 Sin stock
               </div>
             </div>
@@ -76,7 +76,7 @@ export const Tasting = ({
         </div>
 
         <section className="flex flex-col items-start justify-start gap-2">
-          <h2 className="mb-2 mt-4 text-center font-kalnia text-2xl font-bold text-zinc-950">
+          <h2 className="font-kalnia mt-4 mb-2 text-center text-2xl font-bold text-zinc-950">
             {name}
           </h2>
           <p className="text-zinc-500">{winesCount} vinos</p>

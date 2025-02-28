@@ -37,7 +37,7 @@ export async function clearAccommodationCookie() {
 }
 
 export async function getAccommodationById(id: string) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const supabaseAcommodationQuery = supabase
     .from('accommodations')
     .select('id, name, address')

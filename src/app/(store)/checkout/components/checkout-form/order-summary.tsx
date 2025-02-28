@@ -72,7 +72,7 @@ function OrderSummary({
       <h2 className="hidden text-base font-bold md:block">
         Resumen de la orden
       </h2>
-      <article className="hidden h-full flex-col rounded border bg-white pb-4 md:flex md:max-w-[400px] md:pb-10 md:pt-6">
+      <article className="hidden h-full flex-col rounded border bg-white pb-4 md:flex md:max-w-[400px] md:pt-6 md:pb-10">
         <div className="flex grow flex-col overflow-y-auto px-4 text-left">
           {items.map((item) => (
             <Item key={item.id} item={item} />

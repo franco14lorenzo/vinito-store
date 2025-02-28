@@ -19,9 +19,9 @@ export default function Error({
     // TODO: Handle error in production environment
   }, [error])
   return (
-    <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4 text-foreground">
-      <AlertTriangle className="-mt-10 mb-4 h-16 w-16 text-destructive" />
-      <h1 className="mb-4 text-center font-kalnia text-4xl font-bold">
+    <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">
+      <AlertTriangle className="text-destructive -mt-10 mb-4 h-16 w-16" />
+      <h1 className="font-kalnia mb-4 text-center text-4xl font-bold">
         ¡Ups! Algo salió mal
       </h1>
       <p className="mb-8 text-center text-base">

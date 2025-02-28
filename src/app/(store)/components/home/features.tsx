@@ -44,7 +44,7 @@ export const Feature = ({
 }>) => {
   return (
     <article className="flex flex-col items-start text-left">
-      <div className="mb-4 rounded-full bg-primary/10 p-2">{icon}</div>
+      <div className="bg-primary/10 mb-4 rounded-full p-2">{icon}</div>
       <h3 className="mb-2 text-lg font-semibold">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
     </article>

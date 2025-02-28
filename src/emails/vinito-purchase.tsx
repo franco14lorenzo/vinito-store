@@ -233,7 +233,7 @@ export const VinitoPurchaseEmail = ({
               ))}
 
               {/* Costs breakdown */}
-              <Row className="mb-2 mt-4">
+              <Row className="mt-4 mb-2">
                 <Column>
                   <Text className="text-sm text-gray-600">Subtotal:</Text>
                 </Column>

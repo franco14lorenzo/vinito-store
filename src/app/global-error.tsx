@@ -26,11 +26,11 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body
-        className={`${raleway.variable} ${kalnia.variable} flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 font-raleway text-zinc-950`}
+        className={`${raleway.variable} ${kalnia.variable} font-raleway flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 text-zinc-950`}
       >
-        <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4 text-foreground">
-          <AlertTriangle className="-mt-10 mb-4 h-16 w-16 text-destructive" />
-          <h1 className="mb-4 text-center font-kalnia text-4xl font-bold">
+        <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">
+          <AlertTriangle className="text-destructive -mt-10 mb-4 h-16 w-16" />
+          <h1 className="font-kalnia mb-4 text-center text-4xl font-bold">
             ¡Ups! Algo salió mal
           </h1>
           <p className="mb-8 text-center text-base">

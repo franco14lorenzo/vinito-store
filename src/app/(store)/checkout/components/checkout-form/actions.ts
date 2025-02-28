@@ -29,7 +29,7 @@ type Order = {
 }
 
 export async function createOrder(order: Order) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase.rpc('create_order', {
     customer: order.customer,

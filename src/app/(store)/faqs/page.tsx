@@ -34,7 +34,7 @@ export default async function FaqsPage() {
   return (
     <>
       <Breadcrumbs elements={breadcrumbs} />
-      <h1 className="my-6 w-full text-center font-kalnia text-3xl font-bold">
+      <h1 className="font-kalnia my-6 w-full text-center text-3xl font-bold">
         Preguntas frecuentes
       </h1>
       <Accordion type="single" collapsible className="w-full px-4">

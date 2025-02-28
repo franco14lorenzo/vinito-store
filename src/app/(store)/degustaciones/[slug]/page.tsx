@@ -15,12 +15,10 @@ export async function generateStaticParams() {
   return data.map(({ slug }) => ({ slug }))
 }
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>
-  }
-) {
-  const params = await props.params;
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
+}) {
+  const params = await props.params
   const getCachedTastingWithWines = cache(
     async (slug: string) => {
       const { data, error } = await getTastingWithWines(slug)
@@ -41,12 +39,10 @@ export async function generateMetadata(
   }
 }
 
-export default async function TastingDetailsPage(
-  props: {
-    params: Promise<{ slug: string }>
-  }
-) {
-  const params = await props.params;
+export default async function TastingDetailsPage(props: {
+  params: Promise<{ slug: string }>
+}) {
+  const params = await props.params
   const getCachedTastingWithWines = cache(
     async (slug: string) => {
       const { data, error } = await getTastingWithWines(slug)
@@ -83,13 +79,13 @@ export default async function TastingDetailsPage(
 
       <section className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2">
         <div className="flex flex-col justify-between gap-0 px-4 md:hidden">
-          <h1 className="h-14 font-kalnia text-3xl font-bold">{data.name}</h1>
+          <h1 className="font-kalnia h-14 text-3xl font-bold">{data.name}</h1>
           <p className="">{data.short_description}</p>
         </div>
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
           {data.stock <= 0 && (
             <div className="absolute inset-0 z-10 bg-black/10 backdrop-blur-[2px]">
-              <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
+              <div className="absolute top-0 right-0 rounded-tr-lg rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
                 Sin stock
               </div>
             </div>
@@ -112,7 +108,7 @@ export default async function TastingDetailsPage(
 
         <article className="flex flex-col justify-between gap-4 px-4">
           <section className="py-4 md:py-0">
-            <h1 className="hidden h-14 font-kalnia text-3xl font-bold md:block">
+            <h1 className="font-kalnia hidden h-14 text-3xl font-bold md:block">
               {data.name}
             </h1>
             <h2 className="font-bold">Descripción de la degustación</h2>
@@ -139,7 +135,7 @@ export default async function TastingDetailsPage(
 
       <div className="h-[60px] w-full md:hidden" />
 
-      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow-sm md:hidden">
+      <div className="fixed inset-x-0 bottom-0 block border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow-sm md:hidden">
         <Actions
           item={{
             id: data.id,
