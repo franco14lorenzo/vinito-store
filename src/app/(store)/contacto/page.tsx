@@ -1,6 +1,5 @@
-import { Mail, MessageCircle } from 'lucide-react'
-
 import { Metadata } from 'next'
+import { Mail, MessageCircle } from 'lucide-react'
 
 import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'

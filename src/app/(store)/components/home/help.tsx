@@ -1,6 +1,5 @@
-import { ArrowRight, HelpCircle, MessageCircle } from 'lucide-react'
-
 import Link from 'next/link'
+import { ArrowRight, HelpCircle, MessageCircle } from 'lucide-react'
 
 function Help() {
   return (

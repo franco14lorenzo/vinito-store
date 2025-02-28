@@ -1,5 +1,4 @@
 import { ReactNode, Suspense } from 'react'
-
 import type { Metadata } from 'next'
 import { Kalnia, Raleway } from 'next/font/google'
 

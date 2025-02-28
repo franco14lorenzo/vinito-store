@@ -1,6 +1,5 @@
-import { QueryData } from '@supabase/supabase-js'
-
 import { unstable_cache as cache } from 'next/cache'
+import { QueryData } from '@supabase/supabase-js'
 
 import { createClient } from '@/lib/supabase/client'
 import { transformSettingsToObject } from '@/lib/utils'

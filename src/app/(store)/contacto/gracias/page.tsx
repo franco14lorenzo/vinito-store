@@ -1,8 +1,7 @@
-import { ArrowRight, CheckCircle, Clock, HelpCircle } from 'lucide-react'
-
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { ArrowRight, CheckCircle, Clock, HelpCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {

@@ -1,9 +1,8 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend'
 import { v4 as uuid } from 'uuid'
-
-import { revalidatePath } from 'next/cache'
 
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import VinitoPurchaseEmail from '@/emails/vinito-purchase'

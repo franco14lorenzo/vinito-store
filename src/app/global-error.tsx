@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { AlertTriangle, Home, RotateCcw } from 'lucide-react'
-
 import { Kalnia, Raleway } from 'next/font/google'
 import Link from 'next/link'
+import { AlertTriangle, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { IS_DEV_ENVIRONMENT } from '@/constants'

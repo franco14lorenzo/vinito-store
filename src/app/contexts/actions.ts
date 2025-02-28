@@ -1,9 +1,8 @@
 'use server'
 
-import { QueryData } from '@supabase/supabase-js'
-
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { QueryData } from '@supabase/supabase-js'
 
 import { createClient } from '@/lib/supabase/server'
 

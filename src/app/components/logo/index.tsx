@@ -1,6 +1,5 @@
-import { Grape } from 'lucide-react'
-
 import Link from 'next/link'
+import { Grape } from 'lucide-react'
 
 const Logo = () => {
   return (

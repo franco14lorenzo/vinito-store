@@ -1,6 +1,5 @@
-import { MessageCircle, QrCode } from 'lucide-react'
-
 import type { Metadata } from 'next'
+import { MessageCircle, QrCode } from 'lucide-react'
 
 import Logo from '@/app/components/logo'
 import { Button } from '@/components/ui/button'

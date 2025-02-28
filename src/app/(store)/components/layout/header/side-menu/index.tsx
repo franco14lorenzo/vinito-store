@@ -1,9 +1,8 @@
 'use client'
 import { useEffect } from 'react'
+import Link from 'next/link'
 import { useWindowSize } from '@uidotdev/usehooks'
 import { ChevronRight, Grape, Menu } from 'lucide-react'
-
-import Link from 'next/link'
 
 import NavItem from '@/app/(store)/components/layout/header/nav-item'
 import { Dialogs, useDialog } from '@/app/contexts/dialogs'

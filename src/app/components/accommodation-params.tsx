@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-
 import { useSearchParams } from 'next/navigation'
 
 import { useAccommodation } from '@/app/contexts/accommodation'

@@ -1,6 +1,5 @@
-import { Home, Wine } from 'lucide-react'
-
 import Link from 'next/link'
+import { Home, Wine } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 

@@ -8,10 +8,14 @@
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "sort-imports": "off",
+    "import/order": "off"
   },
   "overrides": [
-    // override "simple-import-sort" config
     {
       "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
       "rules": {
@@ -19,26 +23,27 @@
           "error",
           {
             "groups": [
-              // Packages `react` related packages come first.
-              ["^react", "^@?\\w"],
-              // Packages `next` related packages come second.
-              ["^next", "^@?\\w"],
-              // Components
-              ["^(@|components)(/.*|$)"],
-              // Contexts
-              ["^(@|contexts)(/.*|$)"],
-              // Hooks
-              ["^(@|hooks)(/.*|$)"],
-              // Utils
-              ["^(@|utils)(/.*|$)"],
-              // Side effect imports.
+              // Node.js builtins
+              ["^node:"],
+              // React and Next.js packages
+              ["^react", "^next", "^@?\\w"],
+              // Other external packages
+              ["^@?\\w"],
+              // Absolute imports (components, contexts, etc)
+              ["^(@|components)(/.*|$)", "^(@|layouts)(/.*|$)"],
+              ["^(@|contexts)(/.*|$)", "^(@|providers)(/.*|$)"],
+              ["^(@|hooks)(/.*|$)", "^(@|services)(/.*|$)"],
+              ["^(@|utils)(/.*|$)", "^(@|lib)(/.*|$)", "^(@|config)(/.*|$)"],
+              ["^(@|types)(/.*|$)", "^(@|interfaces)(/.*|$)"],
+              ["^(@|constants)(/.*|$)", "^(@|assets)(/.*|$)"],
+              // Side effect imports
               ["^\\u0000"],
-              // Parent imports. Put `..` last.
+              // Parent imports
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-              // Other relative imports. Put same-folder imports and `.` last.
+              // Other relative imports
               ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-              // Style imports.
-              ["^.+\\.?(css)$"]
+              // Style imports
+              ["^.+\\.?(css|scss|sass|less|styl)$"]
             ]
           }
         ]

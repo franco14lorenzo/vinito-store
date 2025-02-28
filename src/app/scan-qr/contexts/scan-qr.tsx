@@ -7,9 +7,8 @@ import React, {
   useRef,
   useState
 } from 'react'
-import jsQR from 'jsqr'
-
 import { useRouter } from 'next/navigation'
+import jsQR from 'jsqr'
 
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 

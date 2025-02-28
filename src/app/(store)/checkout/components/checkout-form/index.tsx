@@ -2,11 +2,10 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { z } from 'zod'
-
-import { useRouter } from 'next/navigation'
 
 import { createOrder } from '@/app/(store)/checkout/components/checkout-form/actions'
 import ContactInformation from '@/app/(store)/checkout/components/checkout-form/contact-information'

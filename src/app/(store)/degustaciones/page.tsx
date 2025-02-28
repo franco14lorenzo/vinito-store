@@ -1,7 +1,6 @@
-import { QueryData } from '@supabase/supabase-js'
-
 import { Metadata } from 'next'
 import { unstable_cache as cache } from 'next/cache'
+import { QueryData } from '@supabase/supabase-js'
 
 import {
   HeadingSection,

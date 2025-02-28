@@ -1,5 +1,8 @@
 'use client'
 
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useIsClient } from '@uidotdev/usehooks'
 import {
   ArrowRight,
@@ -10,10 +13,6 @@ import {
   ShoppingBag,
   Trash
 } from 'lucide-react'
-
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'

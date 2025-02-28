@@ -1,9 +1,8 @@
-import { QueryData } from '@supabase/supabase-js'
-import { ArrowRight } from 'lucide-react'
-
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import { QueryData } from '@supabase/supabase-js'
+import { ArrowRight } from 'lucide-react'
 
 import CheckoutForm from '@/app/(store)/checkout/components/checkout-form'
 import type { CartItem } from '@/app/(store)/contexts/cart'

@@ -1,9 +1,8 @@
 /* import { ArrowRight } from 'lucide-react' */
 
-import { ImageOff } from 'lucide-react'
-
 import Image from 'next/image'
 import Link from 'next/link'
+import { ImageOff } from 'lucide-react'
 
 type TastingType = {
   id: number
