@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { Kalnia, Raleway } from 'next/font/google'
 import Link from 'next/link'
+import * as Sentry from '@sentry/nextjs'
 import { AlertTriangle, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -19,8 +20,7 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    IS_DEV_ENVIRONMENT && console.error(error)
-    // TODO: Handle error in production environment
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }, [error])
 
   return (
