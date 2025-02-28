@@ -49,7 +49,7 @@ const SideMenu = () => {
           onOpenAutoFocus={(event) => event.preventDefault()}
         >
           <SheetHeader>
-            <SheetTitle className="rounded-b-lg border-zinc-950/50 px-4 pb-4 pt-4 shadow">
+            <SheetTitle className="rounded-b-lg border-zinc-950/50 px-4 pb-4 pt-4 shadow-sm">
               <Link
                 className="flex items-center space-x-2 p-0 hover:opacity-70 md:pl-2"
                 href="/"

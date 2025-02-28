@@ -42,7 +42,7 @@ function OrderSummary({
           </AccordionTrigger>
           <AccordionContent>
             <article className="flex h-full flex-col rounded border bg-white pb-4 md:max-w-[400px]">
-              <div className="flex flex-grow flex-col overflow-y-auto px-4 text-left">
+              <div className="flex grow flex-col overflow-y-auto px-4 text-left">
                 {items.map((item) => (
                   <Item key={item.id} item={item} />
                 ))}
@@ -73,7 +73,7 @@ function OrderSummary({
         Resumen de la orden
       </h2>
       <article className="hidden h-full flex-col rounded border bg-white pb-4 md:flex md:max-w-[400px] md:pb-10 md:pt-6">
-        <div className="flex flex-grow flex-col overflow-y-auto px-4 text-left">
+        <div className="flex grow flex-col overflow-y-auto px-4 text-left">
           {items.map((item) => (
             <Item key={item.id} item={item} />
           ))}

@@ -89,7 +89,7 @@ export default async function TastingDetailsPage(
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
           {data.stock <= 0 && (
             <div className="absolute inset-0 z-10 bg-black/10 backdrop-blur-[2px]">
-              <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-sm backdrop-blur">
+              <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
                 Sin stock
               </div>
             </div>
@@ -139,7 +139,7 @@ export default async function TastingDetailsPage(
 
       <div className="h-[60px] w-full md:hidden" />
 
-      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow md:hidden">
+      <div className="fixed inset-x-0 bottom-0 block  border-t border-zinc-950/10 bg-neutral-50 px-4 pb-4 shadow-sm md:hidden">
         <Actions
           item={{
             id: data.id,

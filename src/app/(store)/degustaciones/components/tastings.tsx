@@ -54,7 +54,7 @@ export const Tasting = ({
         <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-100">
           {stock <= 0 && (
             <div className="absolute inset-0 z-10 overflow-hidden rounded-lg bg-black/10 backdrop-blur-[2px]">
-              <div className="absolute right-0 top-0 rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-sm backdrop-blur">
+              <div className="absolute right-0 top-0 rounded-bl-lg bg-white/90 px-3 py-1.5 text-sm font-medium text-zinc-900 shadow-xs backdrop-blur-sm">
                 Sin stock
               </div>
             </div>

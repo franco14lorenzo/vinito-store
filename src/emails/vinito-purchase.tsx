@@ -78,7 +78,7 @@ export const VinitoPurchaseEmail = ({
       <Preview>{previewText}</Preview>
       <Tailwind>
         <Body className="mx-auto my-auto bg-gray-50 p-2 font-sans">
-          <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-neutral-50 p-4 pt-6 shadow-sm">
+          <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-neutral-50 p-4 pt-6 shadow-xs">
             <Section className="mb-6">
               <Row>
                 <Column align="center">

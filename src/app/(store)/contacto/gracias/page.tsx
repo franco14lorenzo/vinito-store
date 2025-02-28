@@ -49,7 +49,7 @@ export default async function ThankYouContactPage(
             <div>
               <h3 className="inline-flex items-center gap-2 font-semibold">
                 {' '}
-                <Clock className=" h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                <Clock className=" h-4 w-4 shrink-0 text-muted-foreground" />
                 Tiempo de respuesta estimado
               </h3>
               <p className="text-sm text-muted-foreground">

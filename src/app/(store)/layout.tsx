@@ -14,7 +14,7 @@ export default function StoreLayout({
       <CartProvider>
         <DialogProvider>
           <Header />
-          <main className="mt-16 flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start p-2">
+          <main className="mt-16 flex min-h-screen w-full max-w-(--breakpoint-xl) flex-col items-center justify-start p-2">
             {children}
           </main>
           <Footer />
