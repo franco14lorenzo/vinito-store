@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import * as Sentry from '@sentry/nextjs'
 import { AlertTriangle, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -15,8 +16,7 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    IS_DEV_ENVIRONMENT && console.error(error)
-    // TODO: Handle error in production environment
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }, [error])
   return (
     <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">

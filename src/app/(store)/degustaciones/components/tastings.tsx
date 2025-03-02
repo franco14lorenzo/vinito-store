@@ -43,7 +43,6 @@ export const Tasting = ({
     wines,
     stock
   } = tasting
-  console.log('🚀 ~ image:', image)
   const winesCount = wines.length
   return (
     <Link

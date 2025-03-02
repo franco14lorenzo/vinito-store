@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
 import { Loader2 } from 'lucide-react'
 import { z } from 'zod'
 
@@ -154,7 +155,7 @@ const CheckoutForm = ({
     const { data, error } = await createOrder(order)
 
     if (error) {
-      IS_DEV_ENVIRONMENT && console.error(error) // TODO: Handle error in production environment
+      IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
       toast({
         variant: 'destructive',
         title: 'Error al procesar tu orden',
