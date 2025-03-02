@@ -20,11 +20,21 @@ type TastingsType = TastingType[]
 
 const Tastings = ({ tastings }: { tastings: TastingsType }) => {
   return (
-    <section className="mt-4 grid w-full grid-cols-1 gap-4 px-4 sm:grid-cols-2 lg:grid-cols-3">
-      {tastings.map((tasting, index) => (
-        <Tasting key={index} tasting={tasting} index={index} />
-      ))}
-    </section>
+    <>
+      {tastings?.length ? (
+        <section className="mt-4 grid w-full grid-cols-1 gap-4 px-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tastings.map((tasting, index) => (
+            <Tasting key={index} tasting={tasting} index={index} />
+          ))}
+        </section>
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <p className="w-full text-center text-zinc-500">
+            No hay degustaciones disponibles
+          </p>
+        </div>
+      )}
+    </>
   )
 }
 
