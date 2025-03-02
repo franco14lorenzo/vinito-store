@@ -21,6 +21,9 @@ export async function getSettings(settings: string[]) {
 export const getCachedSettings = cache(
   async (SETTINGS_KEYS) => {
     const { data: settingsData } = await getSettings(SETTINGS_KEYS)
+    if (!settingsData?.length) {
+      return {}
+    }
     return transformSettingsToObject(settingsData)
   },
   ['settings'],
