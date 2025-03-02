@@ -25,7 +25,7 @@ export function WinesTabs({
             aria-label={wine.type}
             key={`${wine.name}-${wine.type}`}
             value={`${wine.name}-${wine.type}`}
-            className="h-auto text-wrap p-2 text-xs shadow hover:bg-neutral-200 active:bg-neutral-200"
+            className="h-auto p-2 text-xs text-wrap shadow-sm hover:bg-neutral-200 active:bg-neutral-200"
           >
             {wine.name} - {wine.type}
           </TabsTrigger>

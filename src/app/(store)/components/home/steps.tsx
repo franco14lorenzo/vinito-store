@@ -21,7 +21,7 @@ function LineBarSteps() {
           ¿Cómo funciona?
         </h2>
         <div className="relative">
-          <div className="absolute bottom-12 left-[19px] top-0 h-[530px] w-0.5 bg-gray-700 md:left-1/2 md:top-12 md:h-auto" />
+          <div className="absolute top-0 bottom-12 left-[19px] h-[530px] w-0.5 bg-gray-700 md:top-12 md:left-1/2 md:h-auto" />
           <div className="space-y-12">
             {STEPS.map((step, index) => (
               <article
@@ -39,12 +39,12 @@ function LineBarSteps() {
                     <div className="mb-2 flex items-center">
                       <h3 className="text-lg font-semibold">{step.title}</h3>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {step.description}
                     </p>
                   </div>
                 </div>
-                <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground md:absolute md:left-1/2 md:-translate-x-1/2 md:transform">
+                <div className="bg-primary text-primary-foreground relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold md:absolute md:left-1/2 md:-translate-x-1/2 md:transform">
                   {iconsMap[step.icon]}
                 </div>
                 <div className="hidden w-1/2 md:block" />

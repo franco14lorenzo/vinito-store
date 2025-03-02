@@ -60,7 +60,7 @@ const Cart = () => {
           aria-label="shopping bag"
         >
           <ShoppingBag className="size-8 fill-black stroke-neutral-50" />
-          <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full border border-neutral-50 bg-red-500 text-xs font-medium leading-5 text-white">
+          <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-neutral-50 bg-red-500 text-xs leading-5 font-medium text-white">
             {isClient ? totalItems : '...'}
           </span>
         </SheetTrigger>
@@ -70,7 +70,7 @@ const Cart = () => {
           onOpenAutoFocus={(event) => event.preventDefault()}
         >
           <SheetHeader>
-            <SheetTitle className="rounded-b-lg border-zinc-950/50 px-4 pb-4 pt-4 text-left font-kalnia text-2xl font-medium shadow">
+            <SheetTitle className="font-kalnia rounded-b-lg border-zinc-950/50 px-4 pt-4 pb-4 text-left text-2xl font-medium shadow-sm">
               Tu compra
             </SheetTitle>
           </SheetHeader>
@@ -79,7 +79,7 @@ const Cart = () => {
               className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
               {accommodation && (
-                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 pb-2 pt-3">
+                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 pt-3 pb-2">
                   <div className="flex items-center justify-center">
                     <MapPin className="size-6" />
                   </div>
@@ -106,7 +106,7 @@ const Cart = () => {
                       ¡Agrega algunos artículos para comenzar!
                     </p>
                     <Link
-                      className="mt-4 flex h-12 max-w-fit items-center justify-center rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+                      className="hover:bg-opacity-80 mt-4 flex h-12 max-w-fit items-center justify-center rounded-full border border-white bg-black px-4 py-2 font-medium text-white"
                       href="/degustaciones"
                       onClick={() =>
                         pathname === '/degustaciones' && setDialogOpen(null)
@@ -212,7 +212,7 @@ export const Item = ({
           >
             {item.name}
           </Link>
-          <div className="flex w-14  items-center rounded-lg border border-zinc-950/50 font-semibold">
+          <div className="flex w-14 items-center rounded-lg border border-zinc-950/50 font-semibold">
             <button
               disabled={item.quantity === 1}
               type="button"
@@ -249,7 +249,7 @@ export const Item = ({
           >
             <Trash className="size-4" />
           </DialogTrigger>
-          <DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8">
+          <DialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-8">
             <DialogHeader>
               <DialogTitle>Eliminar {item.name} de tu compra</DialogTitle>
               <DialogDescription>
@@ -259,7 +259,7 @@ export const Item = ({
             <DialogFooter className="flex justify-center gap-2">
               <button
                 type="button"
-                className="rounded-full border border-black px-4 py-2 "
+                className="rounded-full border border-black px-4 py-2"
                 onClick={() => {
                   removeItem(item.id)
                   setDialogOpen(null)

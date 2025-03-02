@@ -13,10 +13,13 @@ interface Setting {
 export function transformSettingsToObject(
   settings: Setting[]
 ): Record<string, string> {
-  return settings.reduce((obj, setting) => {
-    obj[setting.key] = setting.value
-    return obj
-  }, {} as Record<string, string>)
+  return settings.reduce(
+    (obj, setting) => {
+      obj[setting.key] = setting.value
+      return obj
+    },
+    {} as Record<string, string>
+  )
 }
 
 export function formatCurrency(value: number | undefined) {

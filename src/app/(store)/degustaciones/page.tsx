@@ -23,7 +23,7 @@ export default async function TastingListPage() {
   const { data, error } = await getCachedTastings()
 
   if (error) {
-    // TODO: Handle error
+    // TODO: Handle this error
     throw error
   }
 

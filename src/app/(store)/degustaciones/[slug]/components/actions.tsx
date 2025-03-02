@@ -33,7 +33,7 @@ const Actions = ({
   return (
     <section className="grid w-full grid-cols-1 gap-2 self-start py-2 md:w-72">
       <div className="flex w-full justify-between">
-        <p className="text-xl font-bold leading-10">
+        <p className="text-xl leading-10 font-bold">
           {formatCurrency(item.price)}{' '}
           <span className="text-[10px] font-light">
             {' '}

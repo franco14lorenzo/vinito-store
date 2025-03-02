@@ -24,9 +24,9 @@ function Experience() {
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {EXPERIENCE_FEATURES.map((feature, index) => (
-            <Card key={index} className="border-none text-primary">
+            <Card key={index} className="text-primary border-none">
               <CardContent className="flex flex-col items-center p-6 text-center">
-                <div className="mb-4 rounded-full bg-primary/10 p-3">
+                <div className="bg-primary/10 mb-4 rounded-full p-3">
                   {iconsMap[feature.icon]}
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>

@@ -45,10 +45,10 @@ export const NotionMagicLinkEmail = ({
           <code className="block w-full rounded-lg border border-gray-200 bg-gray-100 p-4 text-gray-800">
             {loginCode}
           </code>
-          <Text className="mb-4 mt-4 font-sans text-sm text-gray-400">
+          <Text className="mt-4 mb-4 font-sans text-sm text-gray-400">
             If you didn&apos;t try to login, you can safely ignore this email.
           </Text>
-          <Text className="mb-10 mt-3 font-sans text-sm text-gray-400">
+          <Text className="mt-3 mb-10 font-sans text-sm text-gray-400">
             Hint: You can set a permanent password in Settings & members → My
             account.
           </Text>

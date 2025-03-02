@@ -26,7 +26,7 @@ export default async function ContactPage() {
     <>
       <Breadcrumbs elements={breadcrumbs} />
       <section className="flex w-full flex-col items-start justify-center gap-4 p-4 text-left md:my-20">
-        <h1 className="mb-6 w-full px-4 font-kalnia text-3xl font-bold">
+        <h1 className="font-kalnia mb-6 w-full px-4 text-3xl font-bold">
           Contacto
         </h1>
         <div className="flex w-full flex-col items-start justify-start gap-4 md:flex-row md:items-center md:justify-center">

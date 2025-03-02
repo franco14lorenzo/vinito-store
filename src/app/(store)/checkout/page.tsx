@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 export default async function CheckoutPage() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const itemsCookie = cookieStore.get('cartItems')?.value
   const items = itemsCookie ? (JSON.parse(itemsCookie) as CartItem[]) : []
 
@@ -30,7 +30,7 @@ export default async function CheckoutPage() {
 
   return (
     <>
-      <h1 className="my-6 w-full text-center font-kalnia text-3xl font-bold">
+      <h1 className="font-kalnia my-6 w-full text-center text-3xl font-bold">
         Finalizar Compra
       </h1>
       {items?.length ? (
@@ -50,7 +50,7 @@ export default async function CheckoutPage() {
               ¡Agrega algunos artículos para comenzar!
             </p>
             <Link
-              className="mt-4 flex h-12 max-w-fit items-center justify-center rounded-full border border-white bg-black px-4 py-2 font-medium text-white hover:bg-opacity-80"
+              className="hover:bg-opacity-80 mt-4 flex h-12 max-w-fit items-center justify-center rounded-full border border-white bg-black px-4 py-2 font-medium text-white"
               href="/degustaciones"
             >
               Descubre nuestras degustaciones
@@ -64,7 +64,7 @@ export default async function CheckoutPage() {
 }
 
 async function getPaymentsMethods() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const paymentsMethodsQuery = supabase
     .from('payment_methods')
     .select('id, name, type')
@@ -78,7 +78,7 @@ async function getPaymentsMethods() {
 }
 
 async function getDeliverySchedules() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const deliverySchedulseQuery = supabase
     .from('delivery_schedules')
     .select('id, name, start_time, end_time')

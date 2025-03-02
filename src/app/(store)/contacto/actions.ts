@@ -9,7 +9,7 @@ type Contact = {
 }
 
 export async function sendContact(contact: Contact) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('contacts')

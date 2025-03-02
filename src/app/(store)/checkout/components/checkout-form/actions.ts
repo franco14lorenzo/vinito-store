@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import * as Sentry from '@sentry/nextjs'
 import { Resend } from 'resend'
 import { v4 as uuid } from 'uuid'
 
@@ -29,7 +30,7 @@ type Order = {
 }
 
 export async function createOrder(order: Order) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase.rpc('create_order', {
     customer: order.customer,
@@ -138,12 +139,10 @@ export async function createOrder(order: Order) {
     })
 
     if (error) {
-      // TODO: Handle production error
-      IS_DEV_ENVIRONMENT && console.error(error)
+      IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
     }
   } catch (error) {
-    // TODO: Handle production error
-    IS_DEV_ENVIRONMENT && console.error(error)
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }
 
   return { data, error: null }

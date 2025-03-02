@@ -5,7 +5,7 @@ import Logo from '@/app/components/logo'
 
 const Header = () => {
   return (
-    <header className="fixed z-20 flex w-full max-w-screen-xl items-center justify-between overflow-hidden rounded-xl rounded-t-none bg-neutral-50 p-2 shadow">
+    <header className="fixed z-20 flex w-full max-w-(--breakpoint-xl) items-center justify-between overflow-hidden rounded-xl rounded-t-none bg-neutral-50 p-2 shadow-sm">
       <SideMenu />
       <Logo />
       <Navigation />

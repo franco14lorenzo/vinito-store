@@ -8,6 +8,7 @@ import React, {
   useState
 } from 'react'
 import { useRouter } from 'next/navigation'
+import * as Sentry from '@sentry/nextjs'
 import jsQR from 'jsqr'
 
 import { IS_DEV_ENVIRONMENT } from '@/constants'
@@ -16,7 +17,7 @@ type ScanQRContextType = {
   isScanning: boolean
   openCamera: () => Promise<void>
   closeCamera: () => void
-  videoRef: React.RefObject<HTMLVideoElement>
+  videoRef: React.RefObject<HTMLVideoElement | null>
 }
 
 const ScanQRContext = createContext<ScanQRContextType | undefined>(undefined)
@@ -87,8 +88,8 @@ export function ScanQRProvider({ children }: { children: React.ReactNode }) {
         videoRef.current.srcObject = stream
         videoRef.current.play()
       }
-    } catch (err) {
-      IS_DEV_ENVIRONMENT && console.error(err) // TODO: Handle error in production
+    } catch (error) {
+      IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
       alert('No se pudo acceder a la cámara. Por favor, intenta de nuevo.')
       setIsScanning(false)
     }

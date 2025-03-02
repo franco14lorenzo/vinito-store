@@ -18,11 +18,10 @@ export const metadata: Metadata = {
   description: 'Hemos recibido tu mensaje y te responderemos pronto'
 }
 
-export default function ThankYouContactPage({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
+export default async function ThankYouContactPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+  const searchParams = await props.searchParams
   const customerName = searchParams.name as string
 
   if (!customerName) {
@@ -44,21 +43,21 @@ export default function ThankYouContactPage({
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex items-start space-x-4 rounded-lg bg-muted p-4">
+          <div className="bg-muted flex items-start space-x-4 rounded-lg p-4">
             <div>
               <h3 className="inline-flex items-center gap-2 font-semibold">
                 {' '}
-                <Clock className=" h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                <Clock className="text-muted-foreground h-4 w-4 shrink-0" />
                 Tiempo de respuesta estimado
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Nos esforzamos por responder a todas las consultas dentro de
                 24hs horas hábiles.
               </p>
             </div>
           </div>
           <div className="text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Mientras tanto, ¿por qué no exploras más de nuestra selección de
               vinos?
             </p>

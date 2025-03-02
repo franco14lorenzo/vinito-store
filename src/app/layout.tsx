@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${raleway.variable} ${kalnia.variable} flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 font-raleway text-zinc-950`}
+        className={`${raleway.variable} ${kalnia.variable} font-raleway flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 text-zinc-950`}
       >
         <AccommodationProvider>
           <Suspense>
