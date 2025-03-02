@@ -11,7 +11,9 @@ import { createClient } from '@/lib/supabase/client'
 
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
-
+  if (data.length === 0) {
+    return []
+  }
   return data.map(({ slug }) => ({ slug }))
 }
 
