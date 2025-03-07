@@ -24,13 +24,14 @@ import { sendContact } from '../actions'
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: 'Name must be at least 2 characters.'
+    message: 'El nombre debe tener al menos 2 caracteres.'
   }),
   email: z.string().email({
-    message: 'Please enter a valid email address.'
+    message: 'Por favor, ingresa un correo electrónico válido.'
   }),
+  phone: z.string().optional(),
   message: z.string().min(10, {
-    message: 'Message must be at least 10 characters.'
+    message: 'El mensaje debe tener al menos 10 caracteres.'
   })
 })
 
@@ -44,6 +45,7 @@ const ContactForm = () => {
     defaultValues: {
       name: '',
       email: '',
+      phone: '',
       message: ''
     }
   })
@@ -54,6 +56,7 @@ const ContactForm = () => {
     const contact = {
       name: values.name,
       email: values.email,
+      phone: values.phone,
       message: values.message
     }
 
@@ -101,6 +104,19 @@ const ContactForm = () => {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="example@email.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Teléfono</FormLabel>
+              <FormControl>
+                <Input placeholder="123 456 7890" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
