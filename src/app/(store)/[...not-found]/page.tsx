@@ -1,16 +1,22 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { Home, Wine } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
+export const metadata: Metadata = {
+  title: 'Página no encontrada',
+  description: 'Lo sentimos, parece que esta página no existe'
+}
+
 export default function NotFound() {
   return (
     <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">
       <h1 className="font-kalnia -mt-10 mb-4 text-center text-4xl font-bold">
-        ¡Ups! Degustación no encontrada
+        ¡Ups! Página no encontrada
       </h1>
       <p className="mb-8 text-center text-base">
-        La degustación que estás buscando no existe o ha sido eliminada
+        Lo sentimos, parece que esta página no existe.
       </p>
 
       <div className="flex flex-col gap-4 sm:flex-row">
