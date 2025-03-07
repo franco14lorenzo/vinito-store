@@ -38,8 +38,10 @@ export async function generateMetadata(props: {
   const { data } = await getCachedTastingWithWines(params.slug)
 
   return {
-    title: data?.name,
-    description: data?.short_description
+    title: data?.name || 'Degustación no encontrada',
+    description:
+      data?.short_description ||
+      'La degustación que estás buscando no existe o ha sido eliminada'
   }
 }
 
