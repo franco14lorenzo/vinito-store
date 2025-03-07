@@ -65,7 +65,7 @@ export default async function TastingDetailsPage(props: {
   }
 
   if (!data || error) {
-    return notFound()
+    notFound()
   }
 
   const breadcrumbs = [
