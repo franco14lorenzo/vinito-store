@@ -1,12 +1,13 @@
 import { unstable_cache as cache } from 'next/cache'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import * as Sentry from '@sentry/nextjs'
 import { QueryData } from '@supabase/supabase-js'
-import { ImageOff } from 'lucide-react'
+import { Home, ImageOff, Wine } from 'lucide-react'
 
 import Actions from '@/app/(store)/degustaciones/[slug]/components/actions'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
+import { Button } from '@/components/ui/button'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient } from '@/lib/supabase/client'
 
@@ -65,7 +66,38 @@ export default async function TastingDetailsPage(props: {
   }
 
   if (!data || error) {
-    notFound()
+    return (
+      <div className="text-foreground mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center p-4">
+        <h1 className="font-kalnia -mt-10 mb-4 text-center text-4xl font-bold">
+          ¡Ups! Degustación no encontrada
+        </h1>
+        <p className="mb-8 text-center text-base">
+          La degustación que estás buscando no existe o ha sido eliminada
+        </p>
+
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <Button
+            asChild
+            className="flex w-full items-center justify-center rounded-full sm:w-auto"
+          >
+            <Link href="/degustaciones">
+              <Wine className="mr-2 h-5 w-5" />
+              Explora nuestras degustaciones
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="flex w-full items-center justify-center rounded-full bg-white sm:w-auto"
+          >
+            <Link href="/">
+              <Home className="mr-2 h-5 w-5" />
+              Volver al inicio
+            </Link>
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   const breadcrumbs = [
