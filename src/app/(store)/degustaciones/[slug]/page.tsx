@@ -1,6 +1,7 @@
 import { unstable_cache as cache } from 'next/cache'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import * as Sentry from '@sentry/nextjs'
 import { QueryData } from '@supabase/supabase-js'
 import { ImageOff } from 'lucide-react'
 
@@ -60,12 +61,10 @@ export default async function TastingDetailsPage(props: {
   const { data, error } = await getCachedTastingWithWines(params.slug)
 
   if (error) {
-    IS_DEV_ENVIRONMENT && console.error(error)
-    // TODO: Handle error in production environment
-    throw error
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }
 
-  if (!data) {
+  if (!data || error) {
     return notFound()
   }
 
