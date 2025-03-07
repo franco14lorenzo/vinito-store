@@ -1,8 +1,8 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode /* Suspense */ } from 'react'
 import type { Metadata } from 'next'
 import { Kalnia, Raleway } from 'next/font/google'
 
-import AccommodationParams from '@/app/components/accommodation-params'
+/* import AccommodationParams from '@/app/components/accommodation-params' */
 import { AccommodationProvider } from '@/app/contexts/accommodation'
 import { DialogProvider } from '@/app/contexts/dialogs'
 import { Toaster } from '@/components/ui/toaster'
@@ -35,9 +35,9 @@ export default function RootLayout({
         className={`${raleway.variable} ${kalnia.variable} font-raleway flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 text-zinc-950`}
       >
         <AccommodationProvider>
-          <Suspense>
+          {/*          <Suspense>
             <AccommodationParams />
-          </Suspense>
+          </Suspense> */}
           <DialogProvider>{children}</DialogProvider>
         </AccommodationProvider>
         <Toaster />
