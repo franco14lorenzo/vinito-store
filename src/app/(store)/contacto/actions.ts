@@ -15,6 +15,7 @@ async function sendSlackNotification(
     const webhookUrl =
       process.env.SLACK_CONTACT_WEBHOOK_URL ||
       'https://hooks.slack.com/services/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'
+    console.log('🚀 ~ webhookUrl:', webhookUrl)
 
     if (!webhookUrl) {
       console.error('Slack contact webhook URL is not configured')
@@ -88,6 +89,8 @@ async function sendSlackNotification(
       },
       body: JSON.stringify(payload)
     })
+
+    console.dir(response, { depth: null })
 
     if (!response.ok) {
       throw new Error(
