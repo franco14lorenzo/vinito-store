@@ -133,4 +133,4 @@ INSERT INTO settings (key, value, description) VALUES
 ('bank_account_alias', 'banco.ejemplo', 'Alias del CBU de la cuenta bancaria'),
 ('contact_email', 'franco14lorenzo@gmail.com', 'Correo electrónico de contacto'),
 ('contact_phone_number', '5492615040179', 'Número de teléfono de contacto'),
-('send_purchase_emails', 'true', 'Feature flag to control sending purchase emails');
+('send_purchase_emails', 'false', 'Feature flag to control sending purchase emails');
