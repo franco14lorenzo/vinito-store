@@ -42,11 +42,7 @@ function ContactInformation({
               <FormItem className="flex-1">
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="John"
-                    {...field}
-                    className="border bg-white"
-                  />
+                  <Input {...field} className="border bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -59,11 +55,7 @@ function ContactInformation({
               <FormItem className="flex-1">
                 <FormLabel>Apellido</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Doe"
-                    {...field}
-                    className="border bg-white"
-                  />
+                  <Input {...field} className="border bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,11 +71,7 @@ function ContactInformation({
               <FormItem className="flex-1">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="johndoe@example.com"
-                    {...field}
-                    className="border bg-white"
-                  />
+                  <Input {...field} className="border bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,11 +84,7 @@ function ContactInformation({
               <FormItem className="flex-1">
                 <FormLabel>Teléfono</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="1234567890"
-                    {...field}
-                    className="border bg-white"
-                  />
+                  <Input {...field} className="border bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
