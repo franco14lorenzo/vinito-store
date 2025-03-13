@@ -2,6 +2,7 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+import { verifyCaptchaToken } from '@/lib/captcha'
 import { createClient } from '@/lib/supabase/server'
 
 type Contact = {
@@ -99,7 +100,17 @@ async function sendSlackNotification(
   }
 }
 
-export async function sendContact(contact: Contact) {
+export async function sendContact(contact: Contact, token: string) {
+  const captchaVerified = await verifyCaptchaToken(token)
+  if (!captchaVerified) {
+    return {
+      data: null,
+      error: {
+        message: 'Error verifying captcha token'
+      }
+    }
+  }
+
   const supabase = await createClient()
 
   const { data, error } = await supabase

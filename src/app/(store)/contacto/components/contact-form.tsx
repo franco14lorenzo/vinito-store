@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { useToast } from '@/hooks/use-toast'
+import { getCaptchaToken } from '@/lib/captcha'
 
 import { sendContact } from '../actions'
 
@@ -55,6 +56,18 @@ const ContactForm = () => {
   async function handleSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
 
+    const captchaToken = await getCaptchaToken('contact')
+    if (!captchaToken) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al enviar el mensaje',
+        description:
+          'Hubo un error al enviar tu mensaje. Al parecer, no se pudo verificar que no eres un robot. Por favor, intenta de nuevo.'
+      })
+      setLoading(false)
+      return
+    }
+
     const contact = {
       name: values.name,
       email: values.email,
@@ -62,7 +75,7 @@ const ContactForm = () => {
       message: values.message
     }
 
-    const { data, error } = await sendContact(contact)
+    const { data, error } = await sendContact(contact, captchaToken)
 
     if (error) {
       IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
