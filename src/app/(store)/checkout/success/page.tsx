@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 
 import OrderConfirmation from '@/app/(store)/checkout/success/components/order-confirmation'
 
+import ConfettiEffect from '../../components/confetti-effect'
+
 export const metadata: Metadata = {
   title: 'Gracias por tu compra',
   description: '¡Gracias por tu compra!'
@@ -27,6 +29,7 @@ export default async function SuccessCheckoutPage(props: {
         customerEmail={customerEmail}
         orderId={orderId}
       />
+      <ConfettiEffect />
     </>
   )
 }
