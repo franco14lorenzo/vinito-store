@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import Script from 'next/script'
 
 import { Footer, Header } from '@/app/(store)/components/layout'
 import { CartProvider } from '@/app/(store)/contexts/cart'
@@ -20,6 +21,10 @@ export default function StoreLayout({
           <Footer />
         </DialogProvider>
       </CartProvider>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}`}
+      />
     </>
   )
 }

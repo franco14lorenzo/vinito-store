@@ -193,3 +193,5 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+.grecaptcha-badge { visibility: hidden; }

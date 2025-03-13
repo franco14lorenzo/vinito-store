@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { useToast } from '@/hooks/use-toast'
+import { getCaptchaToken } from '@/lib/captcha'
 import { formatCurrency } from '@/lib/utils'
 
 type Order = {
@@ -125,6 +126,18 @@ const CheckoutForm = ({
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true)
 
+    const captchaToken = await getCaptchaToken('checkout')
+    if (!captchaToken) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al procesar tu orden',
+        description:
+          'Hubo un error al procesar tu orden. Al parecer, no se pudo verificar que no eres un robot. Por favor intenta de nuevo.'
+      })
+      setLoading(false)
+      return
+    }
+
     const order: Order = {
       customer: {
         name: values.name,
@@ -152,7 +165,7 @@ const CheckoutForm = ({
       total: Number(totalPrice) || 0
     }
 
-    const { data, error } = await createOrder(order)
+    const { data, error } = await createOrder(order, captchaToken)
 
     if (error) {
       IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)

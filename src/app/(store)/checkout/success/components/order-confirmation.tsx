@@ -37,11 +37,11 @@ export default function OrderConfirmation({
   }
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-start gap-4 px-4 py-12 text-center md:gap-8">
+    <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-start gap-4 px-4 py-12 text-center md:gap-8">
       <Card className="animate-fade-in mx-auto w-full max-w-lg">
         <CardHeader className="space-y-2">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-            <CheckCircle className="h-10 w-10 text-green-600" />
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-100 text-4xl">
+            🎉
           </div>
           <CardTitle className="text-3xl font-bold">
             ¡Gracias, {customerName}!

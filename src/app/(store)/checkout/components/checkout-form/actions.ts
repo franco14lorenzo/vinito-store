@@ -7,6 +7,8 @@ import { v4 as uuid } from 'uuid'
 
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import VinitoPurchaseEmail from '@/emails/vinito-purchase'
+import { verifyCaptchaToken } from '@/lib/captcha'
+import { sendOrderSlackNotification } from '@/lib/slack'
 import { createClient } from '@/lib/supabase/server'
 import { transformSettingsToObject } from '@/lib/utils'
 
@@ -29,7 +31,17 @@ type Order = {
   }[]
 }
 
-export async function createOrder(order: Order) {
+export async function createOrder(order: Order, captchaToken: string) {
+  const isCaptchaValid = await verifyCaptchaToken(captchaToken)
+  if (!isCaptchaValid) {
+    return {
+      data: null,
+      error: {
+        message: 'Error verifying captcha token'
+      }
+    }
+  }
+
   const supabase = await createClient()
 
   const { data, error } = await supabase.rpc('create_order', {
@@ -44,7 +56,7 @@ export async function createOrder(order: Order) {
   })
 
   if (error) {
-    console.error(error)
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
     return { data: null, error }
   }
 
@@ -52,6 +64,7 @@ export async function createOrder(order: Order) {
     revalidatePath(`/degustaciones/${item.slug}`)
   }
 
+  // Get additional data for the Slack notification
   const [
     { data: paymentMethod, error: paymentMethodError },
     { data: accommodation, error: accommodationError },
@@ -74,7 +87,33 @@ export async function createOrder(order: Order) {
       .single()
   ])
 
-  let settings = ['contact_email', 'contact_phone_number']
+  const deliveryDate = order.delivery.date
+    ? new Date(order.delivery.date).toLocaleDateString('es-AR', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+      })
+    : undefined
+
+  const orderId = data[0].order_id.toString()
+  await sendOrderSlackNotification({
+    id: orderId,
+    customer_name: order.customer.name,
+    customer_surname: order.customer.surname,
+    customer_email: order.customer.email,
+    total: order.total,
+    products: order.items,
+    created_at: new Date().toISOString(),
+    payment_method: paymentMethod?.name,
+    delivery_date: deliveryDate,
+    delivery_time: deliverySchedule?.name
+  })
+
+  let settings = [
+    'contact_email',
+    'contact_phone_number',
+    'send_purchase_emails'
+  ]
 
   if (paymentMethod?.type === 'bank_transfer') {
     const bankSettings = [
@@ -92,57 +131,64 @@ export async function createOrder(order: Order) {
     .in('key', settings)
 
   const settingsObject = transformSettingsToObject(settingsData || [])
-
-  if (
+  const metadataError =
     paymentMethodError ||
     accommodationError ||
     deliveryScheduleError ||
     settingsError
-  ) {
-    IS_DEV_ENVIRONMENT &&
-      console.error(paymentMethodError || accommodationError)
+
+  if (metadataError) {
+    IS_DEV_ENVIRONMENT
+      ? console.error(metadataError)
+      : Sentry.captureException(metadataError)
     return { data, error: null }
   }
 
-  try {
-    const { error } = await resend.emails.send({
-      from: 'Vinito <noreply@vinito.store>',
-      to: [order.customer.email],
-      subject: '¡Gracias por tu compra!',
-      react: VinitoPurchaseEmail({
-        customer: { name: order.customer.name, email: order.customer.email },
-        orderNumber: data[0].order_id,
-        orderDate: new Date().toISOString(),
-        items: order.items.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          image: item.image
-        })),
-        subtotal: order.total,
-        shipping: 0,
-        tax: 0,
-        amount: order.total,
-        paymentMethod: paymentMethod?.type || 'cash_on_delivery',
-        paymentMethodLabel: paymentMethod?.name || 'Contra entrega',
-        paymentStatus: 'pending',
-        deliveryDate: order.delivery.date,
-        deliveryTime: deliverySchedule?.name || '',
-        deliveryAddress: accommodation?.name || '',
-        trackingNumber: undefined,
-        settings: settingsObject
-      }),
-      headers: {
-        'X-Entity-Ref-ID': uuid()
-      }
-    })
+  const sendPurchaseEmails = settingsObject?.send_purchase_emails === 'true'
 
-    if (error) {
+  if (sendPurchaseEmails) {
+    try {
+      const { error } = await resend.emails.send({
+        from: 'Vinito <noreply@vinito.store>',
+        to: [order.customer.email],
+        subject: '¡Gracias por tu compra!',
+        react: VinitoPurchaseEmail({
+          customer: { name: order.customer.name, email: order.customer.email },
+          orderNumber: data[0].order_id,
+          orderDate: new Date().toISOString(),
+          items: order.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image
+          })),
+          subtotal: order.total,
+          shipping: 0,
+          tax: 0,
+          amount: order.total,
+          paymentMethod: paymentMethod?.type || 'cash_on_delivery',
+          paymentMethodLabel: paymentMethod?.name || 'Contra entrega',
+          paymentStatus: 'pending',
+          deliveryDate: order.delivery.date,
+          deliveryTime: deliverySchedule?.name || '',
+          deliveryAddress: accommodation?.name || '',
+          trackingNumber: undefined,
+          settings: settingsObject
+        }),
+        headers: {
+          'X-Entity-Ref-ID': uuid()
+        }
+      })
+
+      if (error) {
+        IS_DEV_ENVIRONMENT
+          ? console.error(error)
+          : Sentry.captureException(error)
+      }
+    } catch (error) {
       IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
     }
-  } catch (error) {
-    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }
 
   return { data, error: null }

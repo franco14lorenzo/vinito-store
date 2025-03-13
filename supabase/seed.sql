@@ -132,4 +132,5 @@ INSERT INTO settings (key, value, description) VALUES
 ('bank_account_cbu', '1234567890123456789012', 'CBU de la cuenta bancaria'),
 ('bank_account_alias', 'banco.ejemplo', 'Alias del CBU de la cuenta bancaria'),
 ('contact_email', 'franco14lorenzo@gmail.com', 'Correo electrónico de contacto'),
-('contact_phone_number', '5492615040179', 'Número de teléfono de contacto');
+('contact_phone_number', '5492615040179', 'Número de teléfono de contacto'),
+('send_purchase_emails', 'false', 'Controla el envío de emails luego de realizar una compra');
