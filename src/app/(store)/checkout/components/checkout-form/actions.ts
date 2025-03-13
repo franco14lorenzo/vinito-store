@@ -44,7 +44,7 @@ export async function createOrder(order: Order) {
   })
 
   if (error) {
-    console.error(error)
+    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
     return { data: null, error }
   }
 
@@ -92,15 +92,16 @@ export async function createOrder(order: Order) {
     .in('key', settings)
 
   const settingsObject = transformSettingsToObject(settingsData || [])
-
-  if (
+  const metadataError =
     paymentMethodError ||
     accommodationError ||
     deliveryScheduleError ||
     settingsError
-  ) {
-    IS_DEV_ENVIRONMENT &&
-      console.error(paymentMethodError || accommodationError)
+
+  if (metadataError) {
+    IS_DEV_ENVIRONMENT
+      ? console.error(metadataError)
+      : Sentry.captureException(metadataError)
     return { data, error: null }
   }
 

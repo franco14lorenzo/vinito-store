@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import { Loader2 } from 'lucide-react'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -30,8 +32,8 @@ const formSchema = z.object({
     message: 'Por favor, ingresa un correo electrónico válido.'
   }),
   phone: z.string().optional(),
-  message: z.string().min(10, {
-    message: 'El mensaje debe tener al menos 10 caracteres.'
+  message: z.string().min(5, {
+    message: 'El mensaje debe tener al menos 5 caracteres.'
   })
 })
 
@@ -63,7 +65,7 @@ const ContactForm = () => {
     const { data, error } = await sendContact(contact)
 
     if (error) {
-      IS_DEV_ENVIRONMENT && console.error(error)
+      IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
       toast({
         variant: 'destructive',
         title: 'Error al enviar el mensaje',
@@ -137,10 +139,20 @@ const ContactForm = () => {
         />
         <Button
           type="submit"
-          className="h-10 w-full rounded-full"
+          className="h-10 w-full rounded-full disabled:cursor-not-allowed disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? 'Enviando...' : 'Enviar mensaje'}
+          {!loading ? (
+            'Enviar mensaje'
+          ) : (
+            <>
+              <Loader2
+                className="mr-2 h-4 w-4 animate-spin text-white"
+                aria-label="Cargando"
+              />
+              <span>Enviando mensaje</span>
+            </>
+          )}
         </Button>
       </form>
     </Form>

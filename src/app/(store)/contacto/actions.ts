@@ -1,5 +1,7 @@
 'use server'
 
+import * as Sentry from '@sentry/nextjs'
+
 import { createClient } from '@/lib/supabase/server'
 
 type Contact = {
@@ -14,16 +16,7 @@ async function sendSlackNotification(
   try {
     const webhookUrl =
       process.env.SLACK_CONTACT_WEBHOOK_URL ||
-      'https://hooks.slack.com/services/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'
-    console.log('🚀 ~ webhookUrl:', webhookUrl)
-
-    if (!webhookUrl) {
-      console.error('Slack contact webhook URL is not configured')
-      return {
-        success: false,
-        error: 'Slack contact webhook URL is not configured'
-      }
-    }
+      'https://hooks.slack.com/services/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'
 
     const payload = {
       blocks: [
@@ -90,8 +83,6 @@ async function sendSlackNotification(
       body: JSON.stringify(payload)
     })
 
-    console.dir(response, { depth: null })
-
     if (!response.ok) {
       throw new Error(
         `Error sending Slack notification: ${response.statusText}`
@@ -100,7 +91,10 @@ async function sendSlackNotification(
 
     return { success: true }
   } catch (error) {
-    console.error('Failed to send contact Slack notification:', error)
+    process.env.IS_DEV_ENVIRONMENT
+      ? console.error(error)
+      : Sentry.captureException(error)
+
     return { success: false, error }
   }
 }
@@ -115,9 +109,11 @@ export async function sendContact(contact: Contact) {
     .single()
 
   if (error) {
+    process.env.IS_DEV_ENVIRONMENT
+      ? console.error(error)
+      : Sentry.captureException(error)
     return { data: null, error }
   }
-  console.log('🚀 ~ sendContact ~ data:', data)
 
   await sendSlackNotification({
     ...data,
