@@ -109,7 +109,11 @@ export async function createOrder(order: Order, captchaToken: string) {
     delivery_time: deliverySchedule?.name
   })
 
-  let settings = ['contact_email', 'contact_phone_number']
+  let settings = [
+    'contact_email',
+    'contact_phone_number',
+    'send_purchase_emails'
+  ]
 
   if (paymentMethod?.type === 'bank_transfer') {
     const bankSettings = [
@@ -140,45 +144,51 @@ export async function createOrder(order: Order, captchaToken: string) {
     return { data, error: null }
   }
 
-  try {
-    const { error } = await resend.emails.send({
-      from: 'Vinito <noreply@vinito.store>',
-      to: [order.customer.email],
-      subject: '¡Gracias por tu compra!',
-      react: VinitoPurchaseEmail({
-        customer: { name: order.customer.name, email: order.customer.email },
-        orderNumber: data[0].order_id,
-        orderDate: new Date().toISOString(),
-        items: order.items.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          image: item.image
-        })),
-        subtotal: order.total,
-        shipping: 0,
-        tax: 0,
-        amount: order.total,
-        paymentMethod: paymentMethod?.type || 'cash_on_delivery',
-        paymentMethodLabel: paymentMethod?.name || 'Contra entrega',
-        paymentStatus: 'pending',
-        deliveryDate: order.delivery.date,
-        deliveryTime: deliverySchedule?.name || '',
-        deliveryAddress: accommodation?.name || '',
-        trackingNumber: undefined,
-        settings: settingsObject
-      }),
-      headers: {
-        'X-Entity-Ref-ID': uuid()
-      }
-    })
+  const sendPurchaseEmails = settingsObject?.send_purchase_emails === 'true'
 
-    if (error) {
+  if (sendPurchaseEmails) {
+    try {
+      const { error } = await resend.emails.send({
+        from: 'Vinito <noreply@vinito.store>',
+        to: [order.customer.email],
+        subject: '¡Gracias por tu compra!',
+        react: VinitoPurchaseEmail({
+          customer: { name: order.customer.name, email: order.customer.email },
+          orderNumber: data[0].order_id,
+          orderDate: new Date().toISOString(),
+          items: order.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image
+          })),
+          subtotal: order.total,
+          shipping: 0,
+          tax: 0,
+          amount: order.total,
+          paymentMethod: paymentMethod?.type || 'cash_on_delivery',
+          paymentMethodLabel: paymentMethod?.name || 'Contra entrega',
+          paymentStatus: 'pending',
+          deliveryDate: order.delivery.date,
+          deliveryTime: deliverySchedule?.name || '',
+          deliveryAddress: accommodation?.name || '',
+          trackingNumber: undefined,
+          settings: settingsObject
+        }),
+        headers: {
+          'X-Entity-Ref-ID': uuid()
+        }
+      })
+
+      if (error) {
+        IS_DEV_ENVIRONMENT
+          ? console.error(error)
+          : Sentry.captureException(error)
+      }
+    } catch (error) {
       IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
     }
-  } catch (error) {
-    IS_DEV_ENVIRONMENT ? console.error(error) : Sentry.captureException(error)
   }
 
   return { data, error: null }
