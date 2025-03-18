@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -34,7 +34,7 @@
     "date-fns": "^4.1.0",
     "jsqr": "^1.4.0",
     "lucide-react": "^0.477.0",
-    "next": "15.2.0",
+    "next": "15.3.0-canary.12",
     "posthog-js": "^1.230.4",
     "react": "19.0.0",
     "react-confetti": "^6.4.0",

@@ -1,8 +1,8 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Kalnia, Raleway } from 'next/font/google'
+import { cookies } from 'next/headers'
 
-import AccommodationParams from '@/app/components/accommodation-params'
 import { AccommodationProvider } from '@/app/contexts/accommodation'
 import { DialogProvider } from '@/app/contexts/dialogs'
 import { Toaster } from '@/components/ui/toaster'
@@ -26,21 +26,31 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: ReactNode
 }>) {
+  let initialAccommodation
+
+  const cookieStore = await cookies()
+  const accommodationCookie = cookieStore.get('accommodation')
+
+  if (accommodationCookie?.value) {
+    try {
+      initialAccommodation = JSON.parse(accommodationCookie.value)
+    } catch (error) {
+      console.error('Error parsing accommodation cookie:', error)
+    }
+  }
+
   return (
     <html lang="es">
       <body
         className={`${raleway.variable} ${kalnia.variable} font-raleway flex min-h-screen w-full flex-col items-center justify-start bg-neutral-50 text-zinc-950`}
       >
         <PostHogProvider>
-          <AccommodationProvider>
-            <Suspense>
-              <AccommodationParams />
-            </Suspense>
+          <AccommodationProvider initialAccommodation={initialAccommodation}>
             <DialogProvider>{children}</DialogProvider>
           </AccommodationProvider>
           <Toaster />
