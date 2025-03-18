@@ -4,6 +4,8 @@ import { Home, Wine } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'Página no encontrada',
   description: 'Lo sentimos, parece que esta página no existe'

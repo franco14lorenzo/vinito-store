@@ -4,7 +4,9 @@ import {
   Help,
   Hero,
   LineBarSteps
-} from '@/app/(store)/components/home'
+} from '@/app/(store)/(home)/components'
+
+export const dynamic = 'force-static'
 
 export default async function HomePage() {
   return (
