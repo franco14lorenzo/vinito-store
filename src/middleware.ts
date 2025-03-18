@@ -20,10 +20,8 @@ export async function middleware(request: NextRequest) {
     const response = NextResponse.next()
 
     if (accommodationParam === '0') {
-      // Create a redirect response and then clear the cookie on that response
       const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
       const redirectResponse = NextResponse.redirect(redirectUrl.toString())
-      // Delete the cookie on the redirect response
       redirectResponse.cookies.delete('accommodation')
       return redirectResponse
     }

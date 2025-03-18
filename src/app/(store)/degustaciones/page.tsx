@@ -9,6 +9,8 @@ import {
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { createClient } from '@/lib/supabase/client'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'Degustaciones',
   description: 'Descubre nuestros paquetes de degustación de vinos'

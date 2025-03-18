@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button'
 import { IS_DEV_ENVIRONMENT } from '@/constants'
 import { createClient } from '@/lib/supabase/client'
 
+export const dynamic = 'force-static'
+
 export async function generateStaticParams() {
   const { data } = await getTastingsSlugs()
   if (data?.length) {
