@@ -54,9 +54,13 @@ const Cart = () => {
 
   return (
     <div className="flex w-12 justify-end md:w-[152px]">
-      <Sheet open={dialogOpen === Dialogs.Cart} onOpenChange={handleOpenChange}>
+      <Sheet
+        open={dialogOpen === Dialogs.Cart}
+        onOpenChange={handleOpenChange}
+        modal={false}
+      >
         <SheetTrigger
-          className="relative grid size-12 place-content-center rounded-lg hover:opacity-70"
+          className="relative grid size-12 cursor-pointer place-content-center rounded-lg hover:opacity-70"
           aria-label="shopping bag"
         >
           <ShoppingBag className="size-8 fill-black stroke-neutral-50" />
