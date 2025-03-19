@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useIsClient } from '@uidotdev/usehooks'
 import {
   ArrowRight,
   ImageOff,
@@ -13,6 +12,7 @@ import {
   ShoppingBag,
   Trash
 } from 'lucide-react'
+import { usePostHog } from 'posthog-js/react'
 
 import { useCart } from '@/app/(store)/contexts/cart'
 import { useAccommodation } from '@/app/contexts/accommodation'
@@ -39,17 +39,22 @@ import {
 import { formatCurrency } from '@/lib/utils'
 
 const Cart = () => {
-  const isClient = useIsClient()
   const pathname = usePathname()
+  const posthog = usePostHog()
 
-  const { items, totalItems, totalPrice } = useCart()
+  const { loadingItems, items, totalItems, totalPrice } = useCart()
 
-  const [accommodation] = useAccommodation()
+  const [accommodation, loadingAccommodation] = useAccommodation()
+
+  if (!loadingAccommodation && accommodation) {
+    posthog.identify(accommodation.name)
+  }
 
   const [dialogOpen, setDialogOpen] = useDialog()
 
   const handleOpenChange = (isOpen: boolean) => {
     setDialogOpen(isOpen ? Dialogs.Cart : null)
+    posthog.capture(isOpen ? 'opened_cart' : 'closed_cart')
   }
 
   return (
@@ -65,7 +70,7 @@ const Cart = () => {
         >
           <ShoppingBag className="size-8 fill-black stroke-neutral-50" />
           <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-neutral-50 bg-red-500 text-xs leading-5 font-medium text-white">
-            {isClient ? totalItems : '...'}
+            {!loadingItems ? totalItems : '...'}
           </span>
         </SheetTrigger>
         <SheetContent
@@ -82,26 +87,28 @@ const Cart = () => {
             <div
               className={`flex flex-1 flex-col justify-start overflow-y-auto text-left`}
             >
-              {accommodation && (
-                <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 pt-3 pb-2">
-                  <div className="flex items-center justify-center">
-                    <MapPin className="size-6" />
-                  </div>
-                  <div className="flex flex-1 flex-col overflow-hidden">
-                    <p className="text-[8px] leading-[10px]">Entrega en</p>
+              <section className="flex w-full max-w-full flex-row gap-2 self-start overflow-x-hidden px-4 pt-3 pb-2">
+                <div className="flex items-center justify-center">
+                  <MapPin className="size-6" />
+                </div>
+                <div className="flex flex-1 flex-col overflow-hidden">
+                  <p className="text-[8px] leading-[10px]">Entrega en</p>
+                  {accommodation && !loadingAccommodation ? (
                     <p className="truncate text-xs font-semibold">
                       {accommodation?.name} - {accommodation?.address}
                     </p>
-                  </div>
-                </section>
-              )}
+                  ) : (
+                    <p className="text-xs font-semibold">Cargando...</p>
+                  )}
+                </div>
+              </section>
 
               <div
                 className={`grid overflow-y-auto px-4 text-left ${
                   items.length === 0 && 'flex-1'
                 }`}
               >
-                {items.length === 0 && (
+                {items.length === 0 && !loadingItems ? (
                   <div className="flex flex-col items-center justify-center">
                     <p className="px-4 py-2 text-center text-sm">
                       No hay artículos en tu compra
@@ -120,7 +127,15 @@ const Cart = () => {
                       <ArrowRight className="ml-2 inline size-5" />
                     </Link>
                   </div>
+                ) : (
+                  items.length === 0 &&
+                  !loadingItems && (
+                    <div className="flex flex-col items-center justify-center">
+                      Cargando...
+                    </div>
+                  )
                 )}
+
                 {items.length > 0 &&
                   items.map((item) => <Item key={item.id} item={item} />)}
               </div>
@@ -151,9 +166,10 @@ const Cart = () => {
                       items.length === 0 &&
                       'pointer-events-none cursor-not-allowed opacity-50'
                     }`}
-                    onClick={() =>
+                    onClick={() => {
                       pathname === '/checkout' && setDialogOpen(null)
-                    }
+                      posthog.capture('Checkout Started')
+                    }}
                   >
                     Finalizar compra
                   </Link>

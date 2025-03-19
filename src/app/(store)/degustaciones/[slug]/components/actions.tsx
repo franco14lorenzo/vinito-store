@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 
 /* import { Minus, Plus } from 'lucide-react' */
 import { useCart } from '@/app/(store)/contexts/cart'
@@ -20,6 +21,7 @@ const Actions = ({
   }
 }) => {
   const [quantity /* setQuantity */] = useState(1)
+  const posthog = usePostHog()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setDialogOpen] = useDialog()
@@ -29,6 +31,13 @@ const Actions = ({
   const currentCartItem = items.find((cartItem) => cartItem.id === item.id)
   const currentQuantityInCart = currentCartItem ? currentCartItem.quantity : 0
   const totalDesiredQuantity = currentQuantityInCart + quantity
+
+  useEffect(() => {
+    posthog.capture('Product Viewed', {
+      item_id: item.id,
+      item_name: item.name
+    })
+  }, [item.id, item.name, posthog])
 
   return (
     <section className="grid w-full grid-cols-1 gap-2 self-start py-2 md:w-72">
@@ -76,6 +85,11 @@ const Actions = ({
             price: item.price,
             stock: item.stock,
             image: item.image || null
+          })
+          posthog.capture('Product Added', {
+            item_id: item.id,
+            item_name: item.name,
+            quantity
           })
           setDialogOpen(Dialogs.Cart)
         }}

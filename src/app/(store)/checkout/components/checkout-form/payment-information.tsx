@@ -46,7 +46,9 @@ function PaymentInformation({
           name="paymentMethod"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Método de pago</FormLabel>
+              <FormLabel>
+                Método de pago <span className="text-red-500">*</span>
+              </FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}

@@ -3,6 +3,7 @@ import {
   Features,
   Help,
   Hero,
+  HomePageAnalytics,
   LineBarSteps
 } from '@/app/(store)/(home)/components'
 
@@ -16,6 +17,7 @@ export default async function HomePage() {
       <LineBarSteps />
       <Experience />
       <Help />
+      <HomePageAnalytics />
     </>
   )
 }

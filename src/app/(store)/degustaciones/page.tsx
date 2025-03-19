@@ -4,6 +4,7 @@ import { QueryData } from '@supabase/supabase-js'
 
 import {
   HeadingSection,
+  TastingPageAnalytics,
   Tastings
 } from '@/app/(store)/degustaciones/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
@@ -37,6 +38,7 @@ export default async function TastingListPage() {
         description="Descubrí nuestros paquetes de degustación de vinos"
       />
       <Tastings tastings={data} />
+      <TastingPageAnalytics tastings={data} />
     </>
   )
 }
