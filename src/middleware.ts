@@ -1,30 +1,94 @@
-import { cookies } from 'next/headers'
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { getAccommodationById } from './app/contexts/actions'
+
+const PUBLIC_PATHS = ['/scan-qr']
 
 export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
+  const { pathname } = request.nextUrl
 
-  const accommodationParam =
-    request.nextUrl.searchParams.get('accommodation_id')
-
-  const cookieStore = await cookies()
-
-  if (accommodationParam) {
+  if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
     return NextResponse.next()
   }
 
-  const accommodationCookie = cookieStore.get('accommodation')
+  const hasAccommodationCookie = request.cookies.has('accommodation')
+  const accommodationCookie = request.cookies.get('accommodation')
 
-  if (!accommodationCookie && pathname !== '/scan-qr') {
+  try {
+    const accommodationParam =
+      request.nextUrl.searchParams.get('accommodation_id')
+    const response = NextResponse.next()
+
+    if (accommodationParam === '0') {
+      const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
+      const redirectResponse = NextResponse.redirect(redirectUrl.toString())
+      redirectResponse.cookies.delete('accommodation')
+      return redirectResponse
+    }
+
+    if (accommodationParam) {
+      if (hasAccommodationCookie && accommodationCookie?.value) {
+        try {
+          const currentAccommodation = JSON.parse(accommodationCookie.value)
+          if (currentAccommodation?.id === accommodationParam) {
+            return response
+          }
+        } catch (error) {
+          console.error('Invalid accommodation cookie format:', error)
+        }
+      }
+
+      try {
+        const { data } = await getAccommodationById(accommodationParam)
+
+        if (data) {
+          response.cookies.set({
+            name: 'accommodation',
+            value: JSON.stringify(data),
+            maxAge: 60 * 60 * 24 * 7 // 7 days
+          })
+          return response
+        } else {
+          const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
+          const redirectResponse = NextResponse.redirect(redirectUrl.toString())
+          redirectResponse.cookies.delete('accommodation')
+          return redirectResponse
+        }
+      } catch (error) {
+        console.error('Error fetching accommodation:', error)
+        const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
+        const redirectResponse = NextResponse.redirect(redirectUrl.toString())
+        redirectResponse.cookies.delete('accommodation')
+        return redirectResponse
+      }
+    }
+
+    if (hasAccommodationCookie) {
+      if (accommodationCookie?.value) {
+        try {
+          const accommodation = JSON.parse(accommodationCookie.value)
+          if (accommodation?.id) {
+            return response
+          }
+        } catch (error) {
+          console.error('Invalid accommodation cookie format:', error)
+        }
+      }
+      const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
+      return NextResponse.redirect(redirectUrl.toString())
+    }
+
+    const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
+    return NextResponse.redirect(redirectUrl.toString())
+  } catch (error) {
+    console.error('Middleware error:', error)
     const redirectUrl = new URL('/scan-qr', request.nextUrl.origin)
     return NextResponse.redirect(redirectUrl.toString())
   }
-
-  return NextResponse.next()
 }
 
 export const config = {
+  runtime: 'nodejs',
   matcher: [
     /*
      * Match all request paths except for the ones starting with:

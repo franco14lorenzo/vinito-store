@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Copy } from 'lucide-react'
+import { usePostHog } from 'posthog-js/react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -24,7 +25,16 @@ export default function OrderConfirmation({
   orderId: string
   customerEmail: string
 }) {
+  const posthog = usePostHog()
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    posthog.capture('Order Details Viewed', {
+      order_id: orderId,
+      customer_name: customerName,
+      customer_email: customerEmail
+    })
+  }, [posthog, orderId, customerName, customerEmail])
 
   const copyOrderId = async () => {
     try {
@@ -93,7 +103,7 @@ export default function OrderConfirmation({
             )}
           </Button>
           <Button asChild className="w-full flex-1 rounded-full sm:w-auto">
-            <Link href="/">
+            <Link href="/" onClick={() => posthog.capture('Continue Shopping')}>
               Continuar comprando
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

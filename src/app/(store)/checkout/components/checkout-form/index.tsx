@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { Loader2 } from 'lucide-react'
+import { usePostHog } from 'posthog-js/react'
 import { z } from 'zod'
 
 import { createOrder } from '@/app/(store)/checkout/components/checkout-form/actions'
@@ -103,6 +104,7 @@ const CheckoutForm = ({
     end_time: string
   }[]
 }) => {
+  const posthog = usePostHog()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { totalPrice, clearCart } = useCart()
@@ -125,6 +127,15 @@ const CheckoutForm = ({
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true)
+
+    posthog.capture('Order Started', {
+      total: totalPrice,
+      items: items.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price
+      }))
+    })
 
     const captchaToken = await getCaptchaToken('checkout')
     if (!captchaToken) {
@@ -178,6 +189,13 @@ const CheckoutForm = ({
       setLoading(false)
       return
     }
+
+    posthog.capture('Order Completed', {
+      order_id: data[0].order_id,
+      total: totalPrice,
+      customer_name: values.name,
+      customer_email: values.email
+    })
 
     clearCart()
     router.push(

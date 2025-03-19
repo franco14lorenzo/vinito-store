@@ -1,8 +1,7 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Kalnia, Raleway } from 'next/font/google'
 
-import AccommodationParams from '@/app/components/accommodation-params'
 import { AccommodationProvider } from '@/app/contexts/accommodation'
 import { DialogProvider } from '@/app/contexts/dialogs'
 import { Toaster } from '@/components/ui/toaster'
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: ReactNode
@@ -38,9 +37,6 @@ export default function RootLayout({
       >
         <PostHogProvider>
           <AccommodationProvider>
-            <Suspense>
-              <AccommodationParams />
-            </Suspense>
             <DialogProvider>{children}</DialogProvider>
           </AccommodationProvider>
           <Toaster />

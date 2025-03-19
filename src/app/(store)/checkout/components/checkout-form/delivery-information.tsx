@@ -122,7 +122,9 @@ function DeliveryInformation({
           name="deliveryDate"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Fecha de entrega</FormLabel>
+              <FormLabel>
+                Fecha de entrega <span className="text-red-500">*</span>
+              </FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -170,7 +172,9 @@ function DeliveryInformation({
           name="deliveryTime"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Horario de entrega</FormLabel>
+              <FormLabel>
+                Horario de entrega <span className="text-red-500">*</span>
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>

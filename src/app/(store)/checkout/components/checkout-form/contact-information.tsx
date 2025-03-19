@@ -40,7 +40,9 @@ function ContactInformation({
             name="name"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>
+                  Nombre <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input {...field} className="border bg-white" />
                 </FormControl>
@@ -53,7 +55,9 @@ function ContactInformation({
             name="surname"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Apellido</FormLabel>
+                <FormLabel>
+                  Apellido <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input {...field} className="border bg-white" />
                 </FormControl>
@@ -69,7 +73,9 @@ function ContactInformation({
             name="email"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Email</FormLabel>
+                <FormLabel>
+                  Email <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input {...field} className="border bg-white" />
                 </FormControl>
@@ -82,7 +88,9 @@ function ContactInformation({
             name="phone"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Teléfono</FormLabel>
+                <FormLabel>
+                  Teléfono <span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input {...field} className="border bg-white" />
                 </FormControl>

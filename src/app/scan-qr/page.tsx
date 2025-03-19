@@ -17,6 +17,8 @@ import ScanQRButton from './components/scan-button'
 import QRVideo from './components/scan-video'
 import { ScanQRProvider } from './contexts/scan-qr'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'Escanear Código QR',
   description: 'Escanea el código QR para acceder a la tienda'

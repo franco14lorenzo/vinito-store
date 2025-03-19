@@ -4,10 +4,13 @@ import { QueryData } from '@supabase/supabase-js'
 
 import {
   HeadingSection,
+  TastingPageAnalytics,
   Tastings
 } from '@/app/(store)/degustaciones/components'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { createClient } from '@/lib/supabase/client'
+
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
   title: 'Degustaciones',
@@ -35,6 +38,7 @@ export default async function TastingListPage() {
         description="Descubrí nuestros paquetes de degustación de vinos"
       />
       <Tastings tastings={data} />
+      <TastingPageAnalytics tastings={data} />
     </>
   )
 }

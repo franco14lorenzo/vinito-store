@@ -5,6 +5,8 @@ import ContactForm from '@/app/(store)/contacto/components/contact-form'
 import Breadcrumbs from '@/components/blocks/breadcrumbs'
 import { getCachedSettings } from '@/lib/db'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
   title: 'Contacto',
   description: 'Contáctenos para cualquier consulta'
