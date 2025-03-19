@@ -25,6 +25,7 @@ export type CartItem = {
 }
 
 interface CartContextType {
+  loadingItems: boolean
   items: CartItem[]
   addItem: (item: CartItem) => void
   removeItem: (itemId: number) => void
@@ -41,12 +42,14 @@ interface CartProviderProps {
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+  const [loadingItems, setLoadingItems] = useState(true)
   const [items, setItems] = useState<CartItem[]>([])
 
   useEffect(() => {
     const fetchCartCookie = async () => {
       const cartItems = await getCartCookie()
       setItems(cartItems)
+      setLoadingItems(false)
     }
 
     fetchCartCookie()
@@ -106,6 +109,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        loadingItems,
         items,
         addItem,
         removeItem,

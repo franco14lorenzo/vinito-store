@@ -45,8 +45,6 @@ export async function middleware(request: NextRequest) {
           response.cookies.set({
             name: 'accommodation',
             value: JSON.stringify(data),
-            path: '/',
-            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 7 // 7 days
           })
           return response
