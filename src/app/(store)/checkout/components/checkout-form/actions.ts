@@ -64,7 +64,6 @@ export async function createOrder(order: Order, captchaToken: string) {
     revalidatePath(`/degustaciones/${item.slug}`)
   }
 
-  // Get additional data for the Slack notification
   const [
     { data: paymentMethod, error: paymentMethodError },
     { data: accommodation, error: accommodationError },
